@@ -4,7 +4,7 @@ date: 2021-10-16T20:42:39+02:00
 slug: ""
 description: ""
 keywords: ["linux", "virtual memory"]
-draft: true
+draft: false
 tags: [ "linux"]
 math: false
 toc: false
