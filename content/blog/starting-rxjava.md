@@ -5,9 +5,10 @@ slug: ""
 description: ""
 keywords: [ "java" ]
 draft: false
-tags: [ "java", "systemd" ]
+tags: [ "java" ]
 math: false
 toc: true
+disqus_identifier: "rxjava"
 ---
 
 Pourquoi utiliser Rx ?
