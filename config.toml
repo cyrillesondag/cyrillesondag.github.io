@@ -8,7 +8,7 @@ baseURL = "https://cyrillesondag.github.io/"
 copyright = "© {year}"
 
 # Add your Disqus shortname here.
-# disqusShortname = ""
+disqusShortname = "cyrillesondag"
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
 # googleAnalytics = "" 
