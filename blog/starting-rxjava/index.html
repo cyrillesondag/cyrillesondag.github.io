@@ -1,0 +1,249 @@
+<!doctype html><html lang=fr-fr>
+<head>
+<title>Débuter avec RxJava | Yet another tech blog</title>
+<meta charset=utf-8>
+<meta name=language content="en">
+<meta name=description content>
+<meta name=keywords content="java">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Débuter avec RxJava">
+<meta name=twitter:description content>
+<meta name=twitter:site content="https://twitter.com/CyrilleSondag">
+<meta name=twitter:creator content="https://twitter.com/CyrilleSondag">
+<link rel="shortcut icon" type=image/png href=/favicon.ico>
+<link type=text/css rel=stylesheet href=/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0=">
+<link type=text/css rel=stylesheet href=/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Débuter avec RxJava","headline":"Débuter avec RxJava","description":"","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2012","datePublished":"2012-12-04 10:34:56 \u002b0200 \u002b0200","dateModified":"2012-12-04 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/starting-rxjava\/","wordCount":"941","keywords":["java","Blog"]}</script>
+</head>
+<body>
+<div class=burger__container>
+<div class=burger aria-controls=navigation aria-label=Menu>
+<div class="burger__meat burger__meat--1"></div>
+<div class="burger__meat burger__meat--2"></div>
+<div class="burger__meat burger__meat--3"></div>
+</div>
+</div>
+<nav class=nav id=navigation>
+<ul class=nav__list>
+<li>
+<a href=/>about</a>
+</li>
+<li>
+<a class=active href=/blog>blog</a>
+</li>
+</ul>
+</nav>
+<main>
+<div class=flex-wrapper>
+<div class=post__container>
+<div class=post>
+<header class=post__header>
+<h1 id=post__title>Débuter avec RxJava</h1>
+<time datetime="2012-12-04 10:34:56 +0200 +0200" class=post__date>Dec 4 2012</time>
+</header>
+<article class=post__content>
+<h1 id=pourquoi-utiliser-rx->Pourquoi utiliser Rx ?</h1>
+<p>Le Framework Rx prend une importance croissante dans le développement d&rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux <a href=https://www.quora.com/What-is-callback-hell target=_blank rel="noreferrer noopener">Callback Hell</a>).</p>
+<p>Néanmoins l&rsquo;apprentissage peut être assez déroutant au départ si l&rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevé, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.</p>
+<p>Pour démarrer d&rsquo;un bon pied nous allons d&rsquo;abord définir les principes fondamentaux.</p>
+<h2 id=les-concepts-fondamentaux>Les concepts fondamentaux.<a class=anchor href=#les-concepts-fondamentaux>#</a></h2>
+<p>Rx est basé sur le pattern <a href=https://en.wikipedia.org/wiki/Observer_pattern target=_blank rel="noreferrer noopener">Observer</a> en utilisant la terminologie <strong>Subscriber</strong> / <strong>Observer</strong> et <strong>Observable</strong> (un <strong>Subject</strong> en Rx recouvre une notion bien particulière).</p>
+<h3 id=les-observables>Les Observables<a class=anchor href=#les-observables>#</a></h3>
+<p>Le <a href=https://en.wikipedia.org/wiki/Reactive_programming target=_blank rel="noreferrer noopener">reactive programming</a> voit les événements comme des flux qui se propagent dans l&rsquo;application.</p>
+<p>Ces flux peuvent avoir des sources multiples : une interaction avec un utilisateur (focus, sélection &mldr;), un élément extérieur (ex: la réponse d&rsquo;un serveur distant) ou interne (la fin d&rsquo;un traitement) etc.</p>
+<p>Ils peuvent avoir une durée de vie déterminée (ex : une requête Http) ou non (ex le signal de perte de réseau). De la même manière ces flux peuvent ainsi emmètre un ou plusieurs événements à des intervalles différents.</p>
+<p>En Rx un <em>Observable</em> sert à matérialiser ces flux, ils peuvent être écoutés, avoir leurs propres cycle de vie, être composés de différents flux…</p>
+<h3 id=les-subcribers>Les Subcribers<a class=anchor href=#les-subcribers>#</a></h3>
+<p>Est la notion la plus simple à appréhender. Il s&rsquo;abonne à un <em>Observable</em> et il reçoit ses d&rsquo;émissions, ses signaux d&rsquo;erreurs ou fin de traitement.</p>
+<h3 id=les-operators>Les Operators<a class=anchor href=#les-operators>#</a></h3>
+<p>Les <em>Operators</em> servent à traiter et organiser les flux. Ils permettent de filtrer, combiner, transformer, parcourir, composer des flux…</p>
+<p>De base une foultitude d&rsquo;opérateurs sont fournis. Bien qu&rsquo;on puisse en créer de nouveaux, en pratique les opérateurs par défaut sont généralement largement suffisants pour répondre à la majorité des situations.</p>
+<h3 id=les-schedulers>Les Schedulers<a class=anchor href=#les-schedulers>#</a></h3>
+<p>Par défaut Rx n&rsquo;est pas asynchrone, pour la simple et bonne raisons que le framework réserve cette décision au développeur de l&rsquo;application.</p>
+<p>Les <em>Schedulers</em> servent à contrôler l’exécutions des traitements. Il est alors très simplement possible de décider sur quel Thread va s’exécuter un <em>Observable</em> et sur lequel le <em>Subscriber</em> va recevoir les réponses.</p>
+<h2 id=rxjava-en-pratique>RxJava en pratique.<a class=anchor href=#rxjava-en-pratique>#</a></h2>
+<p>Commençons d&rsquo;abord par un exemple très simple pour illustrer les concepts vus précédemment.</p>
+<h3 id=hello-world->Hello World !<a class=anchor href=#hello-world->#</a></h3>
+<pre><code class=language-java>Subscription subscription = Observable.just(example.dummyValue())
+    .observeOn(Schedulers.newThread())
+    .subscribe(new Observer&lt;Boolean&gt;() {
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;dummyValue has Completed&quot;);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            System.out.println(&quot;Error occured : &quot; + getMessage());
+        }
+
+        @Override
+        public void onNext(Boolean aBoolean) {
+            System.out.println(&quot;dummyValue result : &quot; + aBoolean);
+        }
+    });
+}
+
+public boolean dummyValue() {
+    try {
+        Thread.sleep(600);
+        return true;
+    } catch (InterruptedException e) {
+        throw new IllegalStateException(e);
+    }
+}
+</code></pre>
+<ol>
+<li><code>Observable.just</code> crée un nouvel <em>Observable</em> avec une seule valeur de retour.</li>
+<li><code>.observeOn</code> définit que l'<em>Observable</em> s’exécute sur un nouveau Thread.</li>
+<li><code>.subscribe</code> s&rsquo;abonne à l&rsquo;observable.</li>
+<li>Retourne un objet Subscription.</li>
+</ol>
+<p>Il existe plusieurs méthodes génériques pour créer une <em>Observable</em> soit à partir de valeurs fixes, d&rsquo;une collection, d&rsquo;un <code>Future&lt;?></code> ou <code>Callback&lt;?></code> ou opérateurs.
+Il est aussi relativement facile de créer des <em>Observable</em> particuliers si l&rsquo;on respecte son cycle de vie.</p>
+<p>Comme vu précédemment par défaut un <em>Observable</em> s&rsquo;exécute sur le même Thread que celui qui l&rsquo;a instancié. En spécifiant <code>Schedulers.newThread()</code> on force l’exécution du traitement sur un nouveau Thread.
+Rx est fourni avec plusieurs schedulers prédéfinis tel que <code>io</code>, <code>computation</code>, … On a aussi la possibilité d&rsquo;en créer afin d&rsquo;optimiser la gestion des instances de Thread.</p>
+<p>L&rsquo;interface Observer est, elle aussi, relativement simple et lisible. Elle est composée de trois méthodes :</p>
+<ul>
+<li><code>onNext</code>: appelé à chaque objet émis par l&rsquo;observable.</li>
+<li><code>onError</code>: lorsqu&rsquo;une erreur s&rsquo;est produite lors du traitement.</li>
+<li><code>onComplete</code>: lorsque que l&rsquo;observable a terminé d’émettre des éléments (Par contrat <code>onNext</code> ou <code>onError</code> ne seront plus jamais appelés).</li>
+</ul>
+<p>L’objet Subscription - comme son nom l&rsquo;indique - est la marque de la souscription d&rsquo;un Observer vers un <em>Observable</em>.</p>
+<p>Dans le cas présent, l'<em>Observable</em> est exécuté immédiatement avec une durée de vie fixée à un élément.</p>
+<p>On peut schématiser son cycle comme ceci :</p>
+<blockquote>
+<p>o &mdash;> onNext(true) &ndash;> onComplete()</p>
+</blockquote>
+<p>Au travers de cet exemple basique, il faut noter la gestion ultra simple des <strong>threads</strong> et des <strong>erreurs</strong>, qui est à mon avis le gros avantage de ce Framework.</p>
+<h3 id=débuter-avec-les-operators>Débuter avec les Operators<a class=anchor href=#débuter-avec-les-operators>#</a></h3>
+<p>Prenons pour exemple un Observable assez simple pour comprendre leurs fonctionnements.</p>
+<pre><code class=language-java>Observable&lt;String&gt; obs = Observable.just(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;);
+</code></pre>
+<p>On aura donc 5 appels à <code>onNext(String s)</code> avant la méthode <code>onComplete()</code></p>
+<p>Le Subscriber affichera le résultat de <code>onNext</code> dans la console.</p>
+<pre><code class=language-java>@Override
+public void onNext(String result) {
+    System.out.println(&quot;Result : &quot; + result);
+}
+</code></pre>
+<p>Par défaut les résultats seront donc :</p>
+<blockquote>
+<p>Result : a
+Result : b
+Result : c
+Result : d
+Result : e</p>
+</blockquote>
+<h4 id=filter>Filter:</h4>
+<pre><code class=language-java>.filter(new Func1&lt;String, Boolean&gt;() {
+    @Override
+    public Boolean call(String s) {
+        return &quot;a&quot;.equals(s) || &quot;d&quot;.equals(s);
+    }
+})
+</code></pre>
+<p>Retourne :</p>
+<blockquote>
+<p>Result : a
+Result : d</p>
+</blockquote>
+<h4 id=take>Take:</h4>
+<p><code>.take(2)</code> ou <code>.limit(2)</code></p>
+<p>Retourne les x premiers éléments :</p>
+<blockquote>
+<p>Result : a
+Result : b</p>
+</blockquote>
+<h4 id=takelast>TakeLast:</h4>
+<p><code>.takeLast(2)</code></p>
+<p>Retourne les x derniers éléments :</p>
+<blockquote>
+<p>Result : d
+Result : e</p>
+</blockquote>
+<h4 id=map>Map:</h4>
+<pre><code class=language-java>.map(new Func1&lt;String, String&gt;() {
+    @Override
+    public String call(String s) {
+        return &quot;Hello &quot; + s + &quot; !!&quot;;
+    }
+})
+</code></pre>
+<p>Applique pour chaque élément une transformation (il est également possible de modifier le type de retour) :</p>
+<blockquote>
+<p>Result : Hello a !!
+Result : Hello b !!
+Result : Hello c !!
+Result : Hello d !!
+Result : Hello e !!</p>
+</blockquote>
+<p>Ces opérateurs sont bien évidement combinable entre eux.</p>
+<h3 id=en-conclusion>En conclusion<a class=anchor href=#en-conclusion>#</a></h3>
+<p>Voici une première approche des basiques du Framework. Nous verrons par la suite les avantages de son utilisation, mais aussi les problèmes spécifiques liés à son utilisation dans de prochains articles.</p>
+</article>
+<ul class=tags__list>
+<li class=tag__item>
+<a class=tag__link href=https://cyrillesondag.github.io/tags/java/>java</a>
+</li>
+<li class=tag__item>
+<a class=tag__link href=https://cyrillesondag.github.io/tags/systemd/>systemd</a>
+</li></ul>
+<div class=pagination>
+<a class=pagination__item href=https://cyrillesondag.github.io/blog/presentation-linux-menory/>
+<span class=pagination__label>Next Post</span>
+<span class=pagination__title>Présentation Linux Memory</span>
+</a>
+</div>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//cyrillesondag.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<footer class=post__footer>
+<div class=social-icons>
+<a class=social-icons__link title=Twitter href=https://twitter.com/CyrilleSondag target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/twitter.svg)></div>
+</a>
+<a class=social-icons__link title=GitHub href=https://github.com/cyrillesondag target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/github.svg)></div>
+</a>
+<a class=social-icons__link title=Email href=mailto:cyrille.sondag@gmail.com target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/email.svg)></div>
+</a>
+</div>
+<p>© 2021</p>
+</footer>
+</div>
+</div>
+<div class=toc-container>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#les-concepts-fondamentaux>Les concepts fondamentaux.</a>
+<ul>
+<li><a href=#les-observables>Les Observables</a></li>
+<li><a href=#les-subcribers>Les Subcribers</a></li>
+<li><a href=#les-operators>Les Operators</a></li>
+<li><a href=#les-schedulers>Les Schedulers</a></li>
+</ul>
+</li>
+<li><a href=#rxjava-en-pratique>RxJava en pratique.</a>
+<ul>
+<li><a href=#hello-world->Hello World !</a></li>
+<li><a href=#débuter-avec-les-operators>Débuter avec les Operators</a></li>
+<li><a href=#en-conclusion>En conclusion</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</main>
+<script src=/js/index.min.575dda8d49ee02639942c63564273e6da972ab531dda26a08800bdcb477cbd7f.js integrity="sha256-V13ajUnuAmOZQsY1ZCc+balyq1Md2iagiAC9y0d8vX8=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js></script>
+<script src=https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js data-autoloader-path=https://unpkg.com/prismjs@1.20.0/components/></script>
+<script src=/js/table-of-contents.js></script>
+</body>
+</html>
