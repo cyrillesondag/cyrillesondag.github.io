@@ -8,7 +8,6 @@ draft: false
 tags: [ "java" ]
 math: false
 toc: true
-disqus_identifier: "rxjava"
 ---
 
 Pourquoi utiliser Rx ?
