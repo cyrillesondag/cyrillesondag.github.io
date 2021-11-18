@@ -7,7 +7,7 @@ keywords: ["linux", "virtual memory"]
 draft: false
 tags: [ "linux"]
 math: false
-toc: false
+toc: true
 ---
 
 
