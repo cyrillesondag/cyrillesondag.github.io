@@ -13,20 +13,21 @@ toc: true
 
 {{< figure src="Jean-François_Millet_-_Gleaners_-_Google_Art_Project_2.jpg" link="Jean-François_Millet_-_Gleaners_-_Google_Art_Project_2.jpg" caption="Jean-Francois Millet - Les Glaneuses (1857), huile sur toile, 83,5 × 110 cm, Paris, musée d'Orsay." >}}
 
-Je vais m'attacher dans cette partie introductive à expliciter la sequence de boot sous Linux pour m'arrêter au lancement du process d'init. Puis à faire la distinction entre systemd et SysV init sans rentrer dans les détails d'implémentation, puis revenir rapidement sur le débat autour de l'adoption du systemd.
+Je vais m'attacher dans cette partie introductive à expliciter la séquence de boot sous Linux pour m'arrêter au lancement du processus d'init. 
+Puis faire la distinction entre systemd et SysV init sans rentrer dans les détails d'implémentation, puis revenir rapidement sur le débat autour de l'adoption du systemd.
 
 Les détails techniques et l'utilisation de systemd en lui-même feront les sujets d'articles suivants.
 
 ## Historique
 Systemd a été développé à l'initiative de Lennard Poettering (la première version date de 2010 selon Wikipedia) comme étant le remplaçant - entre autres - de l'historique SysV init.
 
-Promu par Redhat, il a fini par s'imposer comme un standard de l'industrie dans les distributions majeures Linux, et cela, malgré les critiques encore nombreuses critiques.
+Promu par Redhat, il a fini par s'imposer comme un standard de l'industrie dans les distributions majeures Linux, malgré les critiques encore nombreuses critiques.
 
 Systemd est la contraction de system daemon.
 
 ## Du boot à l'init
 
-Avant de parler de l'init il me semble important d'expliquer les étapes précédentes pour bien comprendre le contexte.
+Avant de parler de l'init il me semble important d'expliquer les étapes précédentes pour bien comprendre le contexte et le rôle de ce processus.
 
 Donc lors du démarrage, la séquence est la suivante : 
 
@@ -39,15 +40,17 @@ Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configura
 Pour y accéder il est nécessaires donc nécessaire de charger les différents modules / drivers correspondants.
 
 Pour ce faire il existe principalement deux méthodes :
-- Soit pré-compiler dans l'image du kernel l'ensemble des drivers requis (mais du coup sacrifier les avantages vu plus haut).
+- Soit pré-compiler dans l'image du kernel l'ensemble des drivers requis (mais du coup sacrifier les avantages vus plus haut).
 - Soit passer par une image temporaire du rootFS contenant tout ce dont a besoin le système de poursuivre le démarrage.
 
-On voit bien que le montage des filesystem est donc une tache cruciale du démarrage.
+On voit bien que le montage des filesystems est donc une tache cruciale du démarrage.
 
 Parmi la multitude de tâches d'initialisations (vm, console, horloge...) que le kernel va réaliser, nous allons nous intéresser à quelques-unes en particulier.
 
 #### Instanciation du rootfs.
-Le rootfs est un filesystem un peu special, il est stocké en mémoire et est present dès les premieres étapes du démarrage du kernel et ne peut être démonté (bien qu'il soit rarement utilisé après la phase d'init).
+
+Le rootfs est un filesystem un peu spécial, il est stocké en mémoire et est present dès les premieres étapes du démarrage du kernel et ne peut être démonté (bien qu'il soit rarement utilisé après la phase d'init).
+
 Il existe actuellement sous deux types de filesystem :
 - RAMFS qui est un simple page cache en mémoire dont aucun element ne peut être persisté. 
 - TMPFS qui à l'inverse de RAMFS permet de limiter l'espace utilisé en mémoire et l'écriture sur la SWAP.
@@ -56,9 +59,10 @@ Le choix de l'un ou l'autre se fait à la compilation du kernel.
 
 #### La décompression de l'initrd
 
-L'image temporaire du rootFS évoquée plus haut s'appelle l'initrd (init ram disk) en hommage à l'ancien fonctionnement (< 2.6) qui émulait un périphérique disque. 
+L'image temporaire du rootFS évoquée plus haut s'appelle l'initrd (initial ram disk) en hommage à l'ancien fonctionnement (< 2.6) qui émulait un périphérique disque. 
 C'est une simple archive compressée d'un filesystem au format cpio (une sorte de gz amélioré).
-Elle a l'avantage d'être facilement manipulable car elle n'est pas compilée. Il n'est donc pas nécessaire d'avoir un gcc ou des headers installés pour la générer ou la modifier (à la difference de l'image kernel), elle est d'ailleurs régulièrement mise à jour au cours de la vie du système.
+Elle a l'avantage d'être facilement manipulable, car elle n'est pas compilée. 
+Il n'est donc pas nécessaire d'avoir un gcc ou des headers installés pour la générer ou la modifier (à la difference de l'image kernel), elle est d'ailleurs régulièrement mise à jour au cours de la vie du système.
 
 > on peut facilement lister le contenu grace a la commande ```lsinitramfs``` ou la mettre à jour via ```update-initramfs```
 
@@ -66,9 +70,9 @@ Cette archive est passée en paramètre au kernel via le paramètre ```initrd=``
 
 Enfin - et c'est là que process d'init a proprement parlé commence - le kernel va appeler l'exécutable ```/init``` (ou l'exécutable spécifié via ```rdinit=```).
 
-L'initrd va monter le root device dans le dossier ```/root```, supprimer les autres fichiers du rootFS puis appeler la fonction ```pivot_root``` pour transformer ```/root``` en ```/``` (a la manière d'un chroot).
+L'initrd va monter le ```root=``` device dans le dossier ```/root```, supprimer les autres fichiers du rootFS puis appeler la fonction ```pivot_root``` pour transformer ```/root``` en ```/``` (à la manière d'un chroot).
 
-Bien souvent (c'est le cas de systemd) ce process va re-exécuter une autre phase d'init pour prendre en charge la suite de l'initialisation du système apres le montage du root.
+Bien souvent (c'est le cas de systemd) ce process va re-exécuter une autre phase d'init pour prendre en charge la suite de l'initialisation du système après le montage du root.
 
 #### Le montage "/root"
 
@@ -231,7 +235,7 @@ La ou SysV init se résume bien souvent à sequencer l'exécution de scripts (en
 
 Ces configurations sont écrites au format ini et sont appelées des "unit file" ou unit (mais ce n'est pas exact, car ça désigne les objects manipulés par systemd et non les fichiers)
 
-Il existe plusieurs types d'unit file qui répondent à différents cas d'utilisations, chacune est suffixée par son type. 
+Il existe plusieurs types d'unit files qui répondent à différents cas d'utilisations, chacune est suffixée par son type. 
 
 L'équivalent systemd du script ci-dessus est une unit file de type "service". Que l'on pourrait adapter de la sorte :
 ```ini
@@ -255,7 +259,7 @@ Ce n'est plus nous qui réalisons les actions, c'est systemd qui le fait a notre
 
 Le script de base est extrêmement simple, et n'a pas vraiment de sens (encore moins avec systemd) mais met bien en evidence toutes les choses qui sont inclus de base dans systemd, et la difference entre les deux approches. 
 
-L'avantage ici d'êre dans un "framework" est qu'il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous meme.
+L'avantage ici d'être dans un "framework" est qu'il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous même.
 
 - Un service est un unique, pour un meme nom (au sein d'une instance systemd). Nous n'avons donc pas besoin de lock de synchronisation (il est possible de le variabiliser via le templating).
 - Les états start / status / stop / restart sont implicites et commun a tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l'état du ```PID``` de terminé comme principal.
@@ -275,7 +279,7 @@ Les défenseurs rétorquent souvent que systemd est modulaire - ce qui est vrai 
 À mon avis la principale résistance est que systemd a imposé ses standards (en termes de nomenclature, arborescence, packaging et autres) aux seins des distributions. 
 
 J'y vois également la réaction à la professionnalisation inevitable de l'écosystème Linux, avec la disparition progressive de l'esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets oss.
-(Il faut aussi bien avouer que la communauté linux ADORE le drama, et trouver des occasions de s'écharper).
+(Il faut aussi bien avouer que la communauté linux ADORE le drama et trouver des occasions de s'écharper).
 
 Systemd n'est certainement pas idéal, mais il est "constant". 
 Il a indéniablement apporté des beaucoup de bénéfices : une facilitation du packaging des applications, une meilleure portabilité, une qualité accru et plus homogène, une facilité d'accès aux fonctions avancés du kernel...
