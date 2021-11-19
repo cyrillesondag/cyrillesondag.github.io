@@ -16,7 +16,7 @@
 <link rel="shortcut icon" type=image/png href=/favicon.ico>
 <link type=text/css rel=stylesheet href=/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0=">
 <link type=text/css rel=stylesheet href=/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 1","headline":"Systemd - partie 1","description":"Init system de initV a systemd","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2021","datePublished":"2021-10-17 10:34:56 \u002b0200 \u002b0200","dateModified":"2021-10-17 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-one\/","wordCount":"2173","keywords":["linux","systemd","init system","Blog"]}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 1","headline":"Systemd - partie 1","description":"Init system de initV a systemd","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2021","datePublished":"2021-10-17 10:34:56 \u002b0200 \u002b0200","dateModified":"2021-10-17 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-one\/","wordCount":"2147","keywords":["linux","systemd","init system","Blog"]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KHJGZJ8WJ"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-8KHJGZJ8WJ',{anonymize_ip:!1})}</script>
 </head>
@@ -143,12 +143,12 @@ panic(&quot;No working init found.  Try passing init= option to kernel. &quot;
 <li>Est chargé d&rsquo;initialiser tout un nombre de ressources (disque, terminaux, réseau, interface graphique…).</li>
 </ul>
 <blockquote>
-<p>Sous linux les process sont tous issus de la methode <code>fork()</code> ou dérivés.</p>
-<p>Tous les processus enfants héritent d&rsquo;un certain nombre d&rsquo;attributs de la part de leur parent : user, session, cgroup, mémoire&mldr;</p>
+<p>Sous linux les processus sont tous issus de la methode <code>fork()</code> ou dérivés.</p>
+<p>Tous les processus enfants héritent d&rsquo;un certain nombre d&rsquo;attributs de leur parent : user, session, cgroup, mémoire partagé&mldr;</p>
 <p>L&rsquo;init à donc un rôle primordial dans la vie du système.</p>
 </blockquote>
 <h2 id=sysv-init>SysV init<a class=anchor href=#sysv-init>#</a></h2>
-<p>Pour bien comprendre ce que systemd apporte il faut le comparer a son remplaçant SysV init (j&rsquo;ai choisi initV uniquement parce que c&rsquo;était le plus répandu et que je l&rsquo;ai un peu utilisé).</p>
+<p>Pour bien comprendre ce que systemd apporte il faut le comparer à son remplaçant SysV init (j&rsquo;ai choisi initV uniquement parce que c&rsquo;était le plus répandu et que je l&rsquo;ai un peu utilisé).</p>
 <p>SysV init est basé sur les run-levels qui sont au nombre de 5 (presque) :</p>
 <ul>
 <li>0 - réservé - Arrêt (halt)</li>
@@ -158,14 +158,14 @@ panic(&quot;No working init found.  Try passing init= option to kernel. &quot;
 </ul>
 <p>Il faut d&rsquo;ailleurs comprendre le mon SysV init comme étant &ldquo;systeme 5 init&rdquo; qui correspond aux 5 run-level de l&rsquo;état d&rsquo;un système.</p>
 <p>Lors de l&rsquo;init le system va passer d&rsquo;un run-level à l&rsquo;autre jusqu&rsquo;à arriver au <em><strong>default level</strong></em> (qui peut varier suivant les distributions&mldr;) qui correspond au mode nominal de fonctionnement (par exemple une interface graphique pour un desktop ou un terminal pour un serveur).</p>
-<p>En cas d&rsquo;une erreur fatale du level X le level X+1 n&rsquo;est pas appelé et l&rsquo;initialisation est marquée en erreur.</p>
-<p>Chacun des levels agit comme un point de synchronisation, c&rsquo;est-a-dire qu&rsquo;il va déclencher un certain nombre d&rsquo;actions à une étape précise du système.</p>
+<p>En cas d&rsquo;erreur du level X le level X+1 n&rsquo;est pas appelé et l&rsquo;initialisation est marquée en échec.</p>
+<p>Chacun des levels agit comme un point de synchronisation, c&rsquo;est-a-dire qu&rsquo;il va déclencher un nombre d&rsquo;actions à une étape précise du démarrage du système.</p>
 <blockquote>
-<p>Par exemple si un daemon &ldquo;A&rdquo; nécessite une interface réseau ou filesystem locaux, il a tout intérêt à se déclencher a un run-level supérieur à 1.</p>
+<p>Par exemple si un daemon &ldquo;A&rdquo; nécessite une interface réseau ou filesystem locaux, il a tout intérêt à se déclencher à un run-level supérieur à 1.</p>
 </blockquote>
 <h2 id=scripts-sysv-init>Scripts SysV init<a class=anchor href=#scripts-sysv-init>#</a></h2>
 <p>SysV init est basé sur un ensemble de scripts, qui doivent répondre à des conventions, certaines peuvent varier suivant les distributions Linux utilisées.</p>
-<p>Prenons l&rsquo;exemple du squelette du script de lancement d&rsquo;un daemon (très simple) :</p>
+<p>Prenons l&rsquo;exemple très simple d&rsquo;un script de lancement d&rsquo;un daemon :</p>
 <pre><code class=language-bash>#!/bin/sh #(1)
 # 
 # Demonstrate creating your own init scripts 
@@ -216,9 +216,9 @@ case &quot;$1&quot; in  #(5)
 esac 
 exit $? #(6)
 </code></pre>
-<p>Il est composé de :</p>
+<p>Il est composé :</p>
 <ul>
-<li>(1) La déclaration de l&rsquo;interpréteur (ici shell)</li>
+<li>(1) D&rsquo;une déclaration de l&rsquo;interpréteur (ici shell)</li>
 <li>Ensuite une série de commentaires qui n&rsquo;en sont pas :
 <ul>
 <li>(2) chkconfig qui permet de définir les levels d&rsquo;exécution et le niveau de priorité</li>
@@ -233,7 +233,7 @@ exit $? #(6)
 <ul>
 <li>Offre un nombre de fonctionnalités assez completes : ckconfig, lsb-headers.</li>
 <li>Une grande flexibilité : c&rsquo;est un script shell on fait &lsquo;ceux qu&rsquo;on veut&rsquo;.</li>
-<li>Un debut de standardisation des scripts (avec les fonctions, lsb headers, checkconfig).</li>
+<li>Un début de standardisation (avec les fonctions, lsb headers, checkconfig).</li>
 </ul>
 <p><em><strong>CONS</strong></em> :</p>
 <ul>
@@ -242,12 +242,12 @@ exit $? #(6)
 <li>Compliqué à réaliser.</li>
 <li>Peut avoir de comportements différents selon le context d&rsquo;appel du script.</li>
 </ul>
-<p>D&rsquo;un point de vue utilisateur, on remarque bien ce n&rsquo;est pas standardisé (avec ses avantages et ses inconvénients) et en pratique demande pas mal d&rsquo;expertise en script (shell, bach&mldr;) pour réaliser des choses qui sont souvent assez semblables (gérer les sorties standards, changer d&rsquo;utilisateur, lancer un daemon, execution unique&mldr;)</p>
-<p>La ou SysV init se résume bien souvent à sequencer l&rsquo;exécution de scripts (en schématisant), systemd se base sur la configuration d&rsquo;actions qu&rsquo;il pourra ensuite exécuter.</p>
+<p>D&rsquo;un point de vue utilisateur, on remarque bien que ce n&rsquo;est pas standardisé (avec ses avantages et ses inconvénients) et en pratique demande pas mal d&rsquo;expertise en script pour réaliser des choses assez semblables (gérer les sorties standards, changer d&rsquo;utilisateur, lancer un daemon, execution unique&mldr;)</p>
+<p>La ou SysV init se résume à sequencer l&rsquo;exécution de scripts (en schématisant), systemd se base sur de la description de configuration.</p>
 <h2 id=service-unit-systemd>Service unit systemd<a class=anchor href=#service-unit-systemd>#</a></h2>
-<p>Ces configurations sont écrites au format ini et sont appelées des &ldquo;unit file&rdquo; ou unit (mais ce n&rsquo;est pas exact, car ça désigne les objects manipulés par systemd et non les fichiers)</p>
-<p>Il existe plusieurs types d&rsquo;unit files qui répondent à différents cas d&rsquo;utilisations, chacune est suffixée par son type.</p>
-<p>L&rsquo;équivalent systemd du script ci-dessus est une unit file de type &ldquo;service&rdquo;. Que l&rsquo;on pourrait adapter de la sorte :</p>
+<p>Ces configurations sont écrites au format ini et sont appelées &ldquo;unit file&rdquo; ou &ldquo;unit&rdquo; (mais ce n&rsquo;est pas exact, car ça désigne les objects manipulés par systemd et non les fichiers).</p>
+<p>Il existe plusieurs types d&rsquo;unit files qui répondent à différents cas d&rsquo;utilisations (service, montage&mldr;), chacune est suffixée par son type.</p>
+<p>L&rsquo;équivalent systemd du script ci-dessus est une unit file de type &ldquo;service&rdquo; que l&rsquo;on pourrait adapter de la sorte :</p>
 <pre><code class=language-ini>[Unit]
 Description=Service
 
@@ -259,17 +259,16 @@ ExecPreStop=/usr/bin/sleep 2
 [Install]
 Wants=multi-users.target
 </code></pre>
-<p>La première chose que l&rsquo;on remarque est que le fichier systemd est un fichier de configuration et pas un script.
-Il n&rsquo;a donc pas d&rsquo;utilité en dehors du contexte de systemd.</p>
+<p>La première chose que l&rsquo;on remarque est que le fichier systemd n&rsquo;est pas un script, il n&rsquo;a donc pas d&rsquo;utilité en dehors du contexte de systemd.</p>
 <p>Deuxième chose, les attributs de configuration sont normées, ils correspondent à une série de propriétés interprétées par le programme.
-Ce n&rsquo;est plus nous qui réalisons les actions, c&rsquo;est systemd qui le fait a notre place.</p>
+Ce n&rsquo;est plus nous qui réalisons les actions, c&rsquo;est systemd qui le fait à notre place.</p>
 <p>Le script de base est extrêmement simple, et n&rsquo;a pas vraiment de sens (encore moins avec systemd) mais met bien en evidence toutes les choses qui sont inclus de base dans systemd, et la difference entre les deux approches.</p>
 <p>L&rsquo;avantage ici d&rsquo;être dans un &ldquo;framework&rdquo; est qu&rsquo;il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous même.</p>
 <ul>
 <li>Un service est un unique, pour un meme nom (au sein d&rsquo;une instance systemd). Nous n&rsquo;avons donc pas besoin de lock de synchronisation (il est possible de le variabiliser via le templating).</li>
-<li>Les états start / status / stop / restart sont implicites et commun a tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l&rsquo;état du <code>PID</code> de terminé comme principal.</li>
-<li>Là où l&rsquo;on devait spécifier via les lsb-headers l&rsquo;ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf <code>defaultdependencies</code>) qui doit répondre à la majorité des cas d&rsquo;utilisations des daemons définis par un utilisateur.</li>
-<li>Enfin on retrouve un équivalent des run-level dans l&rsquo;attribut <code>Target=multi-users.target</code> qui sert ici également de point de synchronisation lors du démarrage.</li>
+<li>Les états start / status / stop / restart sont implicites et commun à tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l&rsquo;état du <code>PID</code> terminé comme principal.</li>
+<li>Là où l&rsquo;on devait spécifier via les lsb-headers l&rsquo;ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf <code>defaultdependencies</code>) qui doit répondre à la majorité des cas d&rsquo;utilisations des daemons de haut niveau.</li>
+<li>Enfin on retrouve un équivalent des run-level avec l&rsquo;attribut <code>Target=multi-users.target</code> qui sert ici également de point de synchronisation lors du démarrage.</li>
 </ul>
 <h2 id=le-mal-aimé>Le mal aimé<a class=anchor href=#le-mal-aimé>#</a></h2>
 <p>On a beaucoup reproché a systemd d&rsquo;être envahissant, et de briser le principe &ldquo;un programme doit faire UNE chose et la faire bien&rdquo;.</p>
@@ -277,11 +276,11 @@ Ce n&rsquo;est plus nous qui réalisons les actions, c&rsquo;est systemd qui le 
 Ce qui était &ldquo;caché&rdquo; sous des scripts est ici rendu apparent.</p>
 <p>Les défenseurs rétorquent souvent que systemd est modulaire - ce qui est vrai - mais cela ne me semble pas être un argument valable, les composants peuvent faire partis de different projets/module (journald, networkd, nspawn&mldr;) ils font tous partis d&rsquo;un ensemble coherent et ont tous vocation à fonctionner ensemble.</p>
 <p>À mon avis la principale résistance est que systemd a imposé ses standards (en termes de nomenclature, arborescence, packaging et autres) aux seins des distributions.</p>
-<p>J&rsquo;y vois également la réaction à la professionnalisation inevitable de l&rsquo;écosystème Linux, avec la disparition progressive de l&rsquo;esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets oss.
-(Il faut aussi bien avouer que la communauté linux ADORE le drama et trouver des occasions de s&rsquo;écharper).</p>
+<p>J&rsquo;y vois également la réaction à la professionnalisation inévitable de l&rsquo;écosystème Linux, avec la disparition progressive de l&rsquo;esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets OSS.
+(Il faut aussi bien avouer que la communauté Linux ADORE les dramas et trouver des occasions de s&rsquo;écharper).</p>
 <p>Systemd n&rsquo;est certainement pas idéal, mais il est &ldquo;constant&rdquo;.
-Il a indéniablement apporté des beaucoup de bénéfices : une facilitation du packaging des applications, une meilleure portabilité, une qualité accru et plus homogène, une facilité d&rsquo;accès aux fonctions avancés du kernel&mldr;</p>
-<p>Bref, il me s&rsquo;agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu&rsquo;il apporte.</p>
+Il a indéniablement apporté beaucoup de bénéfices : facilitation du packaging, une meilleure portabilité, une qualité accru et plus homogène, une facilité d&rsquo;accès aux fonctions avancés du kernel&mldr;</p>
+<p>Bref, il ne s&rsquo;agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu&rsquo;il apporte.</p>
 </article>
 <ul class=tags__list>
 <li class=tag__item>
