@@ -123,16 +123,16 @@ Ce processus est un peu different des autres :
 - Est l'ancêtre de tous les autres processus.
 - Est chargé d'initialiser tout un nombre de ressources (disque, terminaux, réseau, interface graphique…).
 
-> Sous linux les process sont tous issus de la methode ```fork()``` ou dérivés.
+> Sous linux les processus sont tous issus de la methode ```fork()``` ou dérivés.
 > 
-> Tous les processus enfants héritent d'un certain nombre d'attributs de la part de leur parent : user, session, cgroup, mémoire...
+> Tous les processus enfants héritent d'un certain nombre d'attributs de leur parent : user, session, cgroup, mémoire partagé...
 > 
 > L'init à donc un rôle primordial dans la vie du système.
 
 
 ## SysV init 
 
-Pour bien comprendre ce que systemd apporte il faut le comparer a son remplaçant SysV init (j'ai choisi initV uniquement parce que c'était le plus répandu et que je l'ai un peu utilisé).
+Pour bien comprendre ce que systemd apporte il faut le comparer à son remplaçant SysV init (j'ai choisi initV uniquement parce que c'était le plus répandu et que je l'ai un peu utilisé).
 
 SysV init est basé sur les run-levels qui sont au nombre de 5 (presque) :
 - 0 - réservé - Arrêt (halt)
@@ -144,17 +144,17 @@ Il faut d'ailleurs comprendre le mon SysV init comme étant "systeme 5 init" qui
 
 Lors de l'init le system va passer d'un run-level à l'autre jusqu'à arriver au ***default level*** (qui peut varier suivant les distributions...) qui correspond au mode nominal de fonctionnement (par exemple une interface graphique pour un desktop ou un terminal pour un serveur).
 
-En cas d'une erreur fatale du level X le level X+1 n'est pas appelé et l'initialisation est marquée en erreur.
+En cas d'erreur du level X le level X+1 n'est pas appelé et l'initialisation est marquée en échec.
 
-Chacun des levels agit comme un point de synchronisation, c'est-a-dire qu'il va déclencher un certain nombre d'actions à une étape précise du système. 
+Chacun des levels agit comme un point de synchronisation, c'est-a-dire qu'il va déclencher un nombre d'actions à une étape précise du démarrage du système. 
 
-> Par exemple si un daemon "A" nécessite une interface réseau ou filesystem locaux, il a tout intérêt à se déclencher a un run-level supérieur à 1.
+> Par exemple si un daemon "A" nécessite une interface réseau ou filesystem locaux, il a tout intérêt à se déclencher à un run-level supérieur à 1.
 
 ## Scripts SysV init
 
 SysV init est basé sur un ensemble de scripts, qui doivent répondre à des conventions, certaines peuvent varier suivant les distributions Linux utilisées.
 
-Prenons l'exemple du squelette du script de lancement d'un daemon (très simple) :
+Prenons l'exemple très simple d'un script de lancement d'un daemon :
 
 ```bash
 #!/bin/sh #(1)
@@ -207,8 +207,8 @@ case "$1" in  #(5)
 esac 
 exit $? #(6)
 ```
-Il est composé de :
-- (1) La déclaration de l'interpréteur (ici shell)
+Il est composé :
+- (1) D'une déclaration de l'interpréteur (ici shell)
 - Ensuite une série de commentaires qui n'en sont pas :
   - (2) chkconfig qui permet de définir les levels d'exécution et le niveau de priorité
   - (3) LSB Headers qui contient des informations sur ordonnancement du service qui peut être éventuellement utilisé
@@ -219,7 +219,7 @@ Il est composé de :
 ***PROS*** :
 - Offre un nombre de fonctionnalités assez completes : ckconfig, lsb-headers.
 - Une grande flexibilité : c'est un script shell on fait 'ceux qu'on veut'.
-- Un debut de standardisation des scripts (avec les fonctions, lsb headers, checkconfig).
+- Un début de standardisation (avec les fonctions, lsb headers, checkconfig).
 
 ***CONS*** : 
 - Très verbeux, répétitif et difficilement extensible.
@@ -227,17 +227,17 @@ Il est composé de :
 - Compliqué à réaliser.
 - Peut avoir de comportements différents selon le context d'appel du script.
 
-D'un point de vue utilisateur, on remarque bien ce n'est pas standardisé (avec ses avantages et ses inconvénients) et en pratique demande pas mal d'expertise en script (shell, bach...) pour réaliser des choses qui sont souvent assez semblables (gérer les sorties standards, changer d'utilisateur, lancer un daemon, execution unique...) 
+D'un point de vue utilisateur, on remarque bien que ce n'est pas standardisé (avec ses avantages et ses inconvénients) et en pratique demande pas mal d'expertise en script pour réaliser des choses assez semblables (gérer les sorties standards, changer d'utilisateur, lancer un daemon, execution unique...) 
 
-La ou SysV init se résume bien souvent à sequencer l'exécution de scripts (en schématisant), systemd se base sur la configuration d'actions qu'il pourra ensuite exécuter.
+La ou SysV init se résume à sequencer l'exécution de scripts (en schématisant), systemd se base sur de la description de configuration.
 
 ## Service unit systemd
 
-Ces configurations sont écrites au format ini et sont appelées des "unit file" ou unit (mais ce n'est pas exact, car ça désigne les objects manipulés par systemd et non les fichiers)
+Ces configurations sont écrites au format ini et sont appelées "unit file" ou "unit" (mais ce n'est pas exact, car ça désigne les objects manipulés par systemd et non les fichiers).
 
-Il existe plusieurs types d'unit files qui répondent à différents cas d'utilisations, chacune est suffixée par son type. 
+Il existe plusieurs types d'unit files qui répondent à différents cas d'utilisations (service, montage...), chacune est suffixée par son type. 
 
-L'équivalent systemd du script ci-dessus est une unit file de type "service". Que l'on pourrait adapter de la sorte :
+L'équivalent systemd du script ci-dessus est une unit file de type "service" que l'on pourrait adapter de la sorte :
 ```ini
 [Unit]
 Description=Service
@@ -251,20 +251,19 @@ ExecPreStop=/usr/bin/sleep 2
 Wants=multi-users.target
 ```
 
-La première chose que l'on remarque est que le fichier systemd est un fichier de configuration et pas un script.
-Il n'a donc pas d'utilité en dehors du contexte de systemd.
+La première chose que l'on remarque est que le fichier systemd n'est pas un script, il n'a donc pas d'utilité en dehors du contexte de systemd.
 
 Deuxième chose, les attributs de configuration sont normées, ils correspondent à une série de propriétés interprétées par le programme.
-Ce n'est plus nous qui réalisons les actions, c'est systemd qui le fait a notre place.
+Ce n'est plus nous qui réalisons les actions, c'est systemd qui le fait à notre place.
 
 Le script de base est extrêmement simple, et n'a pas vraiment de sens (encore moins avec systemd) mais met bien en evidence toutes les choses qui sont inclus de base dans systemd, et la difference entre les deux approches. 
 
 L'avantage ici d'être dans un "framework" est qu'il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous même.
 
 - Un service est un unique, pour un meme nom (au sein d'une instance systemd). Nous n'avons donc pas besoin de lock de synchronisation (il est possible de le variabiliser via le templating).
-- Les états start / status / stop / restart sont implicites et commun a tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l'état du ```PID``` de terminé comme principal.
-- Là où l'on devait spécifier via les lsb-headers l'ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf ```defaultdependencies```) qui doit répondre à la majorité des cas d'utilisations des daemons définis par un utilisateur.
-- Enfin on retrouve un équivalent des run-level dans l'attribut ```Target=multi-users.target``` qui sert ici également de point de synchronisation lors du démarrage.
+- Les états start / status / stop / restart sont implicites et commun à tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l'état du ```PID``` terminé comme principal.
+- Là où l'on devait spécifier via les lsb-headers l'ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf ```defaultdependencies```) qui doit répondre à la majorité des cas d'utilisations des daemons de haut niveau.
+- Enfin on retrouve un équivalent des run-level avec l'attribut ```Target=multi-users.target``` qui sert ici également de point de synchronisation lors du démarrage.
 
 
 ## Le mal aimé
@@ -278,10 +277,10 @@ Les défenseurs rétorquent souvent que systemd est modulaire - ce qui est vrai 
 
 À mon avis la principale résistance est que systemd a imposé ses standards (en termes de nomenclature, arborescence, packaging et autres) aux seins des distributions. 
 
-J'y vois également la réaction à la professionnalisation inevitable de l'écosystème Linux, avec la disparition progressive de l'esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets oss.
-(Il faut aussi bien avouer que la communauté linux ADORE le drama et trouver des occasions de s'écharper).
+J'y vois également la réaction à la professionnalisation inévitable de l'écosystème Linux, avec la disparition progressive de l'esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets OSS.
+(Il faut aussi bien avouer que la communauté Linux ADORE les dramas et trouver des occasions de s'écharper).
 
 Systemd n'est certainement pas idéal, mais il est "constant". 
-Il a indéniablement apporté des beaucoup de bénéfices : une facilitation du packaging des applications, une meilleure portabilité, une qualité accru et plus homogène, une facilité d'accès aux fonctions avancés du kernel...
+Il a indéniablement apporté beaucoup de bénéfices : facilitation du packaging, une meilleure portabilité, une qualité accru et plus homogène, une facilité d'accès aux fonctions avancés du kernel...
 
-Bref, il me s'agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu'il apporte.
+Bref, il ne s'agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu'il apporte.
