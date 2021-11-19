@@ -16,7 +16,7 @@
 <link rel="shortcut icon" type=image/png href=/favicon.ico>
 <link type=text/css rel=stylesheet href=/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0=">
 <link type=text/css rel=stylesheet href=/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 1","headline":"Systemd - partie 1","description":"Init system de initV a systemd","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2021","datePublished":"2021-10-17 10:34:56 \u002b0200 \u002b0200","dateModified":"2021-10-17 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-one\/","wordCount":"2147","keywords":["linux","systemd","init system","Blog"]}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 1","headline":"Systemd - partie 1","description":"Init system de initV a systemd","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2021","datePublished":"2021-10-17 10:34:56 \u002b0200 \u002b0200","dateModified":"2021-10-17 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-one\/","wordCount":"2153","keywords":["linux","systemd","init system","Blog"]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KHJGZJ8WJ"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-8KHJGZJ8WJ',{anonymize_ip:!1})}</script>
 </head>
@@ -66,42 +66,43 @@ Puis faire la distinction entre systemd et SysV init sans rentrer dans les déta
 <p>Avant de parler de l&rsquo;init il me semble important d&rsquo;expliquer les étapes précédentes pour bien comprendre le contexte et le rôle de ce processus.</p>
 <p>Donc lors du démarrage, la séquence est la suivante :</p>
 <p>Le bootloader va sélectionner et lancer l&rsquo;image du kernel au format bzImage (pour boot executable image), elle est située sur la partition de boot généralement sous le nom vmlinux.**.</p>
-<p>Cette image est compilée et souvent assez minimale, c&rsquo;est-à-dire qu&rsquo;elle contient peu d&rsquo;éléments statiques dans le but d&rsquo;occuper un minimum d&rsquo;espace disque et faciliter son chargement et sa distribution.
+<p>Cette image est compilée et généralement assez minimale, c&rsquo;est-à-dire qu&rsquo;elle contient peu d&rsquo;éléments statiques dans le but d&rsquo;occuper un minimum d&rsquo;espace disque et faciliter son chargement et sa distribution.
 Grâce à cela une même image peut être utilisée par exemple aussi bien sur un téléphone portable que sur un serveur dernière génération (pourvu qu&rsquo;ils utilisent la même architecture).</p>
-<p>Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support (disque, partition, réseaux&mldr;).
-Pour y accéder il est nécessaires donc nécessaire de charger les différents modules / drivers correspondants.</p>
+<p>Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support : disque, partition, réseaux&mldr;
+Pour y accéder il est donc nécessaire de charger les différents modules / drivers correspondants.</p>
 <p>Pour ce faire il existe principalement deux méthodes :</p>
 <ul>
-<li>Soit pré-compiler dans l&rsquo;image du kernel l&rsquo;ensemble des drivers requis (mais du coup sacrifier les avantages vus plus haut).</li>
-<li>Soit passer par une image temporaire du rootFS contenant tout ce dont a besoin le système de poursuivre le démarrage.</li>
+<li>Soit pré-compiler dans l&rsquo;image du kernel l&rsquo;ensemble des drivers requis (mais sacrifier les avantages vus plus haut).</li>
+<li>Soit passer par une image temporaire contenant ce qui est nécessaire au démarrage du système.</li>
 </ul>
-<p>On voit bien que le montage des filesystems est donc une tache cruciale du démarrage.</p>
-<p>Parmi la multitude de tâches d&rsquo;initialisations (vm, console, horloge&mldr;) que le kernel va réaliser, nous allons nous intéresser à quelques-unes en particulier.</p>
+<p>Parmi la multitude de tâches d&rsquo;initialisations (vm, console, horloge&mldr;) que le kernel va réaliser, on va s&rsquo;intéresser à quelques-unes en particulier.</p>
 <h4 id=instanciation-du-rootfs>Instanciation du rootfs.</h4>
-<p>Le rootfs est un filesystem un peu spécial, il est stocké en mémoire et est present dès les premieres étapes du démarrage du kernel et ne peut être démonté (bien qu&rsquo;il soit rarement utilisé après la phase d&rsquo;init).</p>
-<p>Il existe actuellement sous deux types de filesystem :</p>
+<p>Le rootfs est un filesystem un peu spécial, c&rsquo;est la base de tous les futurs filesysteme, il est stocké en mémoire et est présent dès les premieres étapes du démarrage du kernel, ne peut être démonté bien qu&rsquo;il soit rarement utilisé après la phase d&rsquo;init.</p>
+<p>Il existe sous deux types :</p>
 <ul>
-<li>RAMFS qui est un simple page cache en mémoire dont aucun element ne peut être persisté.</li>
+<li>RAMFS qui est un simple &ldquo;page cache&rdquo; en mémoire dont aucun element ne peut être persisté.</li>
 <li>TMPFS qui à l&rsquo;inverse de RAMFS permet de limiter l&rsquo;espace utilisé en mémoire et l&rsquo;écriture sur la SWAP.</li>
 </ul>
 <p>Le choix de l&rsquo;un ou l&rsquo;autre se fait à la compilation du kernel.</p>
 <h4 id=la-décompression-de-linitrd>La décompression de l&rsquo;initrd</h4>
 <p>L&rsquo;image temporaire du rootFS évoquée plus haut s&rsquo;appelle l&rsquo;initrd (initial ram disk) en hommage à l&rsquo;ancien fonctionnement (&lt; 2.6) qui émulait un périphérique disque.
-C&rsquo;est une simple archive compressée d&rsquo;un filesystem au format cpio (une sorte de gz amélioré).
-Elle a l&rsquo;avantage d&rsquo;être facilement manipulable, car elle n&rsquo;est pas compilée.
-Il n&rsquo;est donc pas nécessaire d&rsquo;avoir un gcc ou des headers installés pour la générer ou la modifier (à la difference de l&rsquo;image kernel), elle est d&rsquo;ailleurs régulièrement mise à jour au cours de la vie du système.</p>
+C&rsquo;est une simple archive compressée d&rsquo;un filesystem au format cpio (un gz &ldquo;amélioré&rdquo;).
+Elle a l&rsquo;avantage d&rsquo;être plus facilement manipulable que l&rsquo;image kernel, car non compilée.
+Il n&rsquo;est donc pas nécessaire d&rsquo;avoir un gcc ou des headers installés pour la générer ou la modifier.
+Elle est d&rsquo;ailleurs régulièrement mise à jour au cours de la vie du système (souvent par les packages manager).</p>
 <blockquote>
 <p>on peut facilement lister le contenu grace a la commande <code>lsinitramfs</code> ou la mettre à jour via <code>update-initramfs</code></p>
 </blockquote>
-<p>Cette archive est passée en paramètre au kernel via le paramètre <code>initrd=</code>, qui va ensuite l&rsquo;extraire dans le rootFS.</p>
-<p>Enfin - et c&rsquo;est là que process d&rsquo;init a proprement parlé commence - le kernel va appeler l&rsquo;exécutable <code>/init</code> (ou l&rsquo;exécutable spécifié via <code>rdinit=</code>).</p>
-<p>L&rsquo;initrd va monter le <code>root=</code> device dans le dossier <code>/root</code>, supprimer les autres fichiers du rootFS puis appeler la fonction <code>pivot_root</code> pour transformer <code>/root</code> en <code>/</code> (à la manière d&rsquo;un chroot).</p>
-<p>Bien souvent (c&rsquo;est le cas de systemd) ce process va re-exécuter une autre phase d&rsquo;init pour prendre en charge la suite de l&rsquo;initialisation du système après le montage du root.</p>
+<p>Cette archive est aussi stockée dans la partition de boot et passée en paramètre au kernel via le paramètre <code>initrd=</code>, qui va l&rsquo;extraire dans le rootFS.</p>
+<p>Enfin - et c&rsquo;est là que process d&rsquo;init a proprement parlé commence - le kernel va appeler l&rsquo;exécutable <code>/init</code> (ou l&rsquo;exécutable spécifié via <code>rdinit=</code>) sur le rootFS.</p>
+<p>L&rsquo;initrd d&rsquo;inclure les différents drivers et de monter le root device spécifié par le paramètre <code>root=</code> dans le dossier <code>/root</code>.
+Ensuite, il va supprimer les autres fichiers du rootFS puis appeler la fonction <code>pivot_root</code> pour transformer le repertoire <code>/root</code> en <code>/</code> (à la manière d&rsquo;un chroot).
+Bien souvent (c&rsquo;est le cas de systemd) ce process va re-exécuter une autre phase d&rsquo;init pour prendre en charge la suite de l&rsquo;initialisation du système après le montage du root.</p>
 <h4 id=le-montage-root>Le montage &ldquo;/root&rdquo;</h4>
-<p>En cas d&rsquo;absence de l&rsquo;initrd le kernel va appeler la methode <code>prepare_namespace</code>(qui rempli le même contract que l&rsquo;exécutable <code>/init</code>) c&rsquo;est-a-dire tenter le monter le périphérique spécifié par le paramètre <code>root=</code> dans le répertoire <code>/root</code>, puis faire basculer ce répertoire à la racine.</p>
+<p>En cas d&rsquo;absence de l&rsquo;initrd le kernel va appeler la méthode <code>prepare_namespace</code>(qui rempli le même contract que l&rsquo;exécutable <code>/init</code>) c&rsquo;est-a-dire tenter le monter le périphérique spécifié par le paramètre <code>root=</code> dans le répertoire <code>/root</code>, puis faire basculer ce répertoire à la racine.</p>
 <p>Enfin il va appeler l&rsquo;un des processus d&rsquo;init suivant (<code>/sbin/init</code>, <code>/etc/init</code>, <code>/bin/init</code>, <code>/bin/sh</code>)</p>
 <blockquote>
-<p><em>main.c</em></p>
+<p><em>main.c</em> &lsquo;kernel_init()&rsquo;</p>
 </blockquote>
 <pre><code class=language-c>if (ramdisk_execute_command) {
     ret = run_init_process(ramdisk_execute_command);
@@ -133,9 +134,9 @@ if (!try_to_run_init_process(&quot;/sbin/init&quot;) ||
 panic(&quot;No working init found.  Try passing init= option to kernel. &quot;
       &quot;See Linux Documentation/admin-guide/init.rst for guidance.&quot;);
 </code></pre>
-<p>Comme c&rsquo;est le premier processus lancé par le kernel, il porte donc logiquement le numéro <code>PID=1</code>.</p>
 <h2 id=linit>L&rsquo;init<a class=anchor href=#linit>#</a></h2>
-<p>Ce processus est un peu different des autres :</p>
+<p>Comme c&rsquo;est le premier processus lancé par le kernel, il porte donc logiquement le numéro <code>PID=1</code>.</p>
+<p>Ce processus est un peu différent des autres :</p>
 <ul>
 <li>Ne peut être tué.</li>
 <li>N&rsquo;a pas de parent <code>PPID=</code>.</li>
