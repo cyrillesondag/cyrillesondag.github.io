@@ -33,26 +33,24 @@ Donc lors du démarrage, la séquence est la suivante :
 
 Le bootloader va sélectionner et lancer l'image du kernel au format bzImage (pour boot executable image), elle est située sur la partition de boot généralement sous le nom vmlinux.**.
 
-Cette image est compilée et souvent assez minimale, c'est-à-dire qu'elle contient peu d'éléments statiques dans le but d'occuper un minimum d'espace disque et faciliter son chargement et sa distribution.
+Cette image est compilée et généralement assez minimale, c'est-à-dire qu'elle contient peu d'éléments statiques dans le but d'occuper un minimum d'espace disque et faciliter son chargement et sa distribution.
 Grâce à cela une même image peut être utilisée par exemple aussi bien sur un téléphone portable que sur un serveur dernière génération (pourvu qu'ils utilisent la même architecture). 
 
-Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support (disque, partition, réseaux...). 
-Pour y accéder il est nécessaires donc nécessaire de charger les différents modules / drivers correspondants.
+Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support : disque, partition, réseaux...
+Pour y accéder il est donc nécessaire de charger les différents modules / drivers correspondants.
 
 Pour ce faire il existe principalement deux méthodes :
-- Soit pré-compiler dans l'image du kernel l'ensemble des drivers requis (mais du coup sacrifier les avantages vus plus haut).
-- Soit passer par une image temporaire du rootFS contenant tout ce dont a besoin le système de poursuivre le démarrage.
+- Soit pré-compiler dans l'image du kernel l'ensemble des drivers requis (mais sacrifier les avantages vus plus haut).
+- Soit passer par une image temporaire contenant ce qui est nécessaire au démarrage du système.
 
-On voit bien que le montage des filesystems est donc une tache cruciale du démarrage.
-
-Parmi la multitude de tâches d'initialisations (vm, console, horloge...) que le kernel va réaliser, nous allons nous intéresser à quelques-unes en particulier.
+Parmi la multitude de tâches d'initialisations (vm, console, horloge...) que le kernel va réaliser, on va s'intéresser à quelques-unes en particulier.
 
 #### Instanciation du rootfs.
 
-Le rootfs est un filesystem un peu spécial, il est stocké en mémoire et est present dès les premieres étapes du démarrage du kernel et ne peut être démonté (bien qu'il soit rarement utilisé après la phase d'init).
+Le rootfs est un filesystem un peu spécial, c'est la base de tous les futurs filesysteme, il est stocké en mémoire et est présent dès les premieres étapes du démarrage du kernel, ne peut être démonté bien qu'il soit rarement utilisé après la phase d'init.
 
-Il existe actuellement sous deux types de filesystem :
-- RAMFS qui est un simple page cache en mémoire dont aucun element ne peut être persisté. 
+Il existe sous deux types :
+- RAMFS qui est un simple "page cache" en mémoire dont aucun element ne peut être persisté. 
 - TMPFS qui à l'inverse de RAMFS permet de limiter l'espace utilisé en mémoire et l'écriture sur la SWAP.
 
 Le choix de l'un ou l'autre se fait à la compilation du kernel.
@@ -60,27 +58,29 @@ Le choix de l'un ou l'autre se fait à la compilation du kernel.
 #### La décompression de l'initrd
 
 L'image temporaire du rootFS évoquée plus haut s'appelle l'initrd (initial ram disk) en hommage à l'ancien fonctionnement (< 2.6) qui émulait un périphérique disque. 
-C'est une simple archive compressée d'un filesystem au format cpio (une sorte de gz amélioré).
-Elle a l'avantage d'être facilement manipulable, car elle n'est pas compilée. 
-Il n'est donc pas nécessaire d'avoir un gcc ou des headers installés pour la générer ou la modifier (à la difference de l'image kernel), elle est d'ailleurs régulièrement mise à jour au cours de la vie du système.
+C'est une simple archive compressée d'un filesystem au format cpio (un gz "amélioré").
+Elle a l'avantage d'être plus facilement manipulable que l'image kernel, car non compilée. 
+Il n'est donc pas nécessaire d'avoir un gcc ou des headers installés pour la générer ou la modifier.
+Elle est d'ailleurs régulièrement mise à jour au cours de la vie du système (souvent par les packages manager).
 
 > on peut facilement lister le contenu grace a la commande ```lsinitramfs``` ou la mettre à jour via ```update-initramfs```
 
-Cette archive est passée en paramètre au kernel via le paramètre ```initrd=```, qui va ensuite l'extraire dans le rootFS.
+Cette archive est aussi stockée dans la partition de boot et passée en paramètre au kernel via le paramètre ```initrd=```, qui va l'extraire dans le rootFS.
 
-Enfin - et c'est là que process d'init a proprement parlé commence - le kernel va appeler l'exécutable ```/init``` (ou l'exécutable spécifié via ```rdinit=```).
+Enfin - et c'est là que process d'init a proprement parlé commence - le kernel va appeler l'exécutable ```/init``` (ou l'exécutable spécifié via ```rdinit=```) sur le rootFS.
 
-L'initrd va monter le ```root=``` device dans le dossier ```/root```, supprimer les autres fichiers du rootFS puis appeler la fonction ```pivot_root``` pour transformer ```/root``` en ```/``` (à la manière d'un chroot).
-
+L'initrd d'inclure les différents drivers et de monter le root device spécifié par le paramètre ```root=``` dans le dossier ```/root```.
+Ensuite, il va supprimer les autres fichiers du rootFS puis appeler la fonction ```pivot_root``` pour transformer le repertoire ```/root``` en ```/``` (à la manière d'un chroot).
 Bien souvent (c'est le cas de systemd) ce process va re-exécuter une autre phase d'init pour prendre en charge la suite de l'initialisation du système après le montage du root.
 
 #### Le montage "/root"
 
-En cas d'absence de l'initrd le kernel va appeler la methode ```prepare_namespace```(qui rempli le même contract que l'exécutable ```/init```) c'est-a-dire tenter le monter le périphérique spécifié par le paramètre ```root=``` dans le répertoire ```/root```, puis faire basculer ce répertoire à la racine.
+En cas d'absence de l'initrd le kernel va appeler la méthode ```prepare_namespace```(qui rempli le même contract que l'exécutable ```/init```) c'est-a-dire tenter le monter le périphérique spécifié par le paramètre ```root=``` dans le répertoire ```/root```, puis faire basculer ce répertoire à la racine.
 
 Enfin il va appeler l'un des processus d'init suivant (```/sbin/init```, ```/etc/init```, ```/bin/init```, ```/bin/sh```)
 
-> _main.c_
+
+> _main.c_ 'kernel_init()'
 ```c
 if (ramdisk_execute_command) {
     ret = run_init_process(ramdisk_execute_command);
@@ -113,11 +113,11 @@ panic("No working init found.  Try passing init= option to kernel. "
       "See Linux Documentation/admin-guide/init.rst for guidance.");
 ```
 
-Comme c'est le premier processus lancé par le kernel, il porte donc logiquement le numéro ```PID=1```.
 
 ## L'init
+Comme c'est le premier processus lancé par le kernel, il porte donc logiquement le numéro ```PID=1```.
 
-Ce processus est un peu different des autres :
+Ce processus est un peu différent des autres :
 - Ne peut être tué.
 - N'a pas de parent ```PPID=```.
 - Est l'ancêtre de tous les autres processus.
