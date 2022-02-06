@@ -21,7 +21,7 @@ Les détails techniques et l'utilisation de systemd en lui-même feront les suje
 ## Historique
 Systemd a été développé à l'initiative de Lennard Poettering (la première version date de 2010 selon Wikipedia) comme étant le remplaçant - entre autres - de l'historique SysV init.
 
-Promu par Redhat, il a fini par s'imposer comme un standard de l'industrie dans les distributions majeures Linux, malgré les critiques encore nombreuses critiques.
+Promu par Redhat, il a fini par s'imposer comme un standard de l'industrie dans les distributions majeures Linux, malgré les critiques encore nombreuses.
 
 Systemd est la contraction de system daemon.
 
@@ -31,9 +31,9 @@ Avant de parler de l'init il me semble important d'expliquer les étapes précé
 
 Donc lors du démarrage, la séquence est la suivante : 
 
-Le bootloader va sélectionner et lancer l'image du kernel au format bzImage (pour boot executable image), elle est située sur la partition de boot généralement sous le nom vmlinux.**.
+Le bootloader va sélectionner et lancer l'image du kernel au format bzImage (pour boot executable image), elle est située sur la partition de boot généralement sous le nom ```vmlinux.**```.
 
-Cette image est compilée et généralement assez minimale, c'est-à-dire qu'elle contient peu d'éléments statiques dans le but d'occuper un minimum d'espace disque et faciliter son chargement et sa distribution.
+Cette image est compilée et généralement assez minimale, c'est-à-dire qu'elle contient peu d'éléments statiques dans le but d'occuper un minimum d'espace disque et de faciliter son chargement et sa distribution.
 Grâce à cela une même image peut être utilisée par exemple aussi bien sur un téléphone portable que sur un serveur dernière génération (pourvu qu'ils utilisent la même architecture). 
 
 Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support : disque, partition, réseaux...
@@ -47,10 +47,10 @@ Parmi la multitude de tâches d'initialisations (vm, console, horloge...) que le
 
 #### Instanciation du rootfs.
 
-Le rootfs est un filesystem un peu spécial, c'est la base de tous les futurs filesysteme, il est stocké en mémoire et est présent dès les premieres étapes du démarrage du kernel, ne peut être démonté bien qu'il soit rarement utilisé après la phase d'init.
+Le rootfs est un filesystem un peu spécial, c'est la base de tous les futurs filesysteme, il est stocké en mémoire et est présent dès les premières étapes du démarrage du kernel, ne peut être démonté bien qu'il soit rarement utilisé après la phase d'init.
 
 Il existe sous deux types :
-- RAMFS qui est un simple "page cache" en mémoire dont aucun element ne peut être persisté. 
+- RAMFS qui est un simple "page cache" en mémoire dont aucun élément ne peut être persisté. 
 - TMPFS qui à l'inverse de RAMFS permet de limiter l'espace utilisé en mémoire et l'écriture sur la SWAP.
 
 Le choix de l'un ou l'autre se fait à la compilation du kernel.
@@ -67,9 +67,9 @@ Elle est d'ailleurs régulièrement mise à jour au cours de la vie du système 
 
 Cette archive est aussi stockée dans la partition de boot et passée en paramètre au kernel via le paramètre ```initrd=```, qui va l'extraire dans le rootFS.
 
-Enfin - et c'est là que process d'init a proprement parlé commence - le kernel va appeler l'exécutable ```/init``` (ou l'exécutable spécifié via ```rdinit=```) sur le rootFS.
+Enfin - et c'est là que process d'init à proprement parler commence - le kernel va appeler l'exécutable ```/init``` (ou l'exécutable spécifié via ```rdinit=```) sur le rootFS.
 
-L'initrd d'inclure les différents drivers et de monter le root device spécifié par le paramètre ```root=``` dans le dossier ```/root```.
+L'initrd a pour but d'inclure les différents drivers et de monter le root device spécifié par le paramètre ```root=``` dans le dossier ```/root```.
 Ensuite, il va supprimer les autres fichiers du rootFS puis appeler la fonction ```pivot_root``` pour transformer le repertoire ```/root``` en ```/``` (à la manière d'un chroot).
 Bien souvent (c'est le cas de systemd) ce process va re-exécuter une autre phase d'init pour prendre en charge la suite de l'initialisation du système après le montage du root.
 
@@ -127,12 +127,12 @@ Ce processus est un peu différent des autres :
 > 
 > Tous les processus enfants héritent d'un certain nombre d'attributs de leur parent : user, session, cgroup, mémoire partagé...
 > 
-> L'init à donc un rôle primordial dans la vie du système.
+> L'init a donc un rôle primordial dans la vie du système.
 
 
 ## SysV init 
 
-Pour bien comprendre ce que systemd apporte il faut le comparer à son remplaçant SysV init (j'ai choisi initV uniquement parce que c'était le plus répandu et que je l'ai un peu utilisé).
+Pour bien comprendre ce que systemd apporte il faut le comparer à son prédécesseur SysV init (j'ai choisi initV uniquement parce que c'était le plus répandu et que je l'ai un peu utilisé).
 
 SysV init est basé sur les run-levels qui sont au nombre de 5 (presque) :
 - 0 - réservé - Arrêt (halt)
@@ -140,7 +140,7 @@ SysV init est basé sur les run-levels qui sont au nombre de 5 (presque) :
 - 2..5 Mode multi-utilisateur, les significations varies suivant les distributions, mais correspond à l'état opérationnel de la machine.
 - 6 - réservé - Redémarrage
 
-Il faut d'ailleurs comprendre le mon SysV init comme étant "systeme 5 init" qui correspond aux 5 run-level de l'état d'un système.
+Il faut d'ailleurs comprendre le nom SysV init comme étant "systeme 5 init" qui correspond aux 5 run-level de l'état d'un système.
 
 Lors de l'init le system va passer d'un run-level à l'autre jusqu'à arriver au ***default level*** (qui peut varier suivant les distributions...) qui correspond au mode nominal de fonctionnement (par exemple une interface graphique pour un desktop ou un terminal pour un serveur).
 
@@ -218,7 +218,7 @@ Il est composé :
   
 ***PROS*** :
 - Offre un nombre de fonctionnalités assez completes : ckconfig, lsb-headers.
-- Une grande flexibilité : c'est un script shell on fait 'ceux qu'on veut'.
+- Une grande flexibilité : c'est un script shell on fait 'ce qu'on veut'.
 - Un début de standardisation (avec les fonctions, lsb headers, checkconfig).
 
 ***CONS*** : 
@@ -261,7 +261,7 @@ Le script de base est extrêmement simple, et n'a pas vraiment de sens (encore m
 L'avantage ici d'être dans un "framework" est qu'il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous même.
 
 - Un service est un unique, pour un meme nom (au sein d'une instance systemd). Nous n'avons donc pas besoin de lock de synchronisation (il est possible de le variabiliser via le templating).
-- Les états start / status / stop / restart sont implicites et commun à tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l'état du ```PID``` terminé comme principal.
+- Les états start / status / stop / restart sont implicites et commun à tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement uniquement l'état du ```PID``` déterminé comme principal.
 - Là où l'on devait spécifier via les lsb-headers l'ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf ```defaultdependencies```) qui doit répondre à la majorité des cas d'utilisations des daemons de haut niveau.
 - Enfin on retrouve un équivalent des run-level avec l'attribut ```Target=multi-users.target``` qui sert ici également de point de synchronisation lors du démarrage.
 
@@ -281,6 +281,6 @@ J'y vois également la réaction à la professionnalisation inévitable de l'éc
 (Il faut aussi bien avouer que la communauté Linux ADORE les dramas et trouver des occasions de s'écharper).
 
 Systemd n'est certainement pas idéal, mais il est "constant". 
-Il a indéniablement apporté beaucoup de bénéfices : facilitation du packaging, une meilleure portabilité, une qualité accru et plus homogène, une facilité d'accès aux fonctions avancés du kernel...
+Il a indéniablement apporté beaucoup de bénéfices : facilitation du packaging, une meilleure portabilité, une qualité accrue et plus homogène, une facilité d'accès aux fonctions avancés du kernel...
 
 Bref, il ne s'agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu'il apporte.
