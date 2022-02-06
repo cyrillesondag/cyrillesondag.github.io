@@ -1,6 +1,6 @@
 ---
 title: "Systemd - partie 2"
-date: 2021-11-20T10:34:56+02:00
+date: 2022-02-06T23:24:56+02:00
 slug: ""
 description: "System de configuration"
 keywords: [ "linux", "systemd", "init system" ]
