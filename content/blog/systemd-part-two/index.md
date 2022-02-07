@@ -244,7 +244,7 @@ const UnitVTable * const unit_vtable[_UNIT_TYPE_MAX] = {
 };
 ```
 
-De même une unit est peut-être dans la liste des états suivants :
+Un _unit_ a un cycle de vie, et donc un état. Les états de base sont les suivants :
 - Active
 - Reloading
 - Inactive
@@ -253,7 +253,8 @@ De même une unit est peut-être dans la liste des états suivants :
 - Deactivating
 - Maintenance
 
-Cette liste d'etat peut être, elle aussi, enrichie pour répondre au cycle de vie spécifique d'un type d'_unit_.
+
+Cette liste d'état peut être, elle aussi, enrichie pour répondre au cycle de vie spécifique d'un type d'_unit_.
 
 Par exemple pour une _unit_ de type service on trouve cette liste d'états qui font tous la correspondance avec les états de base.
 ```c
@@ -327,6 +328,11 @@ Sans rentrer dans les details on retrouve l'attribut "UNIT_ATOM_PULL_IN_START_IG
 
 Il implémente un mécanisme de transaction connu sous le nom de Job qui s'assure de la transition d'une _unit_ d'un état A vers un état B (par exemple start / stop / restart...).
 
-Voilà ainsi va se conclure cet article.K
+## Conclusion
+
+Vous l'avez peut-être remarqué, mais systemd est concu comme un système orienté objet. 
+On retrouve d'ailleurs beaucoup de principes de la POO (polymorphisme, sous-typage, redefinition...) dans les différents points que j'ai abordés
+
+Voilà ainsi va se conclure cet article.
 Dans le prochain, nous aborderons l'architecture de systemd.
 
