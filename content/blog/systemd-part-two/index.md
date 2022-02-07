@@ -2,7 +2,7 @@
 title: "Systemd - partie 2"
 date: 2022-02-06T23:24:56+02:00
 slug: ""
-description: "System de configuration"
+description: "A l'intérieur de systemd"
 keywords: [ "linux", "systemd", "init system" ]
 draft: false
 tags: [ "linux", "systemd" ]
