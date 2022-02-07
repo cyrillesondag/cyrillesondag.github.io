@@ -16,7 +16,7 @@
 <link rel="shortcut icon" type=image/png href=/favicon.ico>
 <link type=text/css rel=stylesheet href=/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0=">
 <link type=text/css rel=stylesheet href=/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 2","headline":"Systemd - partie 2","description":"System de configuration","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2022","datePublished":"2022-02-06 23:24:56 \u002b0200 \u002b0200","dateModified":"2022-02-06 23:24:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-two\/","wordCount":"1935","keywords":["linux","systemd","init system","Blog"]}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 2","headline":"Systemd - partie 2","description":"System de configuration","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2022","datePublished":"2022-02-06 23:24:56 \u002b0200 \u002b0200","dateModified":"2022-02-06 23:24:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-two\/","wordCount":"1974","keywords":["linux","systemd","init system","Blog"]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KHJGZJ8WJ"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-8KHJGZJ8WJ',{anonymize_ip:!1})}</script>
 </head>
@@ -238,7 +238,7 @@ Ils correspondent chacun à un type d&rsquo;actions particulières.</p>
         [UNIT_SCOPE] = &amp;scope_vtable,
 };
 </code></pre>
-<p>De même une unit est peut-être dans la liste des états suivants :</p>
+<p>Un <em>unit</em> a un cycle de vie, et donc un état. Les états de base sont les suivants :</p>
 <ul>
 <li>Active</li>
 <li>Reloading</li>
@@ -248,7 +248,7 @@ Ils correspondent chacun à un type d&rsquo;actions particulières.</p>
 <li>Deactivating</li>
 <li>Maintenance</li>
 </ul>
-<p>Cette liste d&rsquo;etat peut être, elle aussi, enrichie pour répondre au cycle de vie spécifique d&rsquo;un type d'<em>unit</em>.</p>
+<p>Cette liste d&rsquo;état peut être, elle aussi, enrichie pour répondre au cycle de vie spécifique d&rsquo;un type d'<em>unit</em>.</p>
 <p>Par exemple pour une <em>unit</em> de type service on trouve cette liste d&rsquo;états qui font tous la correspondance avec les états de base.</p>
 <pre><code class=language-c>static const UnitActiveState state_translation_table[_SERVICE_STATE_MAX] = {
         [SERVICE_DEAD] = UNIT_INACTIVE,
@@ -306,7 +306,10 @@ Ce qui n&rsquo;aurait pas été le cas avec une relation plus &ldquo;forte&rdquo
 <p>Cela lui permet de réagir aux propriétés suivantes qui peuvent être utilisées par different objects (transaction, units&mldr;).
 Sans rentrer dans les details on retrouve l&rsquo;attribut &ldquo;UNIT_ATOM_PULL_IN_START_IGNORED&rdquo; le comportement décrit plus haut.</p>
 <p>Il implémente un mécanisme de transaction connu sous le nom de Job qui s&rsquo;assure de la transition d&rsquo;une <em>unit</em> d&rsquo;un état A vers un état B (par exemple start / stop / restart&mldr;).</p>
-<p>Voilà ainsi va se conclure cet article.K
+<h2 id=conclusion>Conclusion<a class=anchor href=#conclusion>#</a></h2>
+<p>Vous l&rsquo;avez peut-être remarqué, mais systemd est concu comme un système orienté objet.
+On retrouve d&rsquo;ailleurs beaucoup de principes de la POO (polymorphisme, sous-typage, redefinition&mldr;) dans les différents points que j&rsquo;ai abordés</p>
+<p>Voilà ainsi va se conclure cet article.
 Dans le prochain, nous aborderons l&rsquo;architecture de systemd.</p>
 </article>
 <ul class=tags__list>
@@ -354,6 +357,7 @@ Dans le prochain, nous aborderons l&rsquo;architecture de systemd.</p>
 </li>
 <li><a href=#les-units>Les Units</a></li>
 <li><a href=#job-et-transaction>Job et Transaction</a></li>
+<li><a href=#conclusion>Conclusion</a></li>
 </ul>
 </nav>
 </div>
