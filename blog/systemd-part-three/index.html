@@ -1,0 +1,323 @@
+<!doctype html><html lang=fr-fr>
+<head>
+<title>Systemd - partie 3 | Yet another tech blog</title>
+<meta charset=utf-8>
+<meta name=language content="fr">
+<meta name=description content="Systemd architecture">
+<meta name=keywords content="linux ,systemd ,init system">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Systemd - partie 3">
+<meta name=twitter:description content="Systemd architecture">
+<meta name=twitter:site content="https://twitter.com/CyrilleSondag">
+<meta name=twitter:creator content="https://twitter.com/CyrilleSondag">
+<link rel="shortcut icon" type=image/png href=/favicon.ico>
+<link type=text/css rel=stylesheet href=/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0=">
+<link type=text/css rel=stylesheet href=/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cyrillesondag.github.io\/"},"articleSection":"blog","name":"Systemd - partie 3","headline":"Systemd - partie 3","description":"Systemd architecture","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2022","datePublished":"2022-02-11 10:34:56 \u002b0200 \u002b0200","dateModified":"2022-02-11 10:34:56 \u002b0200 \u002b0200","url":"https:\/\/cyrillesondag.github.io\/blog\/systemd-part-three\/","wordCount":"2166","keywords":["linux","systemd","init system","Blog"]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8KHJGZJ8WJ"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-8KHJGZJ8WJ',{anonymize_ip:!1})}</script>
+</head>
+<body>
+<div class=burger__container>
+<div class=burger aria-controls=navigation aria-label=Menu>
+<div class="burger__meat burger__meat--1"></div>
+<div class="burger__meat burger__meat--2"></div>
+<div class="burger__meat burger__meat--3"></div>
+</div>
+</div>
+<nav class=nav id=navigation>
+<ul class=nav__list>
+<li>
+<a href=/>about</a>
+</li>
+<li>
+<a class=active href=/blog>blog</a>
+</li>
+</ul>
+</nav>
+<main>
+<div class=flex-wrapper>
+<div class=post__container>
+<div class=post>
+<header class=post__header>
+<h1 id=post__title>Systemd - partie 3</h1>
+<time datetime="2022-02-11 10:34:56 +0200 +0200" class=post__date>Feb 11 2022</time>
+</header>
+<article class=post__content>
+<figure><a href=Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%c3%abl,_1766%e2%80%931817%29.jpg>
+<img sizes="(min-width: 35em) 1200px, 100vw" srcset="https://cyrillesondag.github.io/blog/systemd-part-three/_huaf80d9647d66b87ae6ea91c922457101_147169_d626c0eadd61a711aebc97548f0d7ff2.jpg 480w,
+https://cyrillesondag.github.io/blog/systemd-part-three/_huaf80d9647d66b87ae6ea91c922457101_147169_98d44746e23e6193e005f3ccbc274e4a.jpg 800w,
+https://cyrillesondag.github.io/blog/systemd-part-three/_huaf80d9647d66b87ae6ea91c922457101_147169_d24b0e0d6f020aad4415f317973077e5.jpg 1200w," src=https://cyrillesondag.github.io/blog/systemd-part-three/_huaf80d9647d66b87ae6ea91c922457101_147169_98d44746e23e6193e005f3ccbc274e4a.jpg alt="Jean Auguste Dominique Ingres - Portrait d&amp;rsquo;une jeune femme (1766–1817), huile sur toile, 59.6 x 73.2 cm, Hull (UK), Ferens Art Gallery."> </a><figcaption style=font-size:80%;text-align:center>
+<p>Jean Auguste Dominique Ingres - Portrait d&rsquo;une jeune femme (1766–1817), huile sur toile, 59.6 x 73.2 cm, Hull (UK), Ferens Art Gallery.</p>
+</figcaption>
+</figure>
+<p>Cet article sera consacré à l&rsquo;architecture de <em>systemd</em>.</p>
+<p>Le cœur de systemd est basé sur quelques piliers : <em>UDev</em> et <em>DBus</em> qui permettent de mettre en place une approche évènementielle, les <em>CGroup</em> pour l&rsquo;encapsulation des processus et le contrôle des ressources et plus récemment <em>EBPF</em> pour les métriques.<br>
+<br>
+<figure><a href=Systemd_components.svg.png>
+<img sizes="(min-width: 35em) 1200px, 100vw" srcset="https://cyrillesondag.github.io/blog/systemd-part-three/Systemd_components.svg_hu01b25832ec91e6ed69bf74c91fbe2e1d_56619_480x0_resize_box_3.png 480w," src=https://cyrillesondag.github.io/blog/systemd-part-three/Systemd_components.svg.png alt="Architecture de systemd - By Shmuel Csaba Otto Traian, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=28698339"> </a><figcaption style=font-size:80%;text-align:center>
+<p>Architecture de systemd - By Shmuel Csaba Otto Traian, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/w/index.php?curid=28698339">https://commons.wikimedia.org/w/index.php?curid=28698339</a></p>
+</figcaption>
+</figure></p>
+<p>Il se base sur plusieurs principes forts que je vais tenter de détailler ci-dessous.</p>
+<h2 id=retarder-linitialisation>Retarder l&rsquo;initialisation<a class=anchor href=#retarder-linitialisation>#</a></h2>
+<p>L&rsquo;un des objectifs initiaux du projet était d&rsquo;améliorer le temps de démarrage des systèmes jugé à juste titre trop long.</p>
+<p>Il ne faut garder à l&rsquo;esprit qu&rsquo;il a été pensée pour répondre ces différents cas d&rsquo;utilisation (serveur, station de travail, embarqué&mldr;).
+Si le temps de démarrage n&rsquo;est (souvent) pas crucial pour un serveur, ce n&rsquo;est absolument pas le cas pour une station de travail ou pour un mobile.</p>
+<p>Pour arriver à cela plusieurs types de <em>unit</em> sont chargées uniquement de l&rsquo;activation des services lors de leur première utilisation.
+On peut citer les types : socket, path, automount &mldr;</p>
+<p>Cela permet d&rsquo;éviter de lancer un service trop tôt (bien souvent au démarrage) et ainsi optimiser le temps de d&rsquo;initialisation.</p>
+<p>Pour réaliser cela systemd utilise plusieurs méthodes d&rsquo;activation :</p>
+<h3 id=les-socket>Les Socket.<a class=anchor href=#les-socket>#</a></h3>
+<p>Le principe est assez simple et est largement inspiré de ce qui se faisait déjà sur <em>inetd</em>.
+Mais contrairement à ce dernier, de nombreux types de socket sont maintenant supportés : UNIX, INET, named pipes, netlink&mldr;</p>
+<p>On peut résumer les étapes de la facon suivante :</p>
+<ul>
+<li>Des buffers sont alloués automatiquement au démarrage pour chaque service qui le demande.</li>
+<li>Lors d&rsquo;un appel, ces buffers se remplissent jusqu&rsquo;à une taille limite au dela de laquelle l&rsquo;écriture devient impossible. Dans ce cas le client se met alors en attente et l&rsquo;appel devient bloquant (c&rsquo;est ce qui se passe d&rsquo;ailleurs lorsqu&rsquo;il attend une réponse).</li>
+<li>Les descripteurs de fichiers sont scrutés et au premier message le service consommateur est démarré en parallèle.</li>
+<li>Enfin on lui transmet le(s) socket(s) en paramètres afin qu&rsquo;il puisse les lire une fois initialisé. En cas d&rsquo;échec de démarrage, rien n&rsquo;est lu et le service peut être relancé sans pertes d&rsquo;informations.</li>
+</ul>
+<p>Néanmoins, attention le passage de sockets n&rsquo;est pas un comportement &ldquo;natif&rdquo; sous Linux.
+Il faut donc que le service soit compatible avec systemd (c&rsquo;est heureusement le cas de nombreux serveurs web entre autres).</p>
+<p>Grâce à ce comportement, on peut non seulement activer un service au premier appel, mais également briser les chaines de dépendances entre services et paralléliser leur activation.</p>
+<p>Par exemple dans le cas d&rsquo;un service qui nécessite syslog :
+Il est possibe de lancer les deux en parallèle, les messages syslog seront envoyés mis en attente dans le buffer avant d&rsquo;être dépilé a l&rsquo;initialisation complete de syslog.</p>
+<h4 id=udev>UDev</h4>
+<p><em>UDev</em> est un daemon qui permet d&rsquo;exposer dans l&rsquo;espace utilisateur les périphériques de facon dynamique.
+Il prend en charge le hot-plug mais aussi pour les périphériques classiques.</p>
+<p>C&rsquo;est un daemon qui écoute dans l&rsquo;espace utilisateur les évènements publiés par le kernel via <em>netlink</em> (un socket entre le kernel et l&rsquo;espace utilisateur).</p>
+<p>Il fait ensuite la liaison entres les informations du sysfs et déclenche des règles spécifiques écrites par un administrateur.</p>
+<p>Ce projet a acquis une telle importance qu&rsquo;il fait maintenant partie à part entière de systemd.</p>
+<p>Prenons un exemple concret de comment utiliser <em>UDev</em> avec systemd.</p>
+<p>Tout d&rsquo;abord nous pouvons écouter les évènements publiés par le kernel et <em>UDev</em> ainsi :</p>
+<pre><code class=language-shell>udevadm monitor
+</code></pre>
+<p>Ce eui donne ce résultat lors de l&rsquo;activation de bluetooth sur mon portable</p>
+<pre><code>monitor will print the received events for:
+UDEV - the event which udev sends out after rule processing
+KERNEL - the kernel uevent
+
+KERNEL[88503.920800] change   /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/rfkill0 (rfkill)
+UDEV  [88503.926695] change   /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/rfkill0 (rfkill)
+KERNEL[88521.147695] add      /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/hci0:256 (bluetooth)
+UDEV  [88521.151331] add      /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/hci0:256 (bluetooth)
+KERNEL[88522.280203] add      /devices/virtual/input/input24 (input)
+KERNEL[88522.280341] add      /devices/virtual/input/input24/event18 (input)
+UDEV  [88522.282180] add      /devices/virtual/input/input24 (input)
+UDEV  [88522.319399] add      /devices/virtual/input/input24/event18 (input)
+</code></pre>
+<p>La première partie concerne la mise en route du récepteur bluetooth, la seconde la connexion du casque audio.</p>
+<p>On voit apparaitre un nouveau device sous l&rsquo;arborescence <code>/devices/virtual/input/input24</code>.</p>
+<p>Ensuite on cherche à écrite une règle UDev qui va s&rsquo;activer uniquement pour ce périphérique.
+Pour cela il nous faut donc chercher les attributs discriminants dans les événements <em>UDev</em> que l&rsquo;on peut voir à l&rsquo;aide de la commande (attention les chemins UDev sont toujours relatifs aux répertoires <code>/sys</code> ou <code>/dev/</code>):</p>
+<pre><code class=language-shell>udevadm info -a /sys/devices/virtual/input/input24
+</code></pre>
+<p>Je serai bien incapable d&rsquo;expliquer la signification de tous les attributs, par contre je peux en reconnaitre quelque uns comme le nom et son adresse (qui me semble assez unique) :</p>
+<pre><code>  KERNEL==&quot;input24&quot;
+  SUBSYSTEM==&quot;input&quot;
+  DRIVER==&quot;&quot;
+  ....
+  ATTR{inhibited}==&quot;0&quot;
+  ATTR{name}==&quot;LG-TONE-FP9 (AVRCP)&quot;
+  ATTR{phys}==&quot;0c:dd:24:30:06:00&quot;
+  ATTR{power/async}==&quot;disabled&quot;
+  ATTR{power/control}==&quot;auto&quot;
+  ....
+</code></pre>
+<p>Ensuite avec ces informations on est en mesure d&rsquo;écrire une règle appropriée pour sélectionner ce matériel de la facon suivante :</p>
+<pre><code>SUBSYSTEM==&quot;input&quot;,  ATTR{name}==&quot;LG-TONE-FP9 (AVRCP)&quot;, ATTR{phys}==&quot;0c:dd:24:30:06:00&quot;, TAG+=&quot;systemd&quot;, ENV{SYSTEMD_ALIAS}+=&quot;/sys/devices/virtual/input/lg_tone_fp9&quot; 
+</code></pre>
+<p>Les premiers éléments servent à sélectionner les attributs dans les événements <em>UDev</em> qui vont déclencher la règle : le nom du system, l&rsquo;attribut mom et son adresse.</p>
+<p>Puis la partie importante pour l&rsquo;intégration avec systemd est <code>TAG+="systemd</code>.
+Ce tag permet de marquer le périphérique pour être interprété comme une unit &ldquo;.device&rdquo;.</p>
+<p>C&rsquo;est d&rsquo;ailleurs la seule chose à faire pour faire fonctionner cette règle avec systemd.</p>
+<p>J&rsquo;ai ajouté l&rsquo;attribut <code>SYSTEMD_ALIAS=</code> car le chemin du périphérique n&rsquo;est pas prévisible (<code>/sys/devices/virtual/input/input&lt;X></code>).</p>
+<p>Comme le nom de la unit est déterminée par son chemin il est plus simple qu&rsquo;il soit toujours le même.
+Maintenant ce device va apparaitre systématiquement sous le nom <code>sys-devices-virtual-input-lg_tone_fp9.device</code>.</p>
+<p>On est donc en mesure d&rsquo;écrire un service qui va s&rsquo;activer lors de la présence de ce device.</p>
+<pre><code class=language-ini>[Unit]
+Wants=sys-devices-virtual-input-lg_tone_fp9.device
+
+[Service]
+ExecStart=/bin/echo headphone connected
+RemainAfterExit=true
+</code></pre>
+<p>Il existe également la possibilité d&rsquo;activer un service directement à partir d&rsquo;une règle <em>UDev</em>.</p>
+<h3 id=d-bus>D-Bus<a class=anchor href=#d-bus>#</a></h3>
+<p><em>D-Bus</em> est un nouvel framework d&rsquo;IPC (inter-process communication) qui permet de communiquer de facon standardisé entre different services.
+Il permet - entre autre - de faire :</p>
+<ul>
+<li>du RPC (Remote Procedure Call) en offrant une serialisation standardisé.</li>
+<li>de sécuriser les communications via un mechanism d&rsquo;autorisation.</li>
+<li>de l&rsquo;activation a la demande via un système de nommage.</li>
+<li>de la découverte de service</li>
+<li>&mldr;</li>
+</ul>
+<p>Systemd est complètement intégré avec D-Bus (l&rsquo;architecture des deux produits est par ailleurs assez similaire).</p>
+<p>Il est ainsi possible d&rsquo;interagir avec systemd uniquement via les API <em>D-BUS</em>.</p>
+<p>Pour voir les services exposés par DBus il suffit de taper la commande :</p>
+<pre><code class=language-shell>~ busctl list --acquired
+NAME                                 PID PROCESS         USER             CONNECTION UNIT                             SESSION DESCRIPTION
+...
+org.freedesktop.systemd1               1 systemd         root             :1.1       init.scope                       -       -
+</code></pre>
+<p>On peut également voir l&rsquo;ensemble des propriétés d&rsquo;un service</p>
+<pre><code class=language-shell>~ busctl introspect org.freedesktop.systemd1 /org/freedesktop/systemd1
+</code></pre>
+<p>Puis pour lister les propriétés, méthodes d&rsquo;un service (systemd ici) :</p>
+<pre><code class=language-shell>~ busctl introspect org.freedesktop.systemd1 /org/freedesktop/systemd1
+</code></pre>
+<p>Cela donne accès à l&rsquo;ensemble des objects accessibles via <em>D-BUS</em> (c&rsquo;est aussi un bon moyen pour connaitre les valeurs des propriétés par défaut).</p>
+<p>On peut également écrire un service activable lors de la presence d&rsquo;un bus de la facon suivante :</p>
+<pre><code class=language-ini>Unit]
+Description=Simple DBus service
+
+[Service]
+Type=dbus
+BusName=org.example.simple-dbus-service
+ExecStart=/usr/sbin/simple-dbus-service
+</code></pre>
+<p>Bref les possibilités sont impressionnantes, tellement l&rsquo;intégration des deux systèmes est poussé.</p>
+<h3 id=inotify>Inotify<a class=anchor href=#inotify>#</a></h3>
+<p><em>Inotify</em> est un mécanisme qui permet d&rsquo;observer les actions sur un système de fichiers.</p>
+<p>Il permet de s&rsquo;abonner a un repertoire ou fichier et de recevoir les types d&rsquo;évènements suivants :</p>
+<ul>
+<li>IN_ACCESS : le fichier est accédé en lecture ;</li>
+<li>IN_MODIFY : le fichier est modifié ;</li>
+<li>IN_ATTRIB : les attributs du fichier sont modifiés ;</li>
+<li>IN_OPEN : le fichier est ouvert ;</li>
+<li>IN_DELETE : un fichier a été supprimé dans le répertoire surveillé ;</li>
+<li>IN_CREATE : un fichier a été créé dans le répertoire surveillé.</li>
+<li>&mldr;</li>
+</ul>
+<p>En symétrie nous allons donc retrouver sous systemd les fonctions suivantes <code>PathExists=, PathChanged=, PathModified=, DirectoryNotEmpty=</code></p>
+<p>Attention - comme spécifié dans la documentation - <em>inotify</em> souffre de certaines limitations, il n&rsquo;est par exemple pas possible de scruter les évènements produits par une machine distante sur une filesystem en réseau (type NFS).</p>
+<h3 id=autofs>Autofs<a class=anchor href=#autofs>#</a></h3>
+<p><em>Autofs</em> est un module du kernel qui permet de retarder le montage d&rsquo;un FS.
+Pour cela il crée des <em>mount-trap</em> (des dentry avec un attribut particulier) qui au premier accès (au dela du stat) va faire appel a un daemon - dans notre cas systemd - qui va effectuer le montage.
+Par la suite le filesystem pourra être utilisé comme un FS habituel.</p>
+<p>Cela offre deux avantages :</p>
+<ul>
+<li>alors que l&rsquo;initialisation classique attend le montage du tout les FS (qui dans le cas de FS en réseaux peut être assez long), ici nous n&rsquo;avons plus à attendre cette étape.</li>
+<li>cela permet également de paralléliser les montages.</li>
+</ul>
+<h2 id=paralléliser>Paralléliser<a class=anchor href=#paralléliser>#</a></h2>
+<p>On l&rsquo;a vu plus haut - en plus du chargement à la demande - beaucoup de composants facilitent la parallélisation des actions et font ainsi gagner en efficacité.</p>
+<p>De son côté systemd se base sur son model de dépendances et cherche à minimiser les points de synchronisations qui ralentissent le démarrage.</p>
+<p>Pour cela il va construire un arbre de dépendances pour pouvoir lancer un maximum de services en parallèle en ayant à attendre uniquement ceux qui lui sont nécessaires.</p>
+<p>Pour arriver à cela des ordonnancements - souvent implicites - sont mise en place suivant different critères afin de garantir la bonne cohérence des actions (c&rsquo;est d&rsquo;ailleurs souvent la partie la plus complexe à mettre en œuvre à mon avis).</p>
+<p>Pour illustrer mes propos voici le graphique de démarrage, pour atteindre la <code>default.target</code> :</p>
+<figure><a href=Systemd-bootup.png>
+<img sizes="(min-width: 35em) 1200px, 100vw" srcset="https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu8b742d0135914c03a6f1f13d04be6022_154131_480x0_resize_box_3.png 480w,
+https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu8b742d0135914c03a6f1f13d04be6022_154131_800x0_resize_box_3.png 800w,
+https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu8b742d0135914c03a6f1f13d04be6022_154131_1200x0_resize_box_3.png 1200w,
+https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu8b742d0135914c03a6f1f13d04be6022_154131_1500x0_resize_box_3.png 1500w," src=https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu8b742d0135914c03a6f1f13d04be6022_154131_800x0_resize_box_3.png alt="Bootup graph"> </a><figcaption style=font-size:80%;text-align:center>
+<p>Bootup graph</p>
+</figcaption>
+</figure>
+<p>À noter quelques points qui me semblent importants :</p>
+<ul>
+<li>Lorsque systemd active un nombre de <em>unit</em> - et si aucun ordre n&rsquo;est spécifié - elles sont faites en parallèle.</li>
+<li>Par défaut les services s&rsquo;exécutent après la <code>sysinit.target</code> (ou a la <code>basic.target</code> en mode user). Pour passer outre il faut ajouter la propriété <code>DefaultDependencies=false</code>.</li>
+</ul>
+<p>Comme souvent des outils sont mis à disposition pour nous aider :
+On peut citer <code>systemd-analyse plot</code> (en SVG) ou <code>systemd-analyse dot</code> (au format DOT) qui permettent de générer des représentations graphiques de ce que nous venons d&rsquo;aborder.</p>
+<h2 id=lutilisation-des-cgroups>L&rsquo;utilisation des cgroups<a class=anchor href=#lutilisation-des-cgroups>#</a></h2>
+<p>Contrairement à ce que l&rsquo;on pourrait croire le cgroups ne sont pas utilisé (du moins au départ) dans systemd pour le contrôle de resources, mais pour le contrôle des processus.</p>
+<p>Il s&rsquo;avère en pratique compliqué de terminer correctement un service ayant un nombre de processus forkés important.</p>
+<p>Pour tenter de comprendre le problème, revenons sur quelques notions UNIX :</p>
+<p>Un processus est rattaché à une session.
+Par convention le <code>SID</code> il est égale au <code>PID</code> du premier membre de la session, le &ldquo;session leader&rdquo;.
+La session peut être un terminal, une connexion ssh&mldr; ou autre.</p>
+<p>Dans une session on trouve un certain nombre de groupes de processus.
+Le <code>PGID</code> est égale au <code>PID</code> du premier membre du groupe le &ldquo;process group leader&rdquo; (vous voyez la logique).
+Au sein d&rsquo;une session un seul groupe peut être au premier plan.</p>
+<p>Un processus PID a (presque) toujours un parent et hérite de certain de ses attributs (UID, GID, SID, PGID&mldr;).
+Il est lui-même composé de plusieurs threads.</p>
+<p>Si en theories c&rsquo;est simple, en pratique, c&rsquo;est assez compliqué : liberté implementation, différences entre les systèmes UNIX, manque de syscall&mldr;
+Tout cela a fait qu&rsquo;il est difficile de suivre correctement l&rsquo;ensemble des processus issus de différents forks.</p>
+<p>Par exemple l&rsquo;une des techniques couramment utilisées pour lancer un processus en arriere plan (daemon) est la technique dites du &ldquo;double-fork&rdquo;.
+Elle consiste à effectuer les opérations suivantes :</p>
+<ul>
+<li>Un premier <code>fork()</code> pour créer un processus enfant de facon classique.</li>
+<li>Qui va ensuite appeler <code>setsid(0)</code> pour se détacher de la session courant.</li>
+<li>Pour enfin effectuer un nouveau <code>fork()</code> pour que ce changement soit pris en compte. Le processus nouvellement créé est ainsi rendu orphelin et ne peut plus interagir avec la session d&rsquo;origine (et vis versa).</li>
+</ul>
+<p>Du point de vue d&rsquo;un init manager, le problème est qu&rsquo;il n&rsquo;a connaissance que du PID issu du retour du premier fork, et pas de celui issu du second et éventuellement des autres processus forkés.</p>
+<p>Une parade consistait à stocker le résultat du second fork dans un fichier PID file pour pouvoir le retrouver.
+Cette methode est tout a fait valide, mais souffre de limites en cas de nouveau fork et est de plus très dépendante de l&rsquo;implémentation qui en est faite.</p>
+<p>On peut me faire remarquer que systemd utilise aussi des pid file, oui mais :</p>
+<ul>
+<li>c&rsquo;est surtout pour assurer la rétrocompatibilité avec les anciens scripts.</li>
+<li>ce n&rsquo;est pas exactement utilisé pour la même fonction (principalement par le watchdog).</li>
+</ul>
+<p>Pour palier ce problème, systemd utilise les <em>CGroup</em>.</p>
+<p>Présent depuis longtemps dans le kernel Linux les <em>CGroups</em> sont prévus pour régler ce type de problème.
+A la difference d&rsquo;autres propriétés un processus ne peut pas s&rsquo;échapper d&rsquo;un <em>CGroup</em> (à moins de créé un nouveau sous <em>CGroup</em> qui reste néanmoins toujours le descendant du parent).
+Il est de plus assez aisé de recenser l&rsquo;ensemble des processus d&rsquo;un CGroup.</p>
+<p>Systemd a donc décidé de lancer tous les services dans leurs propres CGroup, ce la permet de résoudre une bonne fois pour toute les problèmes d&rsquo;échappement des processus.</p>
+<p>Et encore une fois fournis un outil pour nous aider :</p>
+<pre><code class=language-shell>systemd-cgls
+</code></pre>
+</article>
+<ul class=tags__list>
+<li class=tag__item>
+<a class=tag__link href=https://cyrillesondag.github.io/tags/linux/>linux</a>
+</li>
+<li class=tag__item>
+<a class=tag__link href=https://cyrillesondag.github.io/tags/systemd/>systemd</a>
+</li></ul>
+<div class=pagination>
+<a class=pagination__item href=https://cyrillesondag.github.io/blog/systemd-part-two/>
+<span class=pagination__label>Previous Post</span>
+<span class=pagination__title>Systemd - partie 2</span>
+</a>
+</div>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//github-blog-tpysk8cw2i.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<footer class=post__footer>
+<div class=social-icons>
+<a class=social-icons__link title=Twitter href=https://twitter.com/CyrilleSondag target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/twitter.svg)></div>
+</a>
+<a class=social-icons__link title=GitHub href=https://github.com/cyrillesondag target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/github.svg)></div>
+</a>
+<a class=social-icons__link title=Email href=mailto:cyrille.sondag@gmail.com target=_blank rel="me noopener">
+<div class=social-icons__icon style=background-image:url(https://cyrillesondag.github.io/svg/email.svg)></div>
+</a>
+</div>
+<p>© 2022</p>
+</footer>
+</div>
+</div>
+<div class=toc-container>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#retarder-linitialisation>Retarder l&rsquo;initialisation</a>
+<ul>
+<li><a href=#les-socket>Les Socket.</a></li>
+<li><a href=#d-bus>D-Bus</a></li>
+<li><a href=#inotify>Inotify</a></li>
+<li><a href=#autofs>Autofs</a></li>
+</ul>
+</li>
+<li><a href=#paralléliser>Paralléliser</a></li>
+<li><a href=#lutilisation-des-cgroups>L&rsquo;utilisation des cgroups</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</main>
+<script src=/js/index.min.575dda8d49ee02639942c63564273e6da972ab531dda26a08800bdcb477cbd7f.js integrity="sha256-V13ajUnuAmOZQsY1ZCc+balyq1Md2iagiAC9y0d8vX8=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js></script>
+<script src=https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js data-autoloader-path=https://unpkg.com/prismjs@1.20.0/components/></script>
+<script src=/js/table-of-contents.js></script>
+</body>
+</html>
