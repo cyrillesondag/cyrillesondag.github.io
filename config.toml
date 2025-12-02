@@ -4,9 +4,6 @@ title = 'Yet another tech blog'
 theme = 'PaperMod'
 copyright = '© {year}'
 
-# Pagination
-paginate = 10
-
 # Enable emoji support
 enableEmoji = true
 
@@ -137,7 +134,7 @@ Blog technique abordant des sujets autour du développement logiciel, DevOps, Li
     anonymizeIP = true
     respectDoNotTrack = true
 
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
 
   [privacy.youtube]
