@@ -56,8 +56,8 @@ Blog technique abordant des sujets autour du développement logiciel, DevOps, Li
 
   # Social icons
   [[params.socialIcons]]
-    name = "twitter"
-    url = "https://twitter.com/CyrilleSondag"
+    name = "linkedin"
+    url = "www.linkedin.com/in/cyrille-sondag"
 
   [[params.socialIcons]]
     name = "github"
@@ -100,11 +100,6 @@ Blog technique abordant des sujets autour du développement logiciel, DevOps, Li
     url = "/tags/"
     weight = 30
 
-  [[menu.main]]
-    identifier = "search"
-    name = "Rechercher"
-    url = "/search/"
-    weight = 40
 
 # Markup configuration
 [markup]
