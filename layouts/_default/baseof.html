@@ -52,14 +52,21 @@
   {{ partial "nav.html" .}}
 
   <main>
-    {{ block "main" . }} {{ end }}
+    {{- block "main" . }}{{- end }}
   </main>
 
-  {{ block "footer" . }} {{ end }}
+  {{- block "footer" . }}
+      {{- partial "footer.html" . }}
+    {{- end }}
+  </body>
 
-  {{ $script := resources.Get "js/index.js" | minify | fingerprint }}
-  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity | safeHTMLAttr }}" crossorigin="anonymous"></script>
-  {{ block "scripts" . }} {{ end }}
-</body>
+  {{- if hugo.IsServer }}
+    {{- $script := resources.Get "js/main.js" }}
+    <script src="{{ $script.RelPermalink }}"></script>
+  {{- else }}
+    {{- $script := resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ $script.RelPermalink }}"></script>
+  {{- end }}
 
+  {{- block "scripts" . }}{{- end }}
 </html>
