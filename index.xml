@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Accueil on Yet another tech blog</title><link>https://cyrillesondag.github.io/</link><description>Recent content in Accueil on Yet another tech blog</description><generator>Hugo -- 0.152.2</generator><language>fr-fr</language><copyright>{year}</copyright><atom:link href="https://cyrillesondag.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Introduction à Molecule</description><content:encoded><![CDATA[<p>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.</p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Accueil on Yet another tech blog</title><link>https://cyrillesondag.github.io/</link><description>Recent content in Accueil on Yet another tech blog</description><generator>Hugo -- 0.152.2</generator><language>fr-fr</language><copyright>{year}</copyright><atom:link href="https://cyrillesondag.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Les images Docker</title><link>https://cyrillesondag.github.io/blog/presentation-containers/</link><pubDate>Tue, 02 Dec 2025 10:00:00 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/presentation-containers/</guid><description>Présentation sur les images Docker</description><content:encoded><![CDATA[<p>Les slides de ma présentation sur les images Docker.</p>
+<div id="Container"
+ style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
+ <iframe id="googleSlideIframe"
+  width="100%" height="100%"
+  src="https://slides.com/cyrillesondag/copy-of-copy-of-les-images-dockers/embed"
+  frameborder="0" allowfullscreen=""
+  style="position:absolute; top:0; left: 0"></iframe>
+</div>
+
+]]></content:encoded></item><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Introduction à Molecule</description><content:encoded><![CDATA[<p>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.</p>
 <p>C&rsquo;est une réelle aide pour s&rsquo;assurer de la non-régression mais également pour accélérer le processus de développement.</p>
 <h2 id="init">Init</h2>
 <p>Donc d&rsquo;abord pour commencer, nous allons créer un role vide et explorer la structure proposée par Molecule.</p>
