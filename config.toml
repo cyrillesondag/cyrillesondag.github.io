@@ -1,69 +1,150 @@
+baseURL = 'https://cyrillesondag.github.io/'
+languageCode = 'fr-fr'
+title = 'Yet another tech blog'
+theme = 'PaperMod'
+copyright = '© {year}'
 
-theme = "hugo-theme-codex" 
+# Pagination
+paginate = 10
 
-# Override these settings with your own
-title = "Yet another tech blog"
-languageCode = "fr-fr"
-baseURL = "https://cyrillesondag.github.io/"
-copyright = "© {year}"
+# Enable emoji support
+enableEmoji = true
 
-# Add your Disqus shortname here.
-disqusShortname = "github-blog-tpysk8cw2i"
+# Enable Git info
+enableGitInfo = true
 
-# Add your Google Analytics identifier: UA-XXXXXXXX-X
-googleAnalytics = "G-8KHJGZJ8WJ"
+# Google Analytics
+# googleAnalytics = 'G-8KHJGZJ8WJ'
 
-# Optional params
 [params]
-  # Follow the Hugo date/time format reference here: 
-  # https://gohugo.io/functions/format/#gos-layout-string
-  dateFormat = "Jan 2 2006"
+  # Site description
+  description = "Blog technique sur le développement, DevOps et Linux"
+  author = "Cyrille Sondag"
 
-  # Links to your social accounts, comment/uncomment as needed. Icons will be displayed for those specified.
-  twitter = "https://twitter.com/CyrilleSondag"
-  github = "https://github.com/cyrillesondag"
-  email = "mailto:cyrille.sondag@gmail.com"
-  # mastodon = "https://mastodon.social/@nickname"
-  # facebook = "https://facebook.com/<your handle>"
-  # gitlab = "https://gitlab.com/<your handle>"
-  # instagram = "https://instagram.com/<your handle>"
-  # linkedin = "<link to your profile>"
-  # youtube = "https://www.youtube.com/channel/<your channel>"
-  
-  # Titles for your icons (shown as tooltips), and also their display order.
-  # Currently, these icons are supported: 
-  #   "Twitter", "GitHub", "Email", "Mastodon", "Facebook", "GitLab", "Instagram", "LinkedIn", "YouTube"
-  iconOrder = ["Twitter", "GitHub", "Email"]
+  # Date format
+  dateFormat = "2 January 2006"
 
-  # Metadata for Twitter cards, defaults to params.twitter
-  # twitterSite = "@<your handle>"
-  # twitterAuthor = "@<your handle>"
+  # Show reading time
+  ShowReadingTime = true
 
-  # Set to true to display page title in table of contents in blog posts.
-  showPageTitleInTOC = false
+  # Show share buttons
+  ShowShareButtons = true
 
-# This disables Hugo's default syntax highlighting in favor
-# of prismjs. If you wish to use Hugo's default syntax highlighting
-# over prismjs, remove this. You will also need to remove the prismjs
-# vendor script in layouts/blog/single.html.
+  # Show post navigation
+  ShowPostNavLinks = true
+
+  # Show breadcrumbs
+  ShowBreadCrumbs = true
+
+  # Show code copy button
+  ShowCodeCopyButtons = true
+
+  # Show table of contents
+  ShowToc = true
+  TocOpen = false
+
+  # Show full content in RSS
+  ShowFullTextinRSS = true
+
+  # Comments (Disqus)
+  comments = true
+  disqusShortname = "github-blog-tpysk8cw2i"
+
+  # Home page settings
+  [params.homeInfoParams]
+    Title = "Bienvenue 👋"
+    Content = """
+Blog technique abordant des sujets autour du développement logiciel, DevOps, Linux et systemd.
+"""
+
+  # Social icons
+  [[params.socialIcons]]
+    name = "twitter"
+    url = "https://twitter.com/CyrilleSondag"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/cyrillesondag"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:cyrille.sondag@gmail.com"
+
+  # Profile mode (alternative to home info)
+  [params.profileMode]
+    enabled = false
+
+  # Cover image settings
+  [params.cover]
+    linkFullImages = true
+    responsiveImages = true
+
+  # Edit post link
+  [params.editPost]
+    disabled = false
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Accueil"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 30
+
+  [[menu.main]]
+    identifier = "search"
+    name = "Rechercher"
+    url = "/search/"
+    weight = 40
+
+# Markup configuration
 [markup]
   [markup.highlight]
-    codeFences = false
-    
-  # Set to false to disallow raw HTML in markdown files
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    noClasses = false
+    style = "monokai"
+
   [markup.goldmark.renderer]
-      unsafe = true
+    unsafe = true
 
-# Controls the navigation
-[[menu.main]]
-  identifier = "about"
-  name = "about"
-  title = "About"
-  url = "/"
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
 
-[[menu.main]]
-  identifier = "blog"
-  name = "blog"
-  title = "Blog"
-  url = "/blog"
+# Outputs
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
+# Privacy settings
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+
+  [privacy.twitter]
+    enableDNT = true
+
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# Taxonomies
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
