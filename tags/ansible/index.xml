@@ -1,5 +1,288 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ansible on Yet another tech blog</title><link>https://cyrillesondag.github.io/tags/ansible/</link><description>Recent content in ansible on Yet another tech blog</description><generator>Hugo -- gohugo.io</generator><language>fr-fr</language><copyright>© {year}</copyright><lastBuildDate>Sun, 22 May 2022 23:24:56 +0200</lastBuildDate><atom:link href="https://cyrillesondag.github.io/tags/ansible/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.
-C&amp;rsquo;est une réelle aide pour s&amp;rsquo;assurer de la non regression mais également pour accélérer le processus de développement.
-Init Donc d&amp;rsquo;abord pour commencer, nous allons créer un role vide et explorer la structure proposée par Molecule.
-En explorant la commande ìnit role on obtient le résultat suivant :
-molecule init role --help Usage: molecule init role [OPTIONS] ROLE_NAME Initialize a new role for use with Molecule, namespace is required outside collections, like acme.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ansible on Yet another tech blog</title><link>https://cyrillesondag.github.io/tags/ansible/</link><description>Recent content in Ansible on Yet another tech blog</description><generator>Hugo -- 0.152.2</generator><language>fr-fr</language><copyright>{year}</copyright><lastBuildDate>Tue, 02 Dec 2025 17:43:25 +0100</lastBuildDate><atom:link href="https://cyrillesondag.github.io/tags/ansible/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Introduction à Molecule</description><content:encoded><![CDATA[<p>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.</p>
+<p>C&rsquo;est une réelle aide pour s&rsquo;assurer de la non-régression mais également pour accélérer le processus de développement.</p>
+<h2 id="init">Init</h2>
+<p>Donc d&rsquo;abord pour commencer, nous allons créer un role vide et explorer la structure proposée par Molecule.</p>
+<p>En explorant la commande <code>init role</code> on obtient le résultat suivant :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">molecule init role --help
+</span></span><span class="line"><span class="cl">Usage: molecule init role <span class="o">[</span>OPTIONS<span class="o">]</span> ROLE_NAME
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Initialize a new role <span class="k">for</span> use with Molecule, namespace is required outside
+</span></span><span class="line"><span class="cl">  collections, like acme.myrole.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Options:
+</span></span><span class="line"><span class="cl">  --dependency-name <span class="o">[</span>galaxy<span class="o">]</span>      Name of dependency to initialize. <span class="o">(</span>galaxy<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  -d, --driver-name <span class="o">[</span>delegated<span class="p">|</span>openstack<span class="p">|</span>podman<span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                  Name of driver to initialize. <span class="o">(</span>delegated<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --lint-name <span class="o">[</span>yamllint<span class="o">]</span>          Name of lint to initialize. <span class="o">(</span>yamllint<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --provisioner-name <span class="o">[</span>ansible<span class="o">]</span>    Name of provisioner to initialize. <span class="o">(</span>ansible<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --verifier-name <span class="o">[</span>ansible<span class="p">|</span>testinfra<span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                  Name of verifier to initialize. <span class="o">(</span>ansible<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ok donc créons notre nouveau rôle :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bash# molecule init role my_company.my_new_role -d podman
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cela aura pour effet de créer un nouveau role dans <code>./my_new_role</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> my_new_role/ <span class="o">&amp;&amp;</span> tree
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── defaults
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── files
+</span></span><span class="line"><span class="cl">├── handlers
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── meta
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── molecule
+</span></span><span class="line"><span class="cl">│   └── default
+</span></span><span class="line"><span class="cl">│       ├── converge.yml
+</span></span><span class="line"><span class="cl">│       ├── molecule.yml
+</span></span><span class="line"><span class="cl">│       └── verify.yml
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">├── tasks
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── templates
+</span></span><span class="line"><span class="cl">├── tests
+</span></span><span class="line"><span class="cl">│   ├── inventory
+</span></span><span class="line"><span class="cl">│   └── test.yml
+</span></span><span class="line"><span class="cl">└── vars
+</span></span><span class="line"><span class="cl">    └── main.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Au-delà de la structure classique d&rsquo;un rôle, nous allons surtout nous intéresser au répertoire <code>molecule</code> qui contient tous les éléments nécessaires aux tests.</p>
+<p>Au premier niveau un répertoire <code>default</code>, il s&rsquo;agit du scenario par défaut, celui qui sera exécuté si aucune option n&rsquo;est spécifiée (<code>-s &lt;nom_du_scenario&gt;</code> ou le nom du scenario est celui du répertoire).</p>
+<p>Ensuite à l&rsquo;intérieur le plus important <code>molecule.yml</code>.</p>
+<h2 id="moleculeyml">Molecule.yml</h2>
+<p>C&rsquo;est le fichier qui est requis dans chaque scenario.
+Il va servir à décrire et configurer : le driver, le(s) plateforme(s), le provisioner, le linter et le verifier</p>
+<p>Dans notre exemple il ressemble à cela :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">dependency</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">galaxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">driver</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">podman</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">platforms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">instance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/centos/centos:stream8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pre_build_image</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">provisioner</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ansible</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">verifier</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ansible</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dependency-doc"><code>dependency</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#ansible-galaxy">doc</a>)</h3>
+<p>Molecule utilise Ansible galaxy comme gestionnaire de dépendances.
+Cet objet va permettre de configurer <code>ansible-galaxy</code> pour installer les rôles et collections requises.</p>
+<h3 id="driver-doc"><code>driver</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#driver">doc</a>)</h3>
+<p>Ici on spécifie le nom du pilote à utiliser pour accéder aux instances des plateformes sur lesquelles les tests seront exécutés.</p>
+<p>Il existe différents types de drivers : podman, openstack, vagrant, docker, azure&hellip; qui correspondent chacun à une technologie pour créer des instances de tests (vm ou container).</p>
+<p>Le driver <code>delegated</code> est quant à lui un peu particulier, car à la différence des autres il n&rsquo;est pas chargé de créer / détruire les instances de test.</p>
+<p>On peut l&rsquo;utiliser par exemple pour se connecter à une machine préexistante en renseignant seulement une clé ssh.</p>
+<p>Les drivers ne sont pas présents par défaut, ils doivent être installés dans les librairies Python de la façon suivante (ici Docker) :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install <span class="s1">&#39;molecule[docker]&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="platforms-doc"><code>platforms</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#platforms">doc</a>)</h3>
+<p>C&rsquo;est dans ce dictionnaire que nous allons retrouver la configuration de nos instances.
+Ces configurations sont bien évidemment dépendantes du <code>driver</code> utilisé (bien qu&rsquo;il puisse y avoir des similitudes).</p>
+<p>Leurs noms doivent être uniques (ils serviront de hostname pour ansible), sans limitation de nombre.
+On peut définir pour chaque instance un nom de groupe (et des children) pour générer l´inventaire de notre test.</p>
+<p>Cette partie de configuration n&rsquo;est pas forcément toujours très très bien documentée.
+Pour voir l&rsquo;ensemble des options de configuration, il est souvent plus simple de se référer directement au code du driver (ou dans la section <a href="https://molecule.readthedocs.io/en/latest/examples.html">&lsquo;Common uses cases&rsquo;</a>).
+Par exemple pour Docker on peut trouver le détail <a href="https://github.com/ansible-community/molecule-docker/blob/main/src/molecule_docker/driver.py">ici</a></p>
+<h3 id="provisionner-doc"><code>provisionner</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#provisioner">doc</a>)</h3>
+<p>Cet objet est là où est défini la configuration d&rsquo;Ansible.
+Il va être chargé à l&rsquo;aide de playbook classique ansible de réaliser les actions suivantes :</p>
+<ul>
+<li><code>create</code> : création de l&rsquo;ensemble des plateformes à l&rsquo;aide du driver. Ce playbook n&rsquo;est appelé qu&rsquo;une fois durant la durée de vie des instances de test</li>
+<li><code>prepare</code> : utilisé par le tester pour appliquer les prérequis. Ce playbook n&rsquo;est appelé qu&rsquo;une fois durant la durée de vie des instances de test</li>
+<li><code>converge</code> : applique le role en cours de test sur les instances.</li>
+<li><code>idempotence</code> : re-applique le role et vérifie qu&rsquo;aucun <code>changed</code> n&rsquo;ait été déclenché</li>
+<li><code>side_effect</code> : utilisé pour des tests de haute disponibilité (pas activé par défaut)</li>
+<li><code>verify</code> : réalise les assertions sur les instances de tests (activé uniquement sur verifier = ansible)</li>
+<li><code>cleanup</code> (*) : utilisé pour nettoyer les ressources avant le destroy</li>
+<li><code>destroy</code> (*) : utilisé pour supprimer les plateformes de test.</li>
+</ul>
+<p>Les playbooks des actions sont définis par défaut à la racine du scenario sous la forme <code>./$action.yml</code>.</p>
+<p>Il est également possible de définir des playbooks spécifiques par driver de la façon suivante <code>./$driver/$action.yml</code>.</p>
+<p>Enfin certains playbooks sont automatiquement définis par le driver lui-même.</p>
+<p>Par exemple le driver docker va utiliser les arguments du dictionnaire des plateformes pour générer des Dockerfile via une template jinja2 et lancer la création des containers via un playbook Ansible.</p>
+<p>Il est bien évidemment possible de définir des playbooks comme bon nous semble pour réaliser les actions que l&rsquo;on souhaite.</p>
+<p>Enfin, c&rsquo;est aussi dans cet objet provisioner que l&rsquo;on va pouvoir configurer ansible : niveau de log, variables, liens&hellip; etc</p>
+<h3 id="verifier-doc"><code>verifier</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#verifier">doc</a>)</h3>
+<p>Le verifier est chargé de valider le bon déroulement du rôle, en réalisant des assertions sur les plateformes de test.</p>
+<p>Par défaut Ansible est utilisé, les tests s&rsquo;écrivent comme n&rsquo;importe quel playbook (via par exemple le module assert)</p>
+<p>Historiquement <a href="https://testinfra.readthedocs.io/en/latest/">testinfra</a> était privilégié pour cette tâche, dorénavant Ansible l&rsquo;a remplacé.
+À titre personnel, je trouve que la syntaxe Ansible n&rsquo;est pas vraiment efficace pour réaliser ce genre de tâche tant c&rsquo;est verbeux à écrire.
+J&rsquo;imagine que l&rsquo;homogénéité a primé sur l&rsquo;efficacité, car testinfra lui doit être écrit en python.</p>
+<h2 id="les-scenarios">Les scenarios</h2>
+<p>(je me demande s&rsquo;il n&rsquo;y a pas une confusion entre les termes : scénario répertoire où se trouve le fichier molecule.yml et les scénarios la liste des séquences des actions)</p>
+<p>Pour la bonne compréhension de l&rsquo;outil je remets ici la liste par défaut des actions réalisées par molecule :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">scenario</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">create_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">check_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">check</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">converge_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">destroy_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">test_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">lint</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">syntax</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">idempotence</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">side_effect</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">verify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ces séquences peuvent être appelées par les commandes suivantes :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">molecule <span class="o">[</span>create<span class="p">|</span>check<span class="p">|</span>converge<span class="p">|</span>destroy<span class="p">|</span>test<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>NB: il peut être utile en phase de développement de travailler uniquement avec le <code>converge</code>, ainsi les phases &ldquo;couteuses&rdquo; (create et prepare) ne sont appelées qu&rsquo;une fois et on peut travailler plus rapidement sur notre propre environnement.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Voilà qui conclut cet article, Molecule est un outil indispensable à Ansible. Il souffre néanmoins de quelques lacunes : documentation pas toujours très claire, pas de doc sur les drivers, la configuration du provisioner n&rsquo;est pas simple à configurer dans des cas un peu complexes, et comme je l&rsquo;ai dit plus le verifier ansible ne me semble pas idéal.</p>
+<p>Je ne suis pas rentré beaucoup dans les détails mais tout est évidemment hautement paramétrable.</p>
+<p>Pour autant une fois le pas franchi et la configuration mise en place, c&rsquo;est un réel plaisir à utiliser (merci le <code>molecule login</code>)</p>
+]]></content:encoded></item></channel></rss>

@@ -1,2 +1,212 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on Yet another tech blog</title><link>https://cyrillesondag.github.io/tags/java/</link><description>Recent content in java on Yet another tech blog</description><generator>Hugo -- gohugo.io</generator><language>fr-fr</language><copyright>© {year}</copyright><lastBuildDate>Tue, 04 Dec 2012 10:34:56 +0200</lastBuildDate><atom:link href="https://cyrillesondag.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Débuter avec RxJava</title><link>https://cyrillesondag.github.io/blog/starting-rxjava/</link><pubDate>Tue, 04 Dec 2012 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/starting-rxjava/</guid><description>Pourquoi utiliser Rx ? Le Framework Rx prend une importance croissante dans le développement d&amp;rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux Callback Hell).
-Néanmoins l&amp;rsquo;apprentissage peut être assez déroutant au départ si l&amp;rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevé, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Java on Yet another tech blog</title><link>https://cyrillesondag.github.io/tags/java/</link><description>Recent content in Java on Yet another tech blog</description><generator>Hugo -- 0.152.2</generator><language>fr-fr</language><copyright>{year}</copyright><lastBuildDate>Tue, 02 Dec 2025 17:43:25 +0100</lastBuildDate><atom:link href="https://cyrillesondag.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Débuter avec RxJava</title><link>https://cyrillesondag.github.io/blog/starting-rxjava/</link><pubDate>Tue, 04 Dec 2012 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/starting-rxjava/</guid><description>&lt;h1 id="pourquoi-utiliser-rx-"&gt;Pourquoi utiliser Rx ?&lt;/h1&gt;
+&lt;p&gt;Le Framework Rx prend une importance croissante dans le développement d&amp;rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux &lt;a href="https://www.quora.com/What-is-callback-hell"&gt;Callback Hell&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Néanmoins l&amp;rsquo;apprentissage peut être assez déroutant au départ si l&amp;rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevée, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.&lt;/p&gt;</description><content:encoded><![CDATA[<h1 id="pourquoi-utiliser-rx-">Pourquoi utiliser Rx ?</h1>
+<p>Le Framework Rx prend une importance croissante dans le développement d&rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux <a href="https://www.quora.com/What-is-callback-hell">Callback Hell</a>).</p>
+<p>Néanmoins l&rsquo;apprentissage peut être assez déroutant au départ si l&rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevée, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.</p>
+<p>Pour démarrer d&rsquo;un bon pied nous allons d&rsquo;abord définir les principes fondamentaux.</p>
+<h2 id="les-concepts-fondamentaux">Les concepts fondamentaux.</h2>
+<p>Rx est basé sur le pattern <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> en utilisant la terminologie <strong>Subscriber</strong> / <strong>Observer</strong> et  <strong>Observable</strong>  (un <strong>Subject</strong> en Rx recouvre une notion bien particulière).</p>
+<h3 id="les-observables">Les Observables</h3>
+<p>Le <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming</a> voit les événements comme des flux qui se propagent dans l&rsquo;application.</p>
+<p>Ces flux peuvent avoir des sources multiples : une interaction avec un utilisateur (focus, sélection &hellip;), un élément extérieur (ex: la réponse d&rsquo;un serveur distant) ou interne (la fin d&rsquo;un traitement) etc.</p>
+<p>Ils peuvent avoir une durée de vie déterminée (ex : une requête Http) ou non (ex le signal de perte de réseau). De la même manière ces flux peuvent ainsi émettre un ou plusieurs événements à des intervalles différents.</p>
+<p>En Rx un <em>Observable</em> sert à matérialiser ces flux, ils peuvent être écoutés, avoir leurs propres cycles de vie, être composés de différents flux…</p>
+<h3 id="les-subcribers">Les Subcribers</h3>
+<p>Est la notion la plus simple à appréhender. Il s&rsquo;abonne à un <em>Observable</em> et il reçoit ses émissions, ses signaux d&rsquo;erreurs ou fin de traitement.</p>
+<h3 id="les-operators">Les Operators</h3>
+<p>Les <em>Operators</em> servent à traiter et organiser les flux. Ils permettent de filtrer, combiner, transformer, parcourir, composer des flux…</p>
+<p>De base une foultitude d&rsquo;opérateurs sont fournis. Bien qu&rsquo;on puisse en créer de nouveaux, en pratique les opérateurs par défaut sont généralement largement suffisants pour répondre à la majorité des situations.</p>
+<h3 id="les-schedulers">Les Schedulers</h3>
+<p>Par défaut Rx n&rsquo;est pas asynchrone, pour la simple et bonne raison que le framework réserve cette décision au développeur de l&rsquo;application.</p>
+<p>Les <em>Schedulers</em> servent à contrôler l’exécutions des traitements. Il est alors très simplement possible de décider sur quel Thread va s’exécuter un <em>Observable</em> et sur lequel le <em>Subscriber</em> va recevoir les réponses.</p>
+<h2 id="rxjava-en-pratique">RxJava en pratique.</h2>
+<p>Commençons d&rsquo;abord par un exemple très simple pour illustrer les concepts vus précédemment.</p>
+<h3 id="hello-world-">Hello World !</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Subscription</span><span class="w"> </span><span class="n">subscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Observable</span><span class="p">.</span><span class="na">just</span><span class="p">(</span><span class="n">example</span><span class="p">.</span><span class="na">dummyValue</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">observeOn</span><span class="p">(</span><span class="n">Schedulers</span><span class="p">.</span><span class="na">newThread</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Observer</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCompleted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;dummyValue has Completed&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Error occured : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getMessage</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onNext</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">aBoolean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;dummyValue result : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aBoolean</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">dummyValue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">600</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>Observable.just</code> crée un nouvel <em>Observable</em> avec une seule valeur de retour.</li>
+<li><code>.observeOn</code> définit que l&rsquo;<em>Observable</em> s’exécute sur un nouveau Thread.</li>
+<li><code>.subscribe</code> s&rsquo;abonne à l&rsquo;observable.</li>
+<li>Retourne un objet Subscription.</li>
+</ol>
+<p>Il existe plusieurs méthodes génériques pour créer un <em>Observable</em> soit à partir de valeurs fixes, d&rsquo;une collection, d&rsquo;un <code>Future&lt;?&gt;</code> ou <code>Callback&lt;?&gt;</code> ou opérateurs.
+Il est aussi relativement facile de créer des <em>Observable</em> particuliers si l&rsquo;on respecte son cycle de vie.</p>
+<p>Comme vu précédemment par défaut un <em>Observable</em> s&rsquo;exécute sur le même Thread que celui qui l&rsquo;a instancié. En spécifiant <code>Schedulers.newThread()</code> on force l’exécution du traitement sur un nouveau Thread.
+Rx est fourni avec plusieurs schedulers prédéfinis tel que <code>io</code>, <code>computation</code>, … On a aussi la possibilité d&rsquo;en créer afin d&rsquo;optimiser la gestion des instances de Thread.</p>
+<p>L&rsquo;interface Observer est, elle aussi, relativement simple et lisible. Elle est composée de trois méthodes :</p>
+<ul>
+<li><code>onNext</code>: appelé à chaque objet émis par l&rsquo;observable.</li>
+<li><code>onError</code>: lorsqu&rsquo;une erreur s&rsquo;est produite lors du traitement.</li>
+<li><code>onComplete</code>: lorsque que l&rsquo;observable a terminé d’émettre des éléments (Par contrat <code>onNext</code> ou <code>onError</code> ne seront plus jamais appelés).</li>
+</ul>
+<p>L’objet Subscription - comme son nom l&rsquo;indique - est la marque de la souscription d&rsquo;un Observer vers un <em>Observable</em>.</p>
+<p>Dans le cas présent, l&rsquo;<em>Observable</em> est exécuté immédiatement avec une durée de vie fixée à un élément.</p>
+<p>On peut schématiser son cycle comme ceci :</p>
+<blockquote>
+<p>o &mdash;&gt; onNext(true) &ndash;&gt; onComplete()</p>
+</blockquote>
+<p>Au travers de cet exemple basique, il faut noter la gestion ultra simple des <strong>threads</strong> et des <strong>erreurs</strong>, qui est à mon avis le gros avantage de ce Framework.</p>
+<h3 id="débuter-avec-les-operators">Débuter avec les Operators</h3>
+<p>Prenons pour exemple un Observable assez simple pour comprendre leur fonctionnement.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Observable</span><span class="p">.</span><span class="na">just</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;d&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;e&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On aura donc 5 appels à <code>onNext(String s)</code> avant la méthode <code>onComplete()</code></p>
+<p>Le Subscriber affichera le résultat de <code>onNext</code> dans la console.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onNext</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Result : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Par défaut les résultats seront donc :</p>
+<blockquote>
+<p>Result : a
+Result : b
+Result : c
+Result : d
+Result : e</p>
+</blockquote>
+<h4 id="filter">Filter:</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Func1</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;a&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s">&#34;d&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Retourne :</p>
+<blockquote>
+<p>Result : a
+Result : d</p>
+</blockquote>
+<h4 id="take">Take:</h4>
+<p><code>.take(2)</code> ou <code>.limit(2)</code></p>
+<p>Retourne les x premiers éléments :</p>
+<blockquote>
+<p>Result : a
+Result : b</p>
+</blockquote>
+<h4 id="takelast">TakeLast:</h4>
+<p><code>.takeLast(2)</code></p>
+<p>Retourne les x derniers éléments :</p>
+<blockquote>
+<p>Result : d
+Result : e</p>
+</blockquote>
+<h4 id="map">Map:</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Func1</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Hello &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; !!&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Applique pour chaque élément une transformation (il est également possible de modifier le type de retour) :</p>
+<blockquote>
+<p>Result : Hello a !!
+Result : Hello b !!
+Result : Hello c !!
+Result : Hello d !!
+Result : Hello e !!</p>
+</blockquote>
+<p>Ces opérateurs sont bien évidemment combinables entre eux.</p>
+<h3 id="en-conclusion">En conclusion</h3>
+<p>Voici une première approche des basiques du Framework. Nous verrons par la suite les avantages de son utilisation, mais aussi les problèmes spécifiques liés à son utilisation dans de prochains articles.</p>
+]]></content:encoded></item></channel></rss>

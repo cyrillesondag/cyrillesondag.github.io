@@ -1,13 +1,1780 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on Yet another tech blog</title><link>https://cyrillesondag.github.io/blog/</link><description>Recent content in Blogs on Yet another tech blog</description><generator>Hugo -- gohugo.io</generator><language>fr-fr</language><copyright>© {year}</copyright><lastBuildDate>Sun, 22 May 2022 23:24:56 +0200</lastBuildDate><atom:link href="https://cyrillesondag.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.
-C&amp;rsquo;est une réelle aide pour s&amp;rsquo;assurer de la non regression mais également pour accélérer le processus de développement.
-Init Donc d&amp;rsquo;abord pour commencer, nous allons créer un role vide et explorer la structure proposée par Molecule.
-En explorant la commande ìnit role on obtient le résultat suivant :
-molecule init role --help Usage: molecule init role [OPTIONS] ROLE_NAME Initialize a new role for use with Molecule, namespace is required outside collections, like acme.</description></item><item><title>Systemd - partie 3</title><link>https://cyrillesondag.github.io/blog/systemd-part-three/</link><pubDate>Fri, 11 Feb 2022 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-three/</guid><description>Jean Auguste Dominique Ingres - Portrait d&amp;rsquo;une jeune femme (1766–1817), huile sur toile, 59.6 x 73.2 cm, Hull (UK), Ferens Art Gallery.
-Cet article sera consacré à l&amp;rsquo;architecture de systemd.
-Le cœur de systemd est basé sur quelques piliers : UDev et DBus qui permettent de mettre en place une approche évènementielle, les CGroup pour l&amp;rsquo;encapsulation des processus et le contrôle des ressources et plus récemment EBPF pour les métriques.</description></item><item><title>Systemd - partie 2</title><link>https://cyrillesondag.github.io/blog/systemd-part-two/</link><pubDate>Sun, 06 Feb 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-two/</guid><description>Gustave Caillebotte - Périssoires sur l&amp;rsquo;Yerres (1877), huile sur toile, 103 × 155 cm, Milwaukee (USA), Milwaukee Art Museum.
-Nous avons vu dans le précédent article quelques différences entre SysV init et systemd, ainsi que le mécanisme d&amp;rsquo;initialisation de l&amp;rsquo;espace utilisateur par le kernel. Dans cet article, je vais aborder plus en détail sur le fonctionnement de systemd.
-Les Managers L&amp;rsquo;objet manager est central, il contient les valeurs par default des différentes propriétés du système et est responsable de la gestion des units qui lui sont attachées.</description></item><item><title>Systemd - partie 1</title><link>https://cyrillesondag.github.io/blog/systemd-part-one/</link><pubDate>Sun, 17 Oct 2021 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-one/</guid><description>Jean-Francois Millet - Les Glaneuses (1857), huile sur toile, 83,5 × 110 cm, Paris, musée d&amp;rsquo;Orsay.
-Je vais m&amp;rsquo;attacher dans cette partie introductive à expliciter la séquence de boot sous Linux pour m&amp;rsquo;arrêter au lancement du processus d&amp;rsquo;init. Puis faire la distinction entre systemd et SysV init sans rentrer dans les détails d&amp;rsquo;implémentation, puis revenir rapidement sur le débat autour de l&amp;rsquo;adoption du systemd.
-Les détails techniques et l&amp;rsquo;utilisation de systemd en lui-même feront les sujets d&amp;rsquo;articles suivants.</description></item><item><title>Présentation Linux Memory</title><link>https://cyrillesondag.github.io/blog/presentation-linux-menory/</link><pubDate>Sat, 16 Oct 2021 20:42:39 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/presentation-linux-menory/</guid><description>Les slides de ma présentation sur la gestion de la mémoire sous Linux.
-virtual memory memory management TLB &amp;hellip;</description></item><item><title>Débuter avec RxJava</title><link>https://cyrillesondag.github.io/blog/starting-rxjava/</link><pubDate>Tue, 04 Dec 2012 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/starting-rxjava/</guid><description>Pourquoi utiliser Rx ? Le Framework Rx prend une importance croissante dans le développement d&amp;rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux Callback Hell).
-Néanmoins l&amp;rsquo;apprentissage peut être assez déroutant au départ si l&amp;rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevé, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blogs on Yet another tech blog</title><link>https://cyrillesondag.github.io/blog/</link><description>Recent content in Blogs on Yet another tech blog</description><generator>Hugo -- 0.152.2</generator><language>fr-fr</language><copyright>{year}</copyright><lastBuildDate>Tue, 02 Dec 2025 17:43:25 +0100</lastBuildDate><atom:link href="https://cyrillesondag.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Molecule</title><link>https://cyrillesondag.github.io/blog/ansible-molecule/</link><pubDate>Sun, 22 May 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/ansible-molecule/</guid><description>Introduction à Molecule</description><content:encoded><![CDATA[<p>Molecule est un framework de test Ansible. Il permet en isolation de tester les roles (mais aussi les playbooks) Ansible.</p>
+<p>C&rsquo;est une réelle aide pour s&rsquo;assurer de la non-régression mais également pour accélérer le processus de développement.</p>
+<h2 id="init">Init</h2>
+<p>Donc d&rsquo;abord pour commencer, nous allons créer un role vide et explorer la structure proposée par Molecule.</p>
+<p>En explorant la commande <code>init role</code> on obtient le résultat suivant :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">molecule init role --help
+</span></span><span class="line"><span class="cl">Usage: molecule init role <span class="o">[</span>OPTIONS<span class="o">]</span> ROLE_NAME
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Initialize a new role <span class="k">for</span> use with Molecule, namespace is required outside
+</span></span><span class="line"><span class="cl">  collections, like acme.myrole.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Options:
+</span></span><span class="line"><span class="cl">  --dependency-name <span class="o">[</span>galaxy<span class="o">]</span>      Name of dependency to initialize. <span class="o">(</span>galaxy<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  -d, --driver-name <span class="o">[</span>delegated<span class="p">|</span>openstack<span class="p">|</span>podman<span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                  Name of driver to initialize. <span class="o">(</span>delegated<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --lint-name <span class="o">[</span>yamllint<span class="o">]</span>          Name of lint to initialize. <span class="o">(</span>yamllint<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --provisioner-name <span class="o">[</span>ansible<span class="o">]</span>    Name of provisioner to initialize. <span class="o">(</span>ansible<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  --verifier-name <span class="o">[</span>ansible<span class="p">|</span>testinfra<span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                  Name of verifier to initialize. <span class="o">(</span>ansible<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ok donc créons notre nouveau rôle :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bash# molecule init role my_company.my_new_role -d podman
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cela aura pour effet de créer un nouveau role dans <code>./my_new_role</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> my_new_role/ <span class="o">&amp;&amp;</span> tree
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── defaults
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── files
+</span></span><span class="line"><span class="cl">├── handlers
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── meta
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── molecule
+</span></span><span class="line"><span class="cl">│   └── default
+</span></span><span class="line"><span class="cl">│       ├── converge.yml
+</span></span><span class="line"><span class="cl">│       ├── molecule.yml
+</span></span><span class="line"><span class="cl">│       └── verify.yml
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">├── tasks
+</span></span><span class="line"><span class="cl">│   └── main.yml
+</span></span><span class="line"><span class="cl">├── templates
+</span></span><span class="line"><span class="cl">├── tests
+</span></span><span class="line"><span class="cl">│   ├── inventory
+</span></span><span class="line"><span class="cl">│   └── test.yml
+</span></span><span class="line"><span class="cl">└── vars
+</span></span><span class="line"><span class="cl">    └── main.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Au-delà de la structure classique d&rsquo;un rôle, nous allons surtout nous intéresser au répertoire <code>molecule</code> qui contient tous les éléments nécessaires aux tests.</p>
+<p>Au premier niveau un répertoire <code>default</code>, il s&rsquo;agit du scenario par défaut, celui qui sera exécuté si aucune option n&rsquo;est spécifiée (<code>-s &lt;nom_du_scenario&gt;</code> ou le nom du scenario est celui du répertoire).</p>
+<p>Ensuite à l&rsquo;intérieur le plus important <code>molecule.yml</code>.</p>
+<h2 id="moleculeyml">Molecule.yml</h2>
+<p>C&rsquo;est le fichier qui est requis dans chaque scenario.
+Il va servir à décrire et configurer : le driver, le(s) plateforme(s), le provisioner, le linter et le verifier</p>
+<p>Dans notre exemple il ressemble à cela :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">dependency</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">galaxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">driver</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">podman</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">platforms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">instance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/centos/centos:stream8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pre_build_image</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">provisioner</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ansible</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">verifier</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ansible</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dependency-doc"><code>dependency</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#ansible-galaxy">doc</a>)</h3>
+<p>Molecule utilise Ansible galaxy comme gestionnaire de dépendances.
+Cet objet va permettre de configurer <code>ansible-galaxy</code> pour installer les rôles et collections requises.</p>
+<h3 id="driver-doc"><code>driver</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#driver">doc</a>)</h3>
+<p>Ici on spécifie le nom du pilote à utiliser pour accéder aux instances des plateformes sur lesquelles les tests seront exécutés.</p>
+<p>Il existe différents types de drivers : podman, openstack, vagrant, docker, azure&hellip; qui correspondent chacun à une technologie pour créer des instances de tests (vm ou container).</p>
+<p>Le driver <code>delegated</code> est quant à lui un peu particulier, car à la différence des autres il n&rsquo;est pas chargé de créer / détruire les instances de test.</p>
+<p>On peut l&rsquo;utiliser par exemple pour se connecter à une machine préexistante en renseignant seulement une clé ssh.</p>
+<p>Les drivers ne sont pas présents par défaut, ils doivent être installés dans les librairies Python de la façon suivante (ici Docker) :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install <span class="s1">&#39;molecule[docker]&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="platforms-doc"><code>platforms</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#platforms">doc</a>)</h3>
+<p>C&rsquo;est dans ce dictionnaire que nous allons retrouver la configuration de nos instances.
+Ces configurations sont bien évidemment dépendantes du <code>driver</code> utilisé (bien qu&rsquo;il puisse y avoir des similitudes).</p>
+<p>Leurs noms doivent être uniques (ils serviront de hostname pour ansible), sans limitation de nombre.
+On peut définir pour chaque instance un nom de groupe (et des children) pour générer l´inventaire de notre test.</p>
+<p>Cette partie de configuration n&rsquo;est pas forcément toujours très très bien documentée.
+Pour voir l&rsquo;ensemble des options de configuration, il est souvent plus simple de se référer directement au code du driver (ou dans la section <a href="https://molecule.readthedocs.io/en/latest/examples.html">&lsquo;Common uses cases&rsquo;</a>).
+Par exemple pour Docker on peut trouver le détail <a href="https://github.com/ansible-community/molecule-docker/blob/main/src/molecule_docker/driver.py">ici</a></p>
+<h3 id="provisionner-doc"><code>provisionner</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#provisioner">doc</a>)</h3>
+<p>Cet objet est là où est défini la configuration d&rsquo;Ansible.
+Il va être chargé à l&rsquo;aide de playbook classique ansible de réaliser les actions suivantes :</p>
+<ul>
+<li><code>create</code> : création de l&rsquo;ensemble des plateformes à l&rsquo;aide du driver. Ce playbook n&rsquo;est appelé qu&rsquo;une fois durant la durée de vie des instances de test</li>
+<li><code>prepare</code> : utilisé par le tester pour appliquer les prérequis. Ce playbook n&rsquo;est appelé qu&rsquo;une fois durant la durée de vie des instances de test</li>
+<li><code>converge</code> : applique le role en cours de test sur les instances.</li>
+<li><code>idempotence</code> : re-applique le role et vérifie qu&rsquo;aucun <code>changed</code> n&rsquo;ait été déclenché</li>
+<li><code>side_effect</code> : utilisé pour des tests de haute disponibilité (pas activé par défaut)</li>
+<li><code>verify</code> : réalise les assertions sur les instances de tests (activé uniquement sur verifier = ansible)</li>
+<li><code>cleanup</code> (*) : utilisé pour nettoyer les ressources avant le destroy</li>
+<li><code>destroy</code> (*) : utilisé pour supprimer les plateformes de test.</li>
+</ul>
+<p>Les playbooks des actions sont définis par défaut à la racine du scenario sous la forme <code>./$action.yml</code>.</p>
+<p>Il est également possible de définir des playbooks spécifiques par driver de la façon suivante <code>./$driver/$action.yml</code>.</p>
+<p>Enfin certains playbooks sont automatiquement définis par le driver lui-même.</p>
+<p>Par exemple le driver docker va utiliser les arguments du dictionnaire des plateformes pour générer des Dockerfile via une template jinja2 et lancer la création des containers via un playbook Ansible.</p>
+<p>Il est bien évidemment possible de définir des playbooks comme bon nous semble pour réaliser les actions que l&rsquo;on souhaite.</p>
+<p>Enfin, c&rsquo;est aussi dans cet objet provisioner que l&rsquo;on va pouvoir configurer ansible : niveau de log, variables, liens&hellip; etc</p>
+<h3 id="verifier-doc"><code>verifier</code> (<a href="https://molecule.readthedocs.io/en/latest/configuration.html#verifier">doc</a>)</h3>
+<p>Le verifier est chargé de valider le bon déroulement du rôle, en réalisant des assertions sur les plateformes de test.</p>
+<p>Par défaut Ansible est utilisé, les tests s&rsquo;écrivent comme n&rsquo;importe quel playbook (via par exemple le module assert)</p>
+<p>Historiquement <a href="https://testinfra.readthedocs.io/en/latest/">testinfra</a> était privilégié pour cette tâche, dorénavant Ansible l&rsquo;a remplacé.
+À titre personnel, je trouve que la syntaxe Ansible n&rsquo;est pas vraiment efficace pour réaliser ce genre de tâche tant c&rsquo;est verbeux à écrire.
+J&rsquo;imagine que l&rsquo;homogénéité a primé sur l&rsquo;efficacité, car testinfra lui doit être écrit en python.</p>
+<h2 id="les-scenarios">Les scenarios</h2>
+<p>(je me demande s&rsquo;il n&rsquo;y a pas une confusion entre les termes : scénario répertoire où se trouve le fichier molecule.yml et les scénarios la liste des séquences des actions)</p>
+<p>Pour la bonne compréhension de l&rsquo;outil je remets ici la liste par défaut des actions réalisées par molecule :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">scenario</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">create_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">check_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">check</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">converge_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">destroy_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">test_sequence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dependency</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">lint</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">syntax</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prepare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">converge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">idempotence</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">side_effect</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">verify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">destroy</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ces séquences peuvent être appelées par les commandes suivantes :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">molecule <span class="o">[</span>create<span class="p">|</span>check<span class="p">|</span>converge<span class="p">|</span>destroy<span class="p">|</span>test<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>NB: il peut être utile en phase de développement de travailler uniquement avec le <code>converge</code>, ainsi les phases &ldquo;couteuses&rdquo; (create et prepare) ne sont appelées qu&rsquo;une fois et on peut travailler plus rapidement sur notre propre environnement.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Voilà qui conclut cet article, Molecule est un outil indispensable à Ansible. Il souffre néanmoins de quelques lacunes : documentation pas toujours très claire, pas de doc sur les drivers, la configuration du provisioner n&rsquo;est pas simple à configurer dans des cas un peu complexes, et comme je l&rsquo;ai dit plus le verifier ansible ne me semble pas idéal.</p>
+<p>Je ne suis pas rentré beaucoup dans les détails mais tout est évidemment hautement paramétrable.</p>
+<p>Pour autant une fois le pas franchi et la configuration mise en place, c&rsquo;est un réel plaisir à utiliser (merci le <code>molecule login</code>)</p>
+]]></content:encoded></item><item><title>Systemd - partie 3</title><link>https://cyrillesondag.github.io/blog/systemd-part-three/</link><pubDate>Fri, 11 Feb 2022 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-three/</guid><description>Systemd architecture</description><content:encoded><![CDATA[
+
+
+
+
+
+
+
+<figure><a href="Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%c3%abl,_1766%e2%80%931817%29.jpg">
+    <img
+        
+            sizes="(min-width: 35em) 1200px, 100vw"
+            
+            srcset='
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%C3%ABl,_1766%E2%80%931817%29_hu_b6df43bd59b9fdae.jpg 480w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%C3%ABl,_1766%E2%80%931817%29_hu_16d971948921ad07.jpg 800w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%C3%ABl,_1766%E2%80%931817%29_hu_4e1ef40c3db9f7a0.jpg 1200w,
+            
+                   
+            '
+
+            
+            
+            src="https://cyrillesondag.github.io/blog/systemd-part-three/Jean_Auguste_Dominique_Ingres_-_Portrait_of_a_Young_Woman_%28formerly_thought_to_be_Mme_de_Sta%C3%ABl,_1766%E2%80%931817%29_hu_16d971948921ad07.jpg"
+            
+
+        
+            alt="Jean Auguste Dominique Ingres - Portrait d&rsquo;une jeune femme (1766–1817), huile sur toile, 59.6 x 73.2 cm, Hull (UK), Ferens Art Gallery."/> </a><figcaption style="font-size: 80%; text-align: center;">
+            <p>Jean Auguste Dominique Ingres - Portrait d&rsquo;une jeune femme (1766–1817), huile sur toile, 59.6 x 73.2 cm, Hull (UK), Ferens Art Gallery.</p>
+        </figcaption>
+</figure>
+<p>Cet article sera consacré à l&rsquo;architecture de <em>systemd</em>.</p>
+<p>Le cœur de systemd est basé sur quelques piliers : <em>UDev</em> et <em>DBus</em> qui permettent de mettre en place une approche évènementielle, les <em>CGroup</em> pour l&rsquo;encapsulation des processus et le contrôle des ressources et plus récemment <em>EBPF</em> pour les métriques.<br>
+<br/>
+
+
+
+
+
+
+
+
+<figure><a href="Systemd_components.svg.png">
+    <img
+        
+            sizes="(min-width: 35em) 1200px, 100vw"
+            
+            srcset='
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Systemd_components.svg_hu_bf7855a7b1ad0e55.png 480w,
+            
+                   
+            
+                   
+            
+                   
+            '
+
+            
+            
+            src="https://cyrillesondag.github.io/blog/systemd-part-three/Systemd_components.svg.png"
+            
+
+        
+            alt="Architecture de systemd - By Shmuel Csaba Otto Traian, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=28698339"/> </a><figcaption style="font-size: 80%; text-align: center;">
+            <p>Architecture de systemd - By Shmuel Csaba Otto Traian, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/w/index.php?curid=28698339">https://commons.wikimedia.org/w/index.php?curid=28698339</a></p>
+        </figcaption>
+</figure></p>
+<p>Il se base sur plusieurs principes forts que je vais tenter de détailler ci-dessous.</p>
+<h2 id="retarder-linitialisation">Retarder l&rsquo;initialisation</h2>
+<p>L&rsquo;un des objectifs initiaux du projet était d&rsquo;améliorer le temps de démarrage des systèmes jugé à juste titre trop long.</p>
+<p>Il faut garder à l&rsquo;esprit qu&rsquo;il a été pensé pour répondre à ces différents cas d&rsquo;utilisation (serveur, station de travail, embarqué&hellip;).
+Si le temps de démarrage n&rsquo;est (souvent) pas crucial pour un serveur, ce n&rsquo;est absolument pas le cas pour une station de travail ou pour un mobile.</p>
+<p>Pour arriver à cela plusieurs types d&rsquo;<em>unit</em> sont chargés uniquement de l&rsquo;activation des services lors de leur première utilisation.
+On peut citer les types : socket, path, automount &hellip;</p>
+<p>Cela permet d&rsquo;éviter de lancer un service trop tôt (bien souvent au démarrage) et ainsi optimiser le temps de d&rsquo;initialisation.</p>
+<p>Pour réaliser cela systemd utilise plusieurs méthodes d&rsquo;activation :</p>
+<h3 id="les-socket">Les Socket.</h3>
+<p>Le principe est assez simple et est largement inspiré de ce qui se faisait déjà sur <em>inetd</em>.
+Mais contrairement à ce dernier, de nombreux types de socket sont maintenant supportés : UNIX, INET, named pipes, netlink&hellip;</p>
+<p>On peut résumer les étapes de la façon suivante :</p>
+<ul>
+<li>Des buffers sont alloués automatiquement au démarrage pour chaque service qui le demande.</li>
+<li>Lors d&rsquo;un appel, ces buffers se remplissent jusqu&rsquo;à une taille limite au-delà de laquelle l&rsquo;écriture devient impossible. Dans ce cas le client se met alors en attente et l&rsquo;appel devient bloquant (c&rsquo;est ce qui se passe d&rsquo;ailleurs lorsqu&rsquo;il attend une réponse).</li>
+<li>Les descripteurs de fichiers sont scrutés et au premier message le service consommateur est démarré en parallèle.</li>
+<li>Enfin on lui transmet le(s) socket(s) en paramètres afin qu&rsquo;il puisse les lire une fois initialisé. En cas d&rsquo;échec de démarrage, rien n&rsquo;est lu et le service peut être relancé sans pertes d&rsquo;informations.</li>
+</ul>
+<p>Néanmoins, attention le passage de sockets n&rsquo;est pas un comportement &ldquo;natif&rdquo; sous Linux.
+Il faut donc que le service soit compatible avec systemd (c&rsquo;est heureusement le cas de nombreux serveurs web entre autres).</p>
+<p>Grâce à ce comportement, on peut non seulement activer un service au premier appel, mais également briser les chaines de dépendances entre services et paralléliser leur activation.</p>
+<p>Par exemple dans le cas d&rsquo;un service qui nécessite syslog :
+Il est possible de lancer les deux en parallèle, les messages syslog seront envoyés mis en attente dans le buffer avant d&rsquo;être dépilé à l&rsquo;initialisation complète de syslog.</p>
+<h4 id="udev">UDev</h4>
+<p><em>UDev</em> est un daemon qui permet d&rsquo;exposer dans l&rsquo;espace utilisateur les périphériques de façon dynamique.
+Il prend en charge le hot-plug mais aussi pour les périphériques classiques.</p>
+<p>C&rsquo;est un daemon qui écoute dans l&rsquo;espace utilisateur les évènements publiés par le kernel via <em>netlink</em> (un socket entre le kernel et l&rsquo;espace utilisateur).</p>
+<p>Il fait ensuite la liaison entres les informations du sysfs et déclenche des règles spécifiques écrites par un administrateur.</p>
+<p>Ce projet a acquis une telle importance qu&rsquo;il fait maintenant partie à part entière de systemd.</p>
+<p>Prenons un exemple concret de comment utiliser <em>UDev</em> avec systemd.</p>
+<p>Tout d&rsquo;abord nous pouvons écouter les évènements publiés par le kernel et <em>UDev</em> ainsi :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">udevadm monitor
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ce qui donne ce résultat lors de l&rsquo;activation de bluetooth sur mon portable</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">monitor will print the received events for:
+</span></span><span class="line"><span class="cl">UDEV - the event which udev sends out after rule processing
+</span></span><span class="line"><span class="cl">KERNEL - the kernel uevent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">KERNEL[88503.920800] change   /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/rfkill0 (rfkill)
+</span></span><span class="line"><span class="cl">UDEV  [88503.926695] change   /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/rfkill0 (rfkill)
+</span></span><span class="line"><span class="cl">KERNEL[88521.147695] add      /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/hci0:256 (bluetooth)
+</span></span><span class="line"><span class="cl">UDEV  [88521.151331] add      /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/bluetooth/hci0/hci0:256 (bluetooth)
+</span></span><span class="line"><span class="cl">KERNEL[88522.280203] add      /devices/virtual/input/input24 (input)
+</span></span><span class="line"><span class="cl">KERNEL[88522.280341] add      /devices/virtual/input/input24/event18 (input)
+</span></span><span class="line"><span class="cl">UDEV  [88522.282180] add      /devices/virtual/input/input24 (input)
+</span></span><span class="line"><span class="cl">UDEV  [88522.319399] add      /devices/virtual/input/input24/event18 (input)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>La première partie concerne la mise en route du récepteur bluetooth, la seconde la connexion du casque audio.</p>
+<p>On voit apparaître un nouveau device sous l&rsquo;arborescence <code>/devices/virtual/input/input24</code>.</p>
+<p>Ensuite on cherche à écrire une règle UDev qui va s&rsquo;activer uniquement pour ce périphérique.
+Pour cela il nous faut donc chercher les attributs discriminants dans les événements <em>UDev</em> que l&rsquo;on peut voir à l&rsquo;aide de la commande (attention les chemins UDev sont toujours relatifs aux répertoires <code>/sys</code> ou <code>/dev/</code>):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">udevadm info -a /sys/devices/virtual/input/input24
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Je serais bien incapable d&rsquo;expliquer la signification de tous les attributs, par contre je peux en reconnaître quelque uns comme le nom et son adresse (qui me semble assez unique) :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  KERNEL==&#34;input24&#34;
+</span></span><span class="line"><span class="cl">  SUBSYSTEM==&#34;input&#34;
+</span></span><span class="line"><span class="cl">  DRIVER==&#34;&#34;
+</span></span><span class="line"><span class="cl">  ....
+</span></span><span class="line"><span class="cl">  ATTR{inhibited}==&#34;0&#34;
+</span></span><span class="line"><span class="cl">  ATTR{name}==&#34;LG-TONE-FP9 (AVRCP)&#34;
+</span></span><span class="line"><span class="cl">  ATTR{phys}==&#34;0c:dd:24:30:06:00&#34;
+</span></span><span class="line"><span class="cl">  ATTR{power/async}==&#34;disabled&#34;
+</span></span><span class="line"><span class="cl">  ATTR{power/control}==&#34;auto&#34;
+</span></span><span class="line"><span class="cl">  ....
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ensuite avec ces informations on est en mesure d&rsquo;écrire une règle appropriée pour sélectionner ce matériel de la façon suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SUBSYSTEM==&#34;input&#34;,  ATTR{name}==&#34;LG-TONE-FP9 (AVRCP)&#34;, ATTR{phys}==&#34;0c:dd:24:30:06:00&#34;, TAG+=&#34;systemd&#34;, ENV{SYSTEMD_ALIAS}+=&#34;/sys/devices/virtual/input/lg_tone_fp9&#34; 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Les premiers éléments servent à sélectionner les attributs dans les événements <em>UDev</em> qui vont déclencher la règle : le nom du system, l&rsquo;attribut nom et son adresse.</p>
+<p>Puis la partie importante pour l&rsquo;intégration avec systemd est <code>TAG+=&quot;systemd</code>.
+Ce tag permet de marquer le périphérique pour être interprété comme une unit &ldquo;.device&rdquo;.</p>
+<p>C&rsquo;est d&rsquo;ailleurs la seule chose à faire pour faire fonctionner cette règle avec systemd.</p>
+<p>J&rsquo;ai ajouté l&rsquo;attribut <code>SYSTEMD_ALIAS=</code> car le chemin du périphérique n&rsquo;est pas prévisible (<code>/sys/devices/virtual/input/input&lt;X&gt;</code>).</p>
+<p>Comme le nom de la unit est déterminé par son chemin il est plus simple qu&rsquo;il soit toujours le même.
+Maintenant ce device va apparaître systématiquement sous le nom <code>sys-devices-virtual-input-lg_tone_fp9.device</code>.</p>
+<p>On est donc en mesure d&rsquo;écrire un service qui va s&rsquo;activer lors de la présence de ce device.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">sys-devices-virtual-input-lg_tone_fp9.device</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/echo headphone connected</span>
+</span></span><span class="line"><span class="cl"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Il existe également la possibilité d&rsquo;activer un service directement à partir d&rsquo;une règle <em>UDev</em>.</p>
+<h3 id="d-bus">D-Bus</h3>
+<p><em>D-Bus</em> est un nouvel framework d&rsquo;IPC (inter-process communication) qui permet de communiquer de façon standardisée entre différents services.
+Il permet - entre autre - de faire :</p>
+<ul>
+<li>du RPC (Remote Procedure Call) en offrant une sérialisation standardisée.</li>
+<li>de sécuriser les communications via un mécanisme d&rsquo;autorisation.</li>
+<li>de l&rsquo;activation à la demande via un système de nommage.</li>
+<li>de la découverte de service</li>
+<li>&hellip;</li>
+</ul>
+<p>Systemd est complètement intégré avec D-Bus (l&rsquo;architecture des deux produits est par ailleurs assez similaire).</p>
+<p>Il est ainsi possible d&rsquo;interagir avec systemd uniquement via les API <em>D-BUS</em>.</p>
+<p>Pour voir les services exposés par DBus il suffit de taper la commande :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">~ busctl list --acquired
+</span></span><span class="line"><span class="cl">NAME                                 PID PROCESS         USER             CONNECTION UNIT                             SESSION DESCRIPTION
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">org.freedesktop.systemd1               <span class="m">1</span> systemd         root             :1.1       init.scope                       -       -
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On peut également voir l&rsquo;ensemble des propriétés d&rsquo;un service</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">~ busctl introspect org.freedesktop.systemd1 /org/freedesktop/systemd1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Puis pour lister les propriétés, méthodes d&rsquo;un service (systemd ici) :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">~ busctl introspect org.freedesktop.systemd1 /org/freedesktop/systemd1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cela donne accès à l&rsquo;ensemble des objets accessibles via <em>D-BUS</em> (c&rsquo;est aussi un bon moyen pour connaître les valeurs des propriétés par défaut).</p>
+<p>On peut également écrire un service activable lors de la présence d&rsquo;un bus de la façon suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">Simple DBus service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">dbus</span>
+</span></span><span class="line"><span class="cl"><span class="na">BusName</span><span class="o">=</span><span class="s">org.example.simple-dbus-service</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/sbin/simple-dbus-service</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Bref les possibilités sont impressionnantes, tellement l&rsquo;intégration des deux systèmes est poussée.</p>
+<h3 id="inotify">Inotify</h3>
+<p><em>Inotify</em> est un mécanisme qui permet d&rsquo;observer les actions sur un système de fichiers.</p>
+<p>Il permet de s&rsquo;abonner à un répertoire ou fichier et de recevoir les types d&rsquo;évènements suivants :</p>
+<ul>
+<li>IN_ACCESS : le fichier est accédé en lecture ;</li>
+<li>IN_MODIFY : le fichier est modifié ;</li>
+<li>IN_ATTRIB : les attributs du fichier sont modifiés ;</li>
+<li>IN_OPEN : le fichier est ouvert ;</li>
+<li>IN_DELETE : un fichier a été supprimé dans le répertoire surveillé ;</li>
+<li>IN_CREATE : un fichier a été créé dans le répertoire surveillé.</li>
+<li>&hellip;</li>
+</ul>
+<p>En symétrie nous allons donc retrouver sous systemd les fonctions suivantes <code>PathExists=, PathChanged=, PathModified=, DirectoryNotEmpty=</code></p>
+<p>Attention - comme spécifié dans la documentation - <em>inotify</em> souffre de certaines limitations, il n&rsquo;est par exemple pas possible de scruter les évènements produits par une machine distante sur une filesystem en réseau (type NFS).</p>
+<h3 id="autofs">Autofs</h3>
+<p><em>Autofs</em> est un module du kernel qui permet de retarder le montage d&rsquo;un FS.
+Pour cela il crée des <em>mount-trap</em> (des dentry avec un attribut particulier) qui au premier accès (au-delà du stat) va faire appel à un daemon - dans notre cas systemd - qui va effectuer le montage.
+Par la suite le filesystem pourra être utilisé comme un FS habituel.</p>
+<p>Cela offre deux avantages :</p>
+<ul>
+<li>alors que l&rsquo;initialisation classique attend le montage de tous les FS (qui dans le cas de FS en réseaux peut être assez long), ici nous n&rsquo;avons plus à attendre cette étape.</li>
+<li>cela permet également de paralléliser les montages.</li>
+</ul>
+<h2 id="paralléliser">Paralléliser</h2>
+<p>On l&rsquo;a vu plus haut - en plus du chargement à la demande - beaucoup de composants facilitent la parallélisation des actions et font ainsi gagner en efficacité.</p>
+<p>De son côté systemd se base sur son modèle de dépendances et cherche à minimiser les points de synchronisations qui ralentissent le démarrage.</p>
+<p>Pour cela il va construire un arbre de dépendances pour pouvoir lancer un maximum de services en parallèle en ayant à attendre uniquement ceux qui lui sont nécessaires.</p>
+<p>Pour arriver à cela des ordonnancements - souvent implicites - sont mis en place suivant différents critères afin de garantir la bonne cohérence des actions (c&rsquo;est d&rsquo;ailleurs souvent la partie la plus complexe à mettre en œuvre à mon avis).</p>
+<p>Pour illustrer mes propos voici le graphique de démarrage, pour atteindre la <code>default.target</code> :</p>
+
+
+
+
+
+
+
+
+<figure><a href="Systemd-bootup.png">
+    <img
+        
+            sizes="(min-width: 35em) 1200px, 100vw"
+            
+            srcset='
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu_e1a0b70f98cb17c.png 480w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu_e65cd91ce5802fa9.png 800w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu_a4c3be56353fa715.png 1200w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu_f59d50a9e28df50f.png 1500w,
+            '
+
+            
+            
+            src="https://cyrillesondag.github.io/blog/systemd-part-three/Systemd-bootup_hu_e65cd91ce5802fa9.png"
+            
+
+        
+            alt="Bootup graph"/> </a><figcaption style="font-size: 80%; text-align: center;">
+            <p>Bootup graph</p>
+        </figcaption>
+</figure>
+<p>À noter quelques points qui me semblent importants :</p>
+<ul>
+<li>Lorsque systemd active un nombre de <em>unit</em> - et si aucun ordre n&rsquo;est spécifié - elles sont faites en parallèle.</li>
+<li>Par défaut les services s&rsquo;exécutent après la <code>sysinit.target</code> (ou à la <code>basic.target</code> en mode user). Pour passer outre il faut ajouter la propriété <code>DefaultDependencies=false</code>.</li>
+</ul>
+<p>Comme souvent des outils sont mis à disposition pour nous aider :
+On peut citer <code>systemd-analyse plot</code> (en SVG) ou <code>systemd-analyse dot</code>  (au format DOT) qui permettent de générer des représentations graphiques de ce que nous venons d&rsquo;aborder.</p>
+<h2 id="lutilisation-des-cgroups">L&rsquo;utilisation des cgroups</h2>
+<p>Contrairement à ce que l&rsquo;on pourrait croire le cgroups ne sont pas utilisés (du moins au départ) dans systemd pour le contrôle de resources, mais pour le contrôle des processus.</p>
+<p>Il s&rsquo;avère en pratique compliqué de terminer correctement un service ayant un nombre de processus forkés important.</p>
+<p>Pour tenter de comprendre le problème, revenons sur quelques notions UNIX :</p>
+<p>Un processus est rattaché à une session.
+Par convention le <code>SID</code> il est égal au <code>PID</code>  du premier membre de la session, le &ldquo;session leader&rdquo;.
+La session peut être un terminal, une connexion ssh&hellip; ou autre.</p>
+<p>Dans une session on trouve un certain nombre de groupes de processus.
+Le <code>PGID</code> est égal au <code>PID</code> du premier membre du groupe le &ldquo;process group leader&rdquo; (vous voyez la logique).
+Au sein d&rsquo;une session un seul groupe peut être au premier plan.</p>
+<p>Un processus PID a (presque) toujours un parent et hérite de certains de ses attributs (UID, GID, SID, PGID&hellip;).
+Il est lui-même composé de plusieurs threads.</p>
+<p>Si en théorie c&rsquo;est simple, en pratique, c&rsquo;est assez compliqué : liberté d&rsquo;implémentation, différences entre les systèmes UNIX, manque de syscall&hellip;
+Tout cela a fait qu&rsquo;il est difficile de suivre correctement l&rsquo;ensemble des processus issus de différents forks.</p>
+<p>Par exemple l&rsquo;une des techniques couramment utilisées pour lancer un processus en arrière-plan (daemon) est la technique dite du &ldquo;double-fork&rdquo;.
+Elle consiste à effectuer les opérations suivantes :</p>
+<ul>
+<li>Un premier <code>fork()</code> pour créer un processus enfant de façon classique.</li>
+<li>Qui va ensuite appeler <code>setsid(0)</code> pour se détacher de la session courante.</li>
+<li>Pour enfin effectuer un nouveau <code>fork()</code> pour que ce changement soit pris en compte. Le processus nouvellement créé est ainsi rendu orphelin et ne peut plus interagir avec la session d&rsquo;origine (et vice versa).</li>
+</ul>
+<p>Du point de vue d&rsquo;un init manager, le problème est qu&rsquo;il n&rsquo;a connaissance que du PID issu du retour du premier fork, et pas de celui issu du second et éventuellement des autres processus forkés.</p>
+<p>Une parade consistait à stocker le résultat du second fork dans un fichier PID file pour pouvoir le retrouver.
+Cette méthode est tout à fait valide, mais souffre de limites en cas de nouveau fork et est de plus très dépendante de l&rsquo;implémentation qui en est faite.</p>
+<p>On peut me faire remarquer que systemd utilise aussi des pid file, oui mais :</p>
+<ul>
+<li>c&rsquo;est surtout pour assurer la rétrocompatibilité avec les anciens scripts.</li>
+<li>ce n&rsquo;est pas exactement utilisé pour la même fonction (principalement par le watchdog).</li>
+</ul>
+<p>Pour pallier ce problème, systemd utilise les <em>CGroup</em>.</p>
+<p>Présent depuis longtemps dans le kernel Linux les <em>CGroups</em> sont prévus pour régler ce type de problème.
+À la différence d&rsquo;autres propriétés un processus ne peut pas s&rsquo;échapper d&rsquo;un <em>CGroup</em> (à moins de créer un nouveau sous <em>CGroup</em> qui reste néanmoins toujours le descendant du parent).
+Il est de plus assez aisé de recenser l&rsquo;ensemble des processus d&rsquo;un CGroup.</p>
+<p>Systemd a donc décidé de lancer tous les services dans leurs propres CGroup, cela permet de résoudre une bonne fois pour toutes les problèmes d&rsquo;échappement des processus.</p>
+<p>Et encore une fois fournit un outil pour nous aider :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemd-cgls
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></content:encoded></item><item><title>Systemd - partie 2</title><link>https://cyrillesondag.github.io/blog/systemd-part-two/</link><pubDate>Sun, 06 Feb 2022 23:24:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-two/</guid><description>A l&amp;#39;intérieur de systemd</description><content:encoded><![CDATA[
+
+
+
+
+
+
+
+<figure><a href="Gustave_Caillebotte_-_Perissoires_sur_yerres.jpg">
+    <img
+        
+            sizes="(min-width: 35em) 1200px, 100vw"
+            
+            srcset='
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-two/Gustave_Caillebotte_-_Perissoires_sur_yerres_hu_b3e53584bfcbaeaa.jpg 480w,
+            
+                   
+            
+                   
+            
+                   
+            '
+
+            
+            
+            src="https://cyrillesondag.github.io/blog/systemd-part-two/Gustave_Caillebotte_-_Perissoires_sur_yerres.jpg"
+            
+
+        
+            alt="Gustave Caillebotte - Périssoires sur l&rsquo;Yerres (1877), huile sur toile, 103 × 155 cm, Milwaukee (USA), Milwaukee Art Museum."/> </a><figcaption style="font-size: 80%; text-align: center;">
+            <p>Gustave Caillebotte - Périssoires sur l&rsquo;Yerres (1877), huile sur toile, 103 × 155 cm, Milwaukee (USA), Milwaukee Art Museum.</p>
+        </figcaption>
+</figure>
+<p><br>
+Nous avons vu dans le précédent article quelques différences entre SysV init et systemd, ainsi que le mécanisme d&rsquo;initialisation de l&rsquo;espace utilisateur par le kernel.
+Dans cet article, je vais aborder plus en détail le fonctionnement de systemd.</p>
+<h2 id="les-managers">Les Managers</h2>
+<p>L&rsquo;objet <em>manager</em> est central, il contient les valeurs par défaut des différentes propriétés du système et est responsable de la gestion des <em>units</em> qui lui sont attachées.
+C&rsquo;est avec lui que les &ldquo;utilisateurs&rdquo; vont communiquer.</p>
+<p>Il est chargé de propager les actions appelées job (par exemple : start, stop, reload&hellip;) vers les <em>units</em> et d&rsquo;interagir avec les éléments tiers du système (watchdog, inotify, D-bus, cgroups&hellip;).</p>
+<p>Il en existe sous 2 formes ayant chacune des portées différentes :</p>
+<p>La première (celle par défaut) appelée &ldquo;system&rdquo; est unique par machine et est normalement lancée par le processus d&rsquo;init avec les droits root.</p>
+<p>On peut vérifier que systemd est bien l&rsquo;init <em>manager</em> du système de la façon suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># ls -ls /usr/sbin/init</span>
+</span></span><span class="line"><span class="cl">/usr/sbin/init -&gt; /lib/systemd/systemd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ou plus simplement utiliser cette commande :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>La seconde est &ldquo;user&rdquo;, il est unique par utilisateur et hérite des mêmes droits que ce dernier.
+Ce type d&rsquo;instance s&rsquo;avère particulièrement utile pour limiter les droits des services qui lui sont associés (rootless).</p>
+<p>Pour connaître l&rsquo;état d&rsquo;une instance utilisateur on peut utiliser la commande suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl --user
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Bien spécifier l&rsquo;argument <code>--user</code> devant toutes les commandes pour interagir avec l&rsquo;instance de l&rsquo;utilisateur.</p>
+<h3 id="la-gestion-des-units">La gestion des Units</h3>
+<p>On l&rsquo;a vu les <em>managers</em> sont responsables de la gestion des <em>units</em>.</p>
+<p>Une <em>unit</em> chargée par un <em>manager</em> elle est unique si son nom est unique (pour les templates, les alias, les fragments, le nom est résolu au runtime).</p>
+<p>Les <em>units files</em> sont lues au premier &ldquo;référencement&rdquo; (par exemple lors de leur activation, ou bien via de liens de dépendances&hellip;), transformées en <em>unit</em> et mise en cache dans la mémoire du <em>manager</em> qui leur est associé.</p>
+<p>Elles sont stockées à l&rsquo;intérieur d&rsquo;une HashMap sous la forme nom/valeur (d&rsquo;où leur unicité).</p>
+<p>Pour cette raison, il faut forcer le ramasse-miette (GC) ce qui a pour effet de sérialiser sur disque l&rsquo;état des <em>units</em> actives, vider le cache du manager et recharger la configuration des <em>units</em> via leurs <em>unit file</em> (ce n&rsquo;est pas néanmoins pas toujours nécessaire, mais ça évite des erreurs).</p>
+<p>Pour forcer le ramasse miette on utilise la commande suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="arborescence-et-précédence">Arborescence et précédence</h3>
+<p>La définition des <em>unit files</em> répondent à une précédence très précise utilisée afin de faciliter l&rsquo;administration du système et sa mise à jour.</p>
+<p>Par ordre d&rsquo;importance croissante (non exhaustif) en mode &ldquo;&ndash;system&rdquo; :</p>
+<ul>
+<li><code>/lib/systemd/system/*</code> : installés par le gestionnaire de paquets (il est recommandé d&rsquo;éviter de les modifier sous peine de pertes lors des mises à jour du paquet)</li>
+<li><code>/usr/local/lib/systemd/system/*</code> : gérés par l&rsquo;administrateur</li>
+<li><code>/run/systemd/system/*</code> : générées au runtime</li>
+<li><code>/etc/systemd/system/*</code> : gérés par l&rsquo;administrateur</li>
+</ul>
+<p>Ainsi une <em>unit file</em> définie dans le répertoire <code>/etc/systemd/system/*</code> sera prioritaire sur celle définie dans <code>/lib/systemd/system/*</code></p>
+<p>En mode &ldquo;&ndash;user&rdquo; la hiérarchie est un peu différente :</p>
+<ul>
+<li><code>/lib/systemd/user/*</code> : installés par le gestionnaire de paquets (ne doivent pas être modifiés sous peine de pertes lors des mises à jour)</li>
+<li><code>/usr/local/lib/systemd/user/*</code> : gérés par l&rsquo;administrateur</li>
+<li><code>/run/systemd/user/*</code> : générées au runtime</li>
+<li><code>/etc/systemd/user/*</code> : gérés par l&rsquo;administrateur</li>
+<li><code>~/.config/systemd/user/*</code> : géré par l&rsquo;utilisateur</li>
+</ul>
+<p>Ça peut paraître compliqué aux premiers abords, mais limite le périmètre des différents intervenants sur une machine (utilisateurs, administrateurs, packageurs&hellip;) pour qu&rsquo;ils ne se marchent sur les pieds.</p>
+<p>De plus des outils spécifiques sont fournis (on le verra plus loin) pour aider à la compréhension de ce mécanisme.</p>
+<h3 id="fragment-configuration">Fragment Configuration</h3>
+<p>Les fragments configuration sont des fichiers qui permettent de modifier les propriétés d&rsquo;une ou d&rsquo;un groupe de <em>units</em> sans avoir à la/les redéfinir entièrement.
+Ces fichiers répondent aux mêmes ordres de précédence que nous venons d&rsquo;aborder plus haut.</p>
+<p>Pour surcharger, il est possible de définir des fichiers <code>.conf</code> qui seront lus par ordre alphabétique dans les formats suivants :</p>
+<ul>
+<li>Par type de <em>unit</em> sous la forme <code>&lt;unit_type&gt;.d/*.conf</code>. Ainsi un fragment dans un répertoire <code>service.d/*.conf</code> s&rsquo;appliquera à tous les <code>*.service</code></li>
+<li>Une <em>unit</em> spécifique sous la forme <code>&lt;unit_name&gt;.d/*.conf</code></li>
+<li>Ou grâce à une pseudo hiérarchie et l&rsquo;utilisation du signe &lsquo;-&rsquo; dans le nom des <em>units</em>. Ainsi un fragment de configuration dans le répertoire <code>foo-.d/*.conf</code> va surcharger les configurations des <em>units</em> <code>foo-bar.service</code>, <code>foo-foo.service</code> et <code>foo-bar-foo.service</code>&hellip;</li>
+</ul>
+<p>Voyons maintenant comment appliquer cela et les outils fournis par systemd pour nous assister dans la mise en place.</p>
+<p>Si l&rsquo;on crée le fichier <code>/etc/systemd/system/service1.service</code> de la façon suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/echo hello world</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Puis le fragment de configuration dans le fichier suivant <code>/etc/systemd/system/service1.service.d/00-override.conf</code> :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/echo running this first</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Puis le fichier suivant <code>/etc/systemd/system/service.d/00-override.conf</code> :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/echo top level exec pre start</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On obtient en utilisant la commande <code>systemctl cat</code> le détail de la configuration de la <em>unit</em> ainsi que ses différents fragments :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ systemctl cat service1.service
+</span></span><span class="line"><span class="cl"><span class="c1"># /etc/systemd/system/service1.service</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecPreStart</span><span class="o">=</span>/bin/echo hello world
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># /etc/systemd/system/service1.service.d/00-override.conf</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecPreStart</span><span class="o">=</span>/bin/echo running this first
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># /etc/systemd/system/service.d/00-override.conf</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecPreStart</span><span class="o">=</span>/bin/echo top level <span class="nb">exec</span> pre start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et produit le résultat suivant :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">top level exec pre start
+</span></span><span class="line"><span class="cl">running this first
+</span></span><span class="line"><span class="cl">hello world
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Il est intéressant de noter que les surcharges sont additives.
+Pour passer outre les précédentes définitions, il faut d&rsquo;abord déclarer la propriété à vide avant de la surcharger avec la valeur attendue.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/echo top level exec pre start</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="les-units">Les Units</h2>
+<p>Les <em>units</em> sont les éléments de bases de systemd.
+Il existe 11 types différents de <em>unit</em>.
+Ils correspondent chacun à un type d&rsquo;actions particulières.</p>
+<p>Le type d&rsquo;une <em>unit</em> est déterminé par le suffix de son <em>unit file</em> :</p>
+<ul>
+<li>*.service : Qui permet de définir un groupe de processus. C&rsquo;est l&rsquo;objet qu&rsquo;on est le plus souvent amené à utiliser.</li>
+<li>*.socket : Pour faire de l&rsquo;activation de services par sockets (IPC, network, unix socket&hellip;).</li>
+<li>*.device : Pour prendre en compte l&rsquo;activation par périphériques via udev (dont le hot-plug).</li>
+<li>*.mount : Pour gérer le montage de partitions.</li>
+<li>*.automount : Qui permet l&rsquo;activation des <em>units</em> .mount automatique lors du premier accès.</li>
+<li>*.swap : Configuration d&rsquo;un point de montage swap</li>
+<li>*.target : Sont des point de synchronisation d&rsquo;un ensemble de <em>units</em> (comme les run-levels de SysVinit), mais également des points de déclenchements.</li>
+<li>*.path : Activation par observation de chemins</li>
+<li>*.timer : Déclencheur périodique (à la manière de cron)</li>
+<li>*.scope : Configuration d&rsquo;un ensemble de processus externes</li>
+<li>*.slice : Qui permet de regrouper un ensemble de processus au sein d&rsquo;un cgroup commun.</li>
+</ul>
+<p>Une <em>unit</em> est décrite par une <em>unit file</em> qui est lue au premier référencement pour être transformée en <em>unit</em>.</p>
+<p>L&rsquo;objet <em>units</em> implémente les opérations de bases génériques, une spécialisation est faite via la structure <code>UnitVtable</code> qui va référencer les méthodes spécifiques à chaque type.</p>
+<p>Voici un exemple non exhaustif des méthodes de <code>UnitVtable</code> :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">UnitVTable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* How much memory does an object of this unit type need */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">size_t</span> <span class="n">object_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* The name of the configuration file section with the private settings of this unit */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">private_section</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Config file sections this unit type understands, separated
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * by NUL chars */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sections</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* This should reset all type-specific variables. This should
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * not allocate memory, and is called with zero-initialized
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * data. It should hence only initialize variables that need
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * to be set != 0. */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* This should free all type-specific variables. It should be
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * idempotent. */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">done</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Actually load data from disk. This may fail, and should set
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * load_state to UNIT_LOADED, UNIT_MERGED or leave it at
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * UNIT_STUB if no configuration could be found. */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">load</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">dump</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">prefix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">stop</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">reload</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">kill</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="n">KillWho</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signo</span><span class="p">,</span> <span class="n">sd_bus_error</span> <span class="o">*</span><span class="n">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Boils down the more complex internal state of this unit to
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * a simpler one that the engine can understand */</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">UnitActiveState</span> <span class="p">(</span><span class="o">*</span><span class="n">active_state</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Return false when there is a reason to prevent this unit from being gc&#39;ed
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * even though nothing references it and it isn&#39;t active in any way. */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">may_gc</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Return true when the unit is not controlled by the manager (e.g. extrinsic mounts). */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">is_extrinsic</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Returns the exit status to propagate in case of FailureAction=exit/SuccessAction=exit; usually returns the
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * exit code of the &#34;main&#34; process of the service or similar. */</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">exit_status</span><span class="p">)(</span><span class="n">Unit</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.....</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">UnitVTable</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On retrouve logiquement dans l&rsquo;objet Unit l&rsquo;ensemble des sous-types, qui permettra de propager les actions génériques vers leurs implementations.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">UnitVTable</span> <span class="o">*</span> <span class="k">const</span> <span class="n">unit_vtable</span><span class="p">[</span><span class="n">_UNIT_TYPE_MAX</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_SERVICE</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">service_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_SOCKET</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">socket_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_TARGET</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">target_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_DEVICE</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">device_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_MOUNT</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">mount_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_AUTOMOUNT</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">automount_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_SWAP</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">swap_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_TIMER</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">timer_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_PATH</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">path_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_SLICE</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">slice_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">UNIT_SCOPE</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">scope_vtable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Un <em>unit</em> a un cycle de vie, et donc un état. Les états de base sont les suivants :</p>
+<ul>
+<li>Active</li>
+<li>Reloading</li>
+<li>Inactive</li>
+<li>Failed</li>
+<li>Activating</li>
+<li>Deactivating</li>
+<li>Maintenance</li>
+</ul>
+<p>Cette liste d&rsquo;état peut être, elle aussi, enrichie pour répondre au cycle de vie spécifique d&rsquo;un type d&rsquo;<em>unit</em>.</p>
+<p>Par exemple pour une <em>unit</em> de type service on trouve cette liste d&rsquo;états qui font tous la correspondance avec les états de base.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">UnitActiveState</span> <span class="n">state_translation_table</span><span class="p">[</span><span class="n">_SERVICE_STATE_MAX</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_DEAD</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_INACTIVE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_CONDITION</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_START_PRE</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_START</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_START_POST</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_RUNNING</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_EXITED</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_RELOAD</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_RELOADING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_STOP</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_STOP_WATCHDOG</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_STOP_SIGTERM</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_STOP_SIGKILL</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_STOP_POST</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_FINAL_WATCHDOG</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_FINAL_SIGTERM</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_FINAL_SIGKILL</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_DEACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_FAILED</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_FAILED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_AUTO_RESTART</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ACTIVATING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">SERVICE_CLEANING</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_MAINTENANCE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="job-et-transaction">Job et Transaction</h2>
+<p>Tout changement d&rsquo;état d&rsquo;une <em>unit</em> se fait au travers d&rsquo;un Job.
+Il existe plusieurs types de job :</p>
+<ul>
+<li>Start / Verify</li>
+<li>Stop</li>
+<li>Reload</li>
+<li>Restart</li>
+<li>Nop</li>
+</ul>
+<p>On trouve également d&rsquo;autres types de Job qui sont la combinaison des types précédents :
+par exemple &ldquo;try-restart&rdquo; se transformera à l&rsquo;exécution en &ldquo;start&rdquo; ou &ldquo;nop&rdquo; si la <em>unit</em> n&rsquo;est pas activée ou en cours de rechargement.</p>
+<p>Prenons l&rsquo;exemple de la <em>unit file</em> suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">multi-users.target</span>
+</span></span><span class="line"><span class="cl"><span class="na">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>La propriété <code>Wants=</code> a pour effet de créer une dépendance entre cette <em>unit</em> et la target <em>unit</em> &ldquo;multi-user.target&rdquo;.</p>
+<p>NB : La plupart des relations peuvent être notées dans un sens ou dans l&rsquo;autre (<code>Before=</code>/ <code>After=</code>, <code>Require=</code>/<code>RequiredBy=</code>&hellip;)
+On pourrait donc réaliser cette même dépendance à l&rsquo;aide de la propriété <code>WantedBy=</code> dans la target et cela aurait le même effet.</p>
+<p>Cette dépendance va avoir pour effet de propager l&rsquo;activation de la target &ldquo;multi-user.target&rdquo; aux <em>unit</em> ayant une relation de type <code>Wants=</code> avec elle.</p>
+<p>Lors de cette activation une transaction qui va contenir le job d&rsquo;activation de la target en elle-même plus autant de job que de dépendances.</p>
+<p>Ainsi dans le cas d&rsquo;une relation avec une <em>unit</em> de type <code>Wants=</code> la transaction pourra être mise en succès même si ce job est en échec.
+Ce qui n&rsquo;aurait pas été le cas avec une relation plus &ldquo;forte&rdquo; (par exemple <code>Require=</code>/<code>RequiredBy=</code>).</p>
+<p>En pratique ces relations sont spécifiées par une énumération de propriétés beaucoup plus fines les <code>UnitDependencyAtom</code> ou &ldquo;atoms&rdquo; (qui ne sont rien d&rsquo;autre qu&rsquo;un bitmask).</p>
+<p>Ainsi la propriété <code>Wants=</code> est composée de la sorte :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">[</span><span class="n">UNIT_WANTS</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNIT_ATOM_PULL_IN_START_IGNORED</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">               <span class="n">UNIT_ATOM_RETROACTIVE_START_FAIL</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">               <span class="n">UNIT_ATOM_ADD_STOP_WHEN_UNNEEDED_QUEUE</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">               <span class="n">UNIT_ATOM_ADD_DEFAULT_TARGET_DEPENDENCY_QUEUE</span><span class="p">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cela lui permet de réagir aux propriétés suivantes qui peuvent être utilisées par différents objets (transaction, units&hellip;).
+Sans rentrer dans les détails on retrouve l&rsquo;attribut &ldquo;UNIT_ATOM_PULL_IN_START_IGNORED&rdquo; le comportement décrit plus haut.</p>
+<p>Il implémente un mécanisme de transaction connu sous le nom de Job qui s&rsquo;assure de la transition d&rsquo;une <em>unit</em> d&rsquo;un état A vers un état B (par exemple start / stop / restart&hellip;).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Vous l&rsquo;avez peut-être remarqué, mais systemd est conçu comme un système orienté objet.
+On retrouve d&rsquo;ailleurs beaucoup de principes de la POO (polymorphisme, sous-typage, redéfinition&hellip;) dans les différents points que j&rsquo;ai abordés</p>
+<p>Voilà ainsi va se conclure cet article.
+Dans le prochain, nous aborderons l&rsquo;architecture de systemd.</p>
+]]></content:encoded></item><item><title>Systemd - partie 1</title><link>https://cyrillesondag.github.io/blog/systemd-part-one/</link><pubDate>Sun, 17 Oct 2021 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/systemd-part-one/</guid><description>Init system de initV a systemd</description><content:encoded><![CDATA[
+
+
+
+
+
+
+
+<figure><a href="Jean-Fran%c3%a7ois_Millet_-_Gleaners_-_Google_Art_Project_2.jpg">
+    <img
+        
+            sizes="(min-width: 35em) 1200px, 100vw"
+            
+            srcset='
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-one/Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project_2_hu_7a9ffdd23859508d.jpg 480w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-one/Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project_2_hu_e3eb97c187c6fdeb.jpg 800w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-one/Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project_2_hu_877d01c955c0e768.jpg 1200w,
+            
+                   https://cyrillesondag.github.io/blog/systemd-part-one/Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project_2_hu_c67f72020effd2b9.jpg 1500w,
+            '
+
+            
+            
+            src="https://cyrillesondag.github.io/blog/systemd-part-one/Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project_2_hu_e3eb97c187c6fdeb.jpg"
+            
+
+        
+            alt="Jean-Francois Millet - Les Glaneuses (1857), huile sur toile, 83,5 × 110 cm, Paris, musée d&rsquo;Orsay."/> </a><figcaption style="font-size: 80%; text-align: center;">
+            <p>Jean-Francois Millet - Les Glaneuses (1857), huile sur toile, 83,5 × 110 cm, Paris, musée d&rsquo;Orsay.</p>
+        </figcaption>
+</figure>
+<p>Je vais m&rsquo;attacher dans cette partie introductive à expliciter la séquence de boot sous Linux pour m&rsquo;arrêter au lancement du processus d&rsquo;init.
+Puis faire la distinction entre systemd et SysV init sans rentrer dans les détails d&rsquo;implémentation, puis revenir rapidement sur le débat autour de l&rsquo;adoption du systemd.</p>
+<p>Les détails techniques et l&rsquo;utilisation de systemd en lui-même feront les sujets d&rsquo;articles suivants.</p>
+<h2 id="historique">Historique</h2>
+<p>Systemd a été développé à l&rsquo;initiative de Lennard Poettering (la première version date de 2010 selon Wikipedia) comme étant le remplaçant - entre autres - de l&rsquo;historique SysV init.</p>
+<p>Promu par Red Hat, il a fini par s&rsquo;imposer comme un standard de l&rsquo;industrie dans les distributions majeures Linux, malgré les critiques encore nombreuses.</p>
+<p>Systemd est la contraction de system daemon.</p>
+<h2 id="du-boot-à-linit">Du boot à l&rsquo;init</h2>
+<p>Avant de parler de l&rsquo;init il me semble important d&rsquo;expliquer les étapes précédentes pour bien comprendre le contexte et le rôle de ce processus.</p>
+<p>Donc lors du démarrage, la séquence est la suivante :</p>
+<p>Le bootloader va sélectionner et lancer l&rsquo;image du kernel au format bzImage (pour boot executable image), elle est située sur la partition de boot généralement sous le nom <code>vmlinux.**</code>.</p>
+<p>Cette image est compilée et généralement assez minimale, c&rsquo;est-à-dire qu&rsquo;elle contient peu d&rsquo;éléments statiques dans le but d&rsquo;occuper un minimum d&rsquo;espace disque et de faciliter son chargement et sa distribution.
+Grâce à cela une même image peut être utilisée par exemple aussi bien sur un téléphone portable que sur un serveur dernière génération (pourvu qu&rsquo;ils utilisent la même architecture).</p>
+<p>Pour réaliser le démarrage, il faut pouvoir accéder aux fichiers de configuration qui peuvent se trouver sur différents types de support : disque, partition, réseau&hellip;
+Pour y accéder, il est donc nécessaire de charger les différents modules/drivers correspondants.</p>
+<p>Pour ce faire, il existe principalement deux méthodes :</p>
+<ul>
+<li>Soit pré-compiler dans l&rsquo;image du kernel l&rsquo;ensemble des drivers requis (mais sacrifier les avantages vus plus haut).</li>
+<li>Soit passer par une image temporaire contenant ce qui est nécessaire au démarrage du système.</li>
+</ul>
+<p>Parmi la multitude de tâches d&rsquo;initialisations (vm, console, horloge&hellip;) que le kernel va réaliser, on va s&rsquo;intéresser à quelques-unes en particulier.</p>
+<h4 id="instanciation-du-rootfs">Instanciation du rootfs.</h4>
+<p>Le rootfs est un filesystem un peu spécial, c&rsquo;est la base de tous les futurs filesystems, il est stocké en mémoire et est présent dès les premières étapes du démarrage du kernel, ne peut être démonté bien qu&rsquo;il soit rarement utilisé après la phase d&rsquo;init.</p>
+<p>Il existe sous deux types :</p>
+<ul>
+<li>RAMFS qui est un simple &ldquo;page cache&rdquo; en mémoire dont aucun élément ne peut être persisté.</li>
+<li>TMPFS qui à l&rsquo;inverse de RAMFS permet de limiter l&rsquo;espace utilisé en mémoire et l&rsquo;écriture sur la SWAP.</li>
+</ul>
+<p>Le choix de l&rsquo;un ou l&rsquo;autre se fait à la compilation du kernel.</p>
+<h4 id="la-décompression-de-linitrd">La décompression de l&rsquo;initrd</h4>
+<p>L&rsquo;image temporaire du rootFS évoquée plus haut s&rsquo;appelle l&rsquo;initrd (initial ram disk) en hommage à l&rsquo;ancien fonctionnement (&lt; 2.6) qui émulait un périphérique disque.
+C&rsquo;est une simple archive compressée d&rsquo;un filesystem au format cpio (un gz &ldquo;amélioré&rdquo;).
+Elle a l&rsquo;avantage d&rsquo;être plus facilement manipulable que l&rsquo;image kernel, car non compilée.
+Il n&rsquo;est donc pas nécessaire d&rsquo;avoir un gcc ou des headers installés pour la générer ou la modifier.
+Elle est d&rsquo;ailleurs régulièrement mise à jour au cours de la vie du système (souvent par les package managers).</p>
+<blockquote>
+<p>on peut facilement lister le contenu grâce à la commande <code>lsinitramfs</code> ou la mettre à jour via <code>update-initramfs</code></p>
+</blockquote>
+<p>Cette archive est aussi stockée dans la partition de boot et passée en paramètre au kernel via le paramètre <code>initrd=</code>, qui va l&rsquo;extraire dans le rootFS.</p>
+<p>Enfin - et c&rsquo;est là que le processus d&rsquo;init à proprement parler commence - le kernel va appeler l&rsquo;exécutable <code>/init</code> (ou l&rsquo;exécutable spécifié via <code>rdinit=</code>) sur le rootFS.</p>
+<p>L&rsquo;initrd a pour but d&rsquo;inclure les différents drivers et de monter le root device spécifié par le paramètre <code>root=</code> dans le dossier <code>/root</code>.
+Ensuite, il va supprimer les autres fichiers du rootFS puis appeler la fonction <code>pivot_root</code> pour transformer le répertoire <code>/root</code> en <code>/</code> (à la manière d&rsquo;un chroot).
+Bien souvent (c&rsquo;est le cas de systemd) ce processus va ré-exécuter une autre phase d&rsquo;init pour prendre en charge la suite de l&rsquo;initialisation du système après le montage du root.</p>
+<h4 id="le-montage-root">Le montage &ldquo;/root&rdquo;</h4>
+<p>En cas d&rsquo;absence de l&rsquo;initrd le kernel va appeler la méthode <code>prepare_namespace</code> (qui remplit le même contrat que l&rsquo;exécutable <code>/init</code>) c&rsquo;est-à-dire tenter de monter le périphérique spécifié par le paramètre <code>root=</code> dans le répertoire <code>/root</code>, puis faire basculer ce répertoire à la racine.</p>
+<p>Enfin il va appeler l&rsquo;un des processus d&rsquo;init suivants (<code>/sbin/init</code>, <code>/etc/init</code>, <code>/bin/init</code>, <code>/bin/sh</code>)</p>
+<blockquote>
+<p><em>main.c</em> &lsquo;kernel_init()&rsquo;</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">ramdisk_execute_command</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="nf">run_init_process</span><span class="p">(</span><span class="n">ramdisk_execute_command</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pr_err</span><span class="p">(</span><span class="s">&#34;Failed to execute %s (error %d)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">           <span class="n">ramdisk_execute_command</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * We try each of these until one succeeds.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The Bourne shell can be used instead of init if we are
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * trying to recover a really broken machine.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">execute_command</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="nf">run_init_process</span><span class="p">(</span><span class="n">execute_command</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;Requested init %s failed (error %d).&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="n">execute_command</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">try_to_run_init_process</span><span class="p">(</span><span class="s">&#34;/sbin/init&#34;</span><span class="p">)</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="nf">try_to_run_init_process</span><span class="p">(</span><span class="s">&#34;/etc/init&#34;</span><span class="p">)</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="nf">try_to_run_init_process</span><span class="p">(</span><span class="s">&#34;/bin/init&#34;</span><span class="p">)</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="nf">try_to_run_init_process</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">panic</span><span class="p">(</span><span class="s">&#34;No working init found.  Try passing init= option to kernel. &#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;See Linux Documentation/admin-guide/init.rst for guidance.&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linit">L&rsquo;init</h2>
+<p>Comme c&rsquo;est le premier processus lancé par le kernel, il porte donc logiquement le numéro <code>PID=1</code>.</p>
+<p>Ce processus est un peu différent des autres :</p>
+<ul>
+<li>Ne peut être tué.</li>
+<li>N&rsquo;a pas de parent <code>PPID=</code>.</li>
+<li>Est l&rsquo;ancêtre de tous les autres processus.</li>
+<li>Est chargé d&rsquo;initialiser tout un nombre de ressources (disque, terminaux, réseau, interface graphique…).</li>
+</ul>
+<blockquote>
+<p>Sous linux les processus sont tous issus de la methode <code>fork()</code> ou dérivés.</p>
+<p>Tous les processus enfants héritent d&rsquo;un certain nombre d&rsquo;attributs de leur parent : user, session, cgroup, mémoire partagé&hellip;</p>
+<p>L&rsquo;init a donc un rôle primordial dans la vie du système.</p>
+</blockquote>
+<h2 id="sysv-init">SysV init</h2>
+<p>Pour bien comprendre ce que systemd apporte il faut le comparer à son prédécesseur SysV init (j&rsquo;ai choisi initV uniquement parce que c&rsquo;était le plus répandu et que je l&rsquo;ai un peu utilisé).</p>
+<p>SysV init est basé sur les run-levels qui sont au nombre de 5 (presque) :</p>
+<ul>
+<li>0 - réservé - Arrêt (halt)</li>
+<li>1 - Mode utilisateur unique avec les filesystems montés.</li>
+<li>2..5 Mode multi-utilisateur, les significations varient suivant les distributions, mais correspondent à l&rsquo;état opérationnel de la machine.</li>
+<li>6 - réservé - Redémarrage</li>
+</ul>
+<p>Il faut d&rsquo;ailleurs comprendre le nom SysV init comme étant &ldquo;système 5 init&rdquo; qui correspond aux 5 run-level de l&rsquo;état d&rsquo;un système.</p>
+<p>Lors de l&rsquo;init le système va passer d&rsquo;un run-level à l&rsquo;autre jusqu&rsquo;à arriver au <em><strong>default level</strong></em> (qui peut varier suivant les distributions&hellip;) qui correspond au mode nominal de fonctionnement (par exemple une interface graphique pour un desktop ou un terminal pour un serveur).</p>
+<p>En cas d&rsquo;erreur du level X le level X+1 n&rsquo;est pas appelé et l&rsquo;initialisation est marquée en échec.</p>
+<p>Chacun des levels agit comme un point de synchronisation, c&rsquo;est-à-dire qu&rsquo;il va déclencher un nombre d&rsquo;actions à une étape précise du démarrage du système.</p>
+<blockquote>
+<p>Par exemple si un daemon &ldquo;A&rdquo; nécessite une interface réseau ou des filesystems locaux, il a tout intérêt à se déclencher à un run-level supérieur à 1.</p>
+</blockquote>
+<h2 id="scripts-sysv-init">Scripts SysV init</h2>
+<p>SysV init est basé sur un ensemble de scripts, qui doivent répondre à des conventions, certaines peuvent varier suivant les distributions Linux utilisées.</p>
+<p>Prenons l&rsquo;exemple très simple d&rsquo;un script de lancement d&rsquo;un daemon :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh #(1)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Demonstrate creating your own init scripts </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># chkconfig: 2345 91 64 (2) </span>
+</span></span><span class="line"><span class="cl"><span class="c1">### BEGIN INIT INFO (3)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Provides: Welcome </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Required-Start: $local_fs $all </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Required-Stop: </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Default-Start: 2345 </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Default-Stop: </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Short-Description: Display a welcome message </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Description: Just display a message. Not much else. </span>
+</span></span><span class="line"><span class="cl"><span class="c1">###END INIT INFO </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Source function library. </span>
+</span></span><span class="line"><span class="cl">. /etc/rc.d/init.d/functions <span class="c1">#(4)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">lock_file</span><span class="o">=</span>/var/lock/subsys/myservice
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">start<span class="o">()</span>  <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">   touch <span class="s2">&#34;</span><span class="nv">$lock_file</span><span class="s2">&#34;</span> 
+</span></span><span class="line"><span class="cl">   <span class="nb">echo</span> <span class="s2">&#34;Starting service&#34;</span> 
+</span></span><span class="line"><span class="cl">   sleep <span class="m">2</span>
+</span></span><span class="line"><span class="cl"> <span class="o">}</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> in  <span class="c1">#(5)</span>
+</span></span><span class="line"><span class="cl">      start<span class="o">)</span> 
+</span></span><span class="line"><span class="cl">       start
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      stop<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       rm -f  <span class="s2">&#34;</span><span class="nv">$lock_file</span><span class="s2">&#34;</span> 
+</span></span><span class="line"><span class="cl">       <span class="nb">echo</span> <span class="s2">&#34;Service is shutting down&#34;</span>  
+</span></span><span class="line"><span class="cl">       sleep <span class="m">2</span> 
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     status<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="k">if</span> <span class="o">[[</span> -f <span class="s2">&#34;</span><span class="nv">$lock_file</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">echo</span> <span class="s2">&#34;Service looks good&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">else</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">echo</span> <span class="s2">&#34;Service not started !!&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">         *<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="nb">echo</span> $<span class="s2">&#34;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop|status}&#34;</span> 
+</span></span><span class="line"><span class="cl">       <span class="nb">exit</span> <span class="m">5</span> 
+</span></span><span class="line"><span class="cl"><span class="k">esac</span> 
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="nv">$?</span> <span class="c1">#(6)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Il est composé :</p>
+<ul>
+<li>(1) D&rsquo;une déclaration de l&rsquo;interpréteur (ici shell)</li>
+<li>Ensuite une série de commentaires qui n&rsquo;en sont pas :
+<ul>
+<li>(2) chkconfig qui permet de définir les levels d&rsquo;exécution et le niveau de priorité</li>
+<li>(3) LSB Headers qui contient des informations sur ordonnancement du service qui peut être éventuellement utilisé</li>
+</ul>
+</li>
+<li>(4) L&rsquo;import des fonctions communes /etc/rc.d/init.d/functions</li>
+<li>(5) Un switch case en fonction des arguments &lsquo;start&rsquo; / &lsquo;stop&rsquo; / &lsquo;status&rsquo;</li>
+<li>(6) Un code de retour</li>
+</ul>
+<p><em><strong>PROS</strong></em> :</p>
+<ul>
+<li>Offre un nombre de fonctionnalités assez complètes : ckconfig, lsb-headers.</li>
+<li>Une grande flexibilité : c&rsquo;est un script shell on fait &lsquo;ce qu&rsquo;on veut&rsquo;.</li>
+<li>Un début de standardisation (avec les fonctions, lsb headers, checkconfig).</li>
+</ul>
+<p><em><strong>CONS</strong></em> :</p>
+<ul>
+<li>Très verbeux, répétitif et difficilement extensible.</li>
+<li>Repose uniquement sur des conventions (start, stop, status&hellip;).</li>
+<li>Compliqué à réaliser.</li>
+<li>Peut avoir des comportements différents selon le contexte d&rsquo;appel du script.</li>
+</ul>
+<p>D&rsquo;un point de vue utilisateur, on remarque bien que ce n&rsquo;est pas standardisé (avec ses avantages et ses inconvénients) et en pratique demande pas mal d&rsquo;expertise en script pour réaliser des choses assez semblables (gérer les sorties standards, changer d&rsquo;utilisateur, lancer un daemon, exécution unique&hellip;)</p>
+<p>Là où SysV init se résume à séquencer l&rsquo;exécution de scripts (en schématisant), systemd se base sur de la description de configuration.</p>
+<h2 id="service-unit-systemd">Service unit systemd</h2>
+<p>Ces configurations sont écrites au format ini et sont appelées &ldquo;unit file&rdquo; ou &ldquo;unit&rdquo; (mais ce n&rsquo;est pas exact, car ça désigne les objets manipulés par systemd et non les fichiers).</p>
+<p>Il existe plusieurs types d&rsquo;unit files qui répondent à différents cas d&rsquo;utilisations (service, montage&hellip;), chacune est suffixée par son type.</p>
+<p>L&rsquo;équivalent systemd du script ci-dessus est une unit file de type &ldquo;service&rdquo; que l&rsquo;on pourrait adapter de la sorte :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">Service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">[Service] </span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/sleep 2</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecPreStop</span><span class="o">=</span><span class="s">/usr/bin/sleep 2 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">multi-users.target</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>La première chose que l&rsquo;on remarque est que le fichier systemd n&rsquo;est pas un script, il n&rsquo;a donc pas d&rsquo;utilité en dehors du contexte de systemd.</p>
+<p>Deuxième chose, les attributs de configuration sont normés, ils correspondent à une série de propriétés interprétées par le programme.
+Ce n&rsquo;est plus nous qui réalisons les actions, c&rsquo;est systemd qui le fait à notre place.</p>
+<p>Le script de base est extrêmement simple, et n&rsquo;a pas vraiment de sens (encore moins avec systemd) mais met bien en évidence toutes les choses qui sont incluses de base dans systemd, et la différence entre les deux approches.</p>
+<p>L&rsquo;avantage ici d&rsquo;être dans un &ldquo;framework&rdquo; est qu&rsquo;il prend nativement en charge toutes les tâches usuelles sans avoir à les redéfinir nous-mêmes.</p>
+<ul>
+<li>Un service est unique, pour un même nom (au sein d&rsquo;une instance systemd). Nous n&rsquo;avons donc pas besoin de lock de synchronisation (il est possible de le variabiliser via le templating).</li>
+<li>Les états start / status / stop / restart sont implicites et communs à tous les services. Il faut noter que le status a souvent une signification un peu différente des scripts initV qui réalisent souvent des tâches de vérification assez complexes. Sous systemd le status ne reporte généralement que l&rsquo;état du <code>PID</code> déterminé comme principal.</li>
+<li>Là où l&rsquo;on devait spécifier via les lsb-headers l&rsquo;ordonnancement (after $local_fs) fait ici partie de la valeur par défaut (cf <code>defaultdependencies</code>) qui doit répondre à la majorité des cas d&rsquo;utilisations des daemons de haut niveau.</li>
+<li>Enfin on retrouve un équivalent des run-level avec l&rsquo;attribut <code>Target=multi-users.target</code> qui sert ici également de point de synchronisation lors du démarrage.</li>
+</ul>
+<h2 id="le-mal-aimé">Le mal aimé</h2>
+<p>On a beaucoup reproché à systemd d&rsquo;être envahissant, et de briser le principe &ldquo;un programme doit faire UNE chose et la faire bien&rdquo;.</p>
+<p>Oui systemd est envahissant, mais principalement parce que c&rsquo;est un init system, une des pièces principales des systèmes UNIX. Il est de ce fait chargé de réaliser une multitude d&rsquo;actions très différentes (monter les fs, mettre en place les interfaces réseau&hellip;).
+Ce qui était &ldquo;caché&rdquo; sous des scripts est ici rendu apparent.</p>
+<p>Les défenseurs rétorquent souvent que systemd est modulaire - ce qui est vrai - mais cela ne me semble pas être un argument valable, les composants peuvent faire partie de différents projets/modules (journald, networkd, nspawn&hellip;) ils font tous partie d&rsquo;un ensemble cohérent et ont tous vocation à fonctionner ensemble.</p>
+<p>À mon avis la principale résistance est que systemd a imposé ses standards (en termes de nomenclature, arborescence, packaging et autres) au sein des distributions.</p>
+<p>J&rsquo;y vois également la réaction à la professionnalisation inévitable de l&rsquo;écosystème Linux, avec la disparition progressive de l&rsquo;esprit pionnier qui perdure dans les communautés de passionnés organisées autour des distributions / projets OSS.
+(Il faut aussi bien avouer que la communauté Linux ADORE les dramas et trouver des occasions de s&rsquo;écharper).</p>
+<p>Systemd n&rsquo;est certainement pas idéal, mais il est &ldquo;constant&rdquo;.
+Il a indéniablement apporté beaucoup de bénéfices : facilitation du packaging, une meilleure portabilité, une qualité accrue et plus homogène, une facilité d&rsquo;accès aux fonctions avancées du kernel&hellip;</p>
+<p>Bref, il ne s&rsquo;agit pas de défendre systemd mais bien de mettre en avant les bénéfices qu&rsquo;il apporte.</p>
+]]></content:encoded></item><item><title>Présentation Linux Memory</title><link>https://cyrillesondag.github.io/blog/presentation-linux-menory/</link><pubDate>Sat, 16 Oct 2021 20:42:39 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/presentation-linux-menory/</guid><description>&lt;p&gt;Les slides de ma présentation sur la gestion de la mémoire sous Linux.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;virtual memory&lt;/li&gt;
+&lt;li&gt;memory management&lt;/li&gt;
+&lt;li&gt;TLB&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id="Container"
+style="padding-bottom:56.25%; position:relative; display:block; width: 100%"&gt;
+&lt;iframe id="googleSlideIframe"
+width="100%" height="100%"
+src="https://docs.google.com/presentation/d/1bdqIdZOZtda5FBrnxnOq1AWdBcDdxcwotYih_6B3AYk/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000"
+frameborder="0" allowfullscreen=""
+style="position:absolute; top:0; left: 0"&gt;&lt;/iframe&gt;
+&lt;/div&gt;</description><content:encoded><![CDATA[<p>Les slides de ma présentation sur la gestion de la mémoire sous Linux.</p>
+<ul>
+<li>virtual memory</li>
+<li>memory management</li>
+<li>TLB</li>
+<li>&hellip;</li>
+</ul>
+<div id="Container"
+ style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
+ <iframe id="googleSlideIframe"
+  width="100%" height="100%"
+  src="https://docs.google.com/presentation/d/1bdqIdZOZtda5FBrnxnOq1AWdBcDdxcwotYih_6B3AYk/embed?start=false&amp;loop=false&amp;delayms=3000"
+  frameborder="0" allowfullscreen=""
+  style="position:absolute; top:0; left: 0"></iframe>
+</div>
+
+]]></content:encoded></item><item><title>Débuter avec RxJava</title><link>https://cyrillesondag.github.io/blog/starting-rxjava/</link><pubDate>Tue, 04 Dec 2012 10:34:56 +0200</pubDate><guid>https://cyrillesondag.github.io/blog/starting-rxjava/</guid><description>&lt;h1 id="pourquoi-utiliser-rx-"&gt;Pourquoi utiliser Rx ?&lt;/h1&gt;
+&lt;p&gt;Le Framework Rx prend une importance croissante dans le développement d&amp;rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux &lt;a href="https://www.quora.com/What-is-callback-hell"&gt;Callback Hell&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Néanmoins l&amp;rsquo;apprentissage peut être assez déroutant au départ si l&amp;rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevée, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.&lt;/p&gt;</description><content:encoded><![CDATA[<h1 id="pourquoi-utiliser-rx-">Pourquoi utiliser Rx ?</h1>
+<p>Le Framework Rx prend une importance croissante dans le développement d&rsquo;applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux <a href="https://www.quora.com/What-is-callback-hell">Callback Hell</a>).</p>
+<p>Néanmoins l&rsquo;apprentissage peut être assez déroutant au départ si l&rsquo;on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevée, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.</p>
+<p>Pour démarrer d&rsquo;un bon pied nous allons d&rsquo;abord définir les principes fondamentaux.</p>
+<h2 id="les-concepts-fondamentaux">Les concepts fondamentaux.</h2>
+<p>Rx est basé sur le pattern <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> en utilisant la terminologie <strong>Subscriber</strong> / <strong>Observer</strong> et  <strong>Observable</strong>  (un <strong>Subject</strong> en Rx recouvre une notion bien particulière).</p>
+<h3 id="les-observables">Les Observables</h3>
+<p>Le <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming</a> voit les événements comme des flux qui se propagent dans l&rsquo;application.</p>
+<p>Ces flux peuvent avoir des sources multiples : une interaction avec un utilisateur (focus, sélection &hellip;), un élément extérieur (ex: la réponse d&rsquo;un serveur distant) ou interne (la fin d&rsquo;un traitement) etc.</p>
+<p>Ils peuvent avoir une durée de vie déterminée (ex : une requête Http) ou non (ex le signal de perte de réseau). De la même manière ces flux peuvent ainsi émettre un ou plusieurs événements à des intervalles différents.</p>
+<p>En Rx un <em>Observable</em> sert à matérialiser ces flux, ils peuvent être écoutés, avoir leurs propres cycles de vie, être composés de différents flux…</p>
+<h3 id="les-subcribers">Les Subcribers</h3>
+<p>Est la notion la plus simple à appréhender. Il s&rsquo;abonne à un <em>Observable</em> et il reçoit ses émissions, ses signaux d&rsquo;erreurs ou fin de traitement.</p>
+<h3 id="les-operators">Les Operators</h3>
+<p>Les <em>Operators</em> servent à traiter et organiser les flux. Ils permettent de filtrer, combiner, transformer, parcourir, composer des flux…</p>
+<p>De base une foultitude d&rsquo;opérateurs sont fournis. Bien qu&rsquo;on puisse en créer de nouveaux, en pratique les opérateurs par défaut sont généralement largement suffisants pour répondre à la majorité des situations.</p>
+<h3 id="les-schedulers">Les Schedulers</h3>
+<p>Par défaut Rx n&rsquo;est pas asynchrone, pour la simple et bonne raison que le framework réserve cette décision au développeur de l&rsquo;application.</p>
+<p>Les <em>Schedulers</em> servent à contrôler l’exécutions des traitements. Il est alors très simplement possible de décider sur quel Thread va s’exécuter un <em>Observable</em> et sur lequel le <em>Subscriber</em> va recevoir les réponses.</p>
+<h2 id="rxjava-en-pratique">RxJava en pratique.</h2>
+<p>Commençons d&rsquo;abord par un exemple très simple pour illustrer les concepts vus précédemment.</p>
+<h3 id="hello-world-">Hello World !</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Subscription</span><span class="w"> </span><span class="n">subscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Observable</span><span class="p">.</span><span class="na">just</span><span class="p">(</span><span class="n">example</span><span class="p">.</span><span class="na">dummyValue</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">observeOn</span><span class="p">(</span><span class="n">Schedulers</span><span class="p">.</span><span class="na">newThread</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Observer</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCompleted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;dummyValue has Completed&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Error occured : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getMessage</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onNext</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">aBoolean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;dummyValue result : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aBoolean</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">dummyValue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">600</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>Observable.just</code> crée un nouvel <em>Observable</em> avec une seule valeur de retour.</li>
+<li><code>.observeOn</code> définit que l&rsquo;<em>Observable</em> s’exécute sur un nouveau Thread.</li>
+<li><code>.subscribe</code> s&rsquo;abonne à l&rsquo;observable.</li>
+<li>Retourne un objet Subscription.</li>
+</ol>
+<p>Il existe plusieurs méthodes génériques pour créer un <em>Observable</em> soit à partir de valeurs fixes, d&rsquo;une collection, d&rsquo;un <code>Future&lt;?&gt;</code> ou <code>Callback&lt;?&gt;</code> ou opérateurs.
+Il est aussi relativement facile de créer des <em>Observable</em> particuliers si l&rsquo;on respecte son cycle de vie.</p>
+<p>Comme vu précédemment par défaut un <em>Observable</em> s&rsquo;exécute sur le même Thread que celui qui l&rsquo;a instancié. En spécifiant <code>Schedulers.newThread()</code> on force l’exécution du traitement sur un nouveau Thread.
+Rx est fourni avec plusieurs schedulers prédéfinis tel que <code>io</code>, <code>computation</code>, … On a aussi la possibilité d&rsquo;en créer afin d&rsquo;optimiser la gestion des instances de Thread.</p>
+<p>L&rsquo;interface Observer est, elle aussi, relativement simple et lisible. Elle est composée de trois méthodes :</p>
+<ul>
+<li><code>onNext</code>: appelé à chaque objet émis par l&rsquo;observable.</li>
+<li><code>onError</code>: lorsqu&rsquo;une erreur s&rsquo;est produite lors du traitement.</li>
+<li><code>onComplete</code>: lorsque que l&rsquo;observable a terminé d’émettre des éléments (Par contrat <code>onNext</code> ou <code>onError</code> ne seront plus jamais appelés).</li>
+</ul>
+<p>L’objet Subscription - comme son nom l&rsquo;indique - est la marque de la souscription d&rsquo;un Observer vers un <em>Observable</em>.</p>
+<p>Dans le cas présent, l&rsquo;<em>Observable</em> est exécuté immédiatement avec une durée de vie fixée à un élément.</p>
+<p>On peut schématiser son cycle comme ceci :</p>
+<blockquote>
+<p>o &mdash;&gt; onNext(true) &ndash;&gt; onComplete()</p>
+</blockquote>
+<p>Au travers de cet exemple basique, il faut noter la gestion ultra simple des <strong>threads</strong> et des <strong>erreurs</strong>, qui est à mon avis le gros avantage de ce Framework.</p>
+<h3 id="débuter-avec-les-operators">Débuter avec les Operators</h3>
+<p>Prenons pour exemple un Observable assez simple pour comprendre leur fonctionnement.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Observable</span><span class="p">.</span><span class="na">just</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;d&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;e&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On aura donc 5 appels à <code>onNext(String s)</code> avant la méthode <code>onComplete()</code></p>
+<p>Le Subscriber affichera le résultat de <code>onNext</code> dans la console.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onNext</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Result : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Par défaut les résultats seront donc :</p>
+<blockquote>
+<p>Result : a
+Result : b
+Result : c
+Result : d
+Result : e</p>
+</blockquote>
+<h4 id="filter">Filter:</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Func1</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;a&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s">&#34;d&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Retourne :</p>
+<blockquote>
+<p>Result : a
+Result : d</p>
+</blockquote>
+<h4 id="take">Take:</h4>
+<p><code>.take(2)</code> ou <code>.limit(2)</code></p>
+<p>Retourne les x premiers éléments :</p>
+<blockquote>
+<p>Result : a
+Result : b</p>
+</blockquote>
+<h4 id="takelast">TakeLast:</h4>
+<p><code>.takeLast(2)</code></p>
+<p>Retourne les x derniers éléments :</p>
+<blockquote>
+<p>Result : d
+Result : e</p>
+</blockquote>
+<h4 id="map">Map:</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Func1</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Hello &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; !!&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Applique pour chaque élément une transformation (il est également possible de modifier le type de retour) :</p>
+<blockquote>
+<p>Result : Hello a !!
+Result : Hello b !!
+Result : Hello c !!
+Result : Hello d !!
+Result : Hello e !!</p>
+</blockquote>
+<p>Ces opérateurs sont bien évidemment combinables entre eux.</p>
+<h3 id="en-conclusion">En conclusion</h3>
+<p>Voici une première approche des basiques du Framework. Nous verrons par la suite les avantages de son utilisation, mais aussi les problèmes spécifiques liés à son utilisation dans de prochains articles.</p>
+]]></content:encoded></item></channel></rss>
