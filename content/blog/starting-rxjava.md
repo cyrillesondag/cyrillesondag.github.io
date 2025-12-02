@@ -15,7 +15,7 @@ Pourquoi utiliser Rx ?
 
 Le Framework Rx prend une importance croissante dans le développement d'applications mobiles. Il apporte une très grande flexibilité dans la gestion des appels asynchrones et permet de répondre facilement aux problèmes de synchronisation des événements (le fameux [Callback Hell](https://www.quora.com/What-is-callback-hell)).
 
-Néanmoins l'apprentissage peut être assez déroutant au départ si l'on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevé, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.
+Néanmoins l'apprentissage peut être assez déroutant au départ si l'on ne comprend pas la philosophie sur laquelle est basée ce Framework. Une fois cette étape achevée, il devient très simple de répondre à des problématiques d’enchaînement d’événements complexes.
 
 Pour démarrer d'un bon pied nous allons d'abord définir les principes fondamentaux.
 
@@ -30,13 +30,13 @@ Le [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming) vo
 
 Ces flux peuvent avoir des sources multiples : une interaction avec un utilisateur (focus, sélection ...), un élément extérieur (ex: la réponse d'un serveur distant) ou interne (la fin d'un traitement) etc. 
 
-Ils peuvent avoir une durée de vie déterminée (ex : une requête Http) ou non (ex le signal de perte de réseau). De la même manière ces flux peuvent ainsi emmètre un ou plusieurs événements à des intervalles différents.
+Ils peuvent avoir une durée de vie déterminée (ex : une requête Http) ou non (ex le signal de perte de réseau). De la même manière ces flux peuvent ainsi émettre un ou plusieurs événements à des intervalles différents.
 
-En Rx un *Observable* sert à matérialiser ces flux, ils peuvent être écoutés, avoir leurs propres cycle de vie, être composés de différents flux…
+En Rx un *Observable* sert à matérialiser ces flux, ils peuvent être écoutés, avoir leurs propres cycles de vie, être composés de différents flux…
 
 ### Les Subcribers
 
-Est la notion la plus simple à appréhender. Il s'abonne à un *Observable* et il reçoit ses d'émissions, ses signaux d'erreurs ou fin de traitement.
+Est la notion la plus simple à appréhender. Il s'abonne à un *Observable* et il reçoit ses émissions, ses signaux d'erreurs ou fin de traitement.
 
 ### Les Operators
 
@@ -46,7 +46,7 @@ De base une foultitude d'opérateurs sont fournis. Bien qu'on puisse en créer d
 
 ### Les Schedulers
 
-Par défaut Rx n'est pas asynchrone, pour la simple et bonne raisons que le framework réserve cette décision au développeur de l'application. 
+Par défaut Rx n'est pas asynchrone, pour la simple et bonne raison que le framework réserve cette décision au développeur de l'application. 
 
 Les *Schedulers* servent à contrôler l’exécutions des traitements. Il est alors très simplement possible de décider sur quel Thread va s’exécuter un *Observable* et sur lequel le *Subscriber* va recevoir les réponses. 
 
@@ -93,7 +93,7 @@ public boolean dummyValue() {
 3. `.subscribe` s'abonne à l'observable.
 4. Retourne un objet Subscription.
 
-Il existe plusieurs méthodes génériques pour créer une *Observable* soit à partir de valeurs fixes, d'une collection, d'un `Future<?>` ou `Callback<?>` ou opérateurs. 
+Il existe plusieurs méthodes génériques pour créer un *Observable* soit à partir de valeurs fixes, d'une collection, d'un `Future<?>` ou `Callback<?>` ou opérateurs. 
 Il est aussi relativement facile de créer des *Observable* particuliers si l'on respecte son cycle de vie.
 
 Comme vu précédemment par défaut un *Observable* s'exécute sur le même Thread que celui qui l'a instancié. En spécifiant `Schedulers.newThread()` on force l’exécution du traitement sur un nouveau Thread. 
@@ -116,7 +116,7 @@ Au travers de cet exemple basique, il faut noter la gestion ultra simple des **t
 
 ### Débuter avec les Operators
 
-Prenons pour exemple un Observable assez simple pour comprendre leurs fonctionnements.
+Prenons pour exemple un Observable assez simple pour comprendre leur fonctionnement.
 ```java
 Observable<String> obs = Observable.just("a", "b", "c", "d", "e");
 ```
@@ -189,7 +189,7 @@ Applique pour chaque élément une transformation (il est également possible de
 >Result : Hello e !!
 
 
-Ces opérateurs sont bien évidement combinable entre eux.
+Ces opérateurs sont bien évidemment combinables entre eux.
 
 ### En conclusion
 

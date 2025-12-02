@@ -14,20 +14,20 @@ toc: true
 
 \
 Nous avons vu dans le précédent article quelques différences entre SysV init et systemd, ainsi que le mécanisme d'initialisation de l'espace utilisateur par le kernel.
-Dans cet article, je vais aborder plus en détail sur le fonctionnement de systemd.
+Dans cet article, je vais aborder plus en détail le fonctionnement de systemd.
 
 ## Les Managers
 
-L'objet _manager_ est central, il contient les valeurs par default des différentes propriétés du système et est responsable de la gestion des _units_ qui lui sont attachées. 
+L'objet _manager_ est central, il contient les valeurs par défaut des différentes propriétés du système et est responsable de la gestion des _units_ qui lui sont attachées. 
 C'est avec lui que les "utilisateurs" vont communiquer.
 
-Il est chargé de propager les actions appelées job (par exemple : start, stop, reload....) vers les _units_ et d'interagir avec les éléments tiers du système (watchdog, inotify, D-bus, cgroups....).
+Il est chargé de propager les actions appelées job (par exemple : start, stop, reload...) vers les _units_ et d'interagir avec les éléments tiers du système (watchdog, inotify, D-bus, cgroups...).
 
-Il en existe sous 2 formes ayant chacune des portés différentes : 
+Il en existe sous 2 formes ayant chacune des portées différentes : 
 
-La première (celui par défaut) appelé "system" est unique par machine et est normalement lancé par le process d'init avec les droits root. 
+La première (celle par défaut) appelée "system" est unique par machine et est normalement lancée par le processus d'init avec les droits root. 
 
-On peut vérifier que systemd est bien l'init _manager_ du système de la facon suivante :
+On peut vérifier que systemd est bien l'init _manager_ du système de la façon suivante :
 ```shell
 # ls -ls /usr/sbin/init
 /usr/sbin/init -> /lib/systemd/systemd
@@ -40,7 +40,7 @@ systemctl
 La seconde est "user", il est unique par utilisateur et hérite des mêmes droits que ce dernier.
 Ce type d'instance s'avère particulièrement utile pour limiter les droits des services qui lui sont associés (rootless).
 
-Pour connaitre l'état d'une instance utilisateur on peut utiliser la commande suivante :
+Pour connaître l'état d'une instance utilisateur on peut utiliser la commande suivante :
 ```shell
 systemctl --user
 ```
@@ -65,7 +65,7 @@ systemctl daemon-reload
 
 ### Arborescence et précédence
 
-La definition des _unit files_ répondent a une précédence tres precise utilisé afin de faciliter l'administration du système et sa mise à jour.
+La définition des _unit files_ répondent à une précédence très précise utilisée afin de faciliter l'administration du système et sa mise à jour.
 
 Par ordre d'importance croissante (non exhaustif) en mode "--system" :
 - ```/lib/systemd/system/*``` : installés par le gestionnaire de paquets (il est recommandé d'éviter de les modifier sous peine de pertes lors des mises à jour du paquet) 
@@ -82,7 +82,7 @@ En mode "--user" la hiérarchie est un peu différente :
 - ```/etc/systemd/user/*``` : gérés par l'administrateur
 - ```~/.config/systemd/user/*``` : géré par l'utilisateur
 
-Ça peut paraitre compliqué aux premiers abords, mais limite le périmètre des différents intervenants sur une machine (utilisateurs, administrateurs, packageurs...) pour qu'ils ne se marchent sur les pieds.
+Ça peut paraître compliqué aux premiers abords, mais limite le périmètre des différents intervenants sur une machine (utilisateurs, administrateurs, packageurs...) pour qu'ils ne se marchent sur les pieds.
 
 De plus des outils spécifiques sont fournis (on le verra plus loin) pour aider à la compréhension de ce mécanisme.
 
@@ -98,7 +98,7 @@ Pour surcharger, il est possible de définir des fichiers ```.conf``` qui seront
 
 Voyons maintenant comment appliquer cela et les outils fournis par systemd pour nous assister dans la mise en place.
 
-Si l'on crée le fichier ```/etc/systemd/system/service1.service``` de la facon suivante :
+Si l'on crée le fichier ```/etc/systemd/system/service1.service``` de la façon suivante :
 ```ini
 [Service]
 Type=oneshot
@@ -161,19 +161,19 @@ Le type d'une _unit_ est déterminé par le suffix de son _unit file_ :
 - *.socket : Pour faire de l'activation de services par sockets (IPC, network, unix socket...).
 - *.device : Pour prendre en compte l'activation par périphériques via udev (dont le hot-plug).
 - *.mount : Pour gérer le montage de partitions.
-- *.automount : Qui permet le l'activation des _units_ .mount automatique lors du premier accès.
+- *.automount : Qui permet l'activation des _units_ .mount automatique lors du premier accès.
 - *.swap : Configuration d'un point de montage swap
 - *.target : Sont des point de synchronisation d'un ensemble de _units_ (comme les run-levels de SysVinit), mais également des points de déclenchements.
 - *.path : Activation par observation de chemins
 - *.timer : Déclencheur périodique (à la manière de cron)
 - *.scope : Configuration d'un ensemble de processus externes
-- *.slice : Qui permet de regrouper un ensemble de processus au sien d'un cgroup commun.
+- *.slice : Qui permet de regrouper un ensemble de processus au sein d'un cgroup commun.
 
-Une _unit_ est décrite par une _unit file_ qui est lu au premier référencement pour être transformé en _unit_.
+Une _unit_ est décrite par une _unit file_ qui est lue au premier référencement pour être transformée en _unit_.
 
-L'objet _units_ implémentes les opérations de bases génériques, une spécialisation est faite via la structure ```UnitVtable``` qui va referencer les méthodes spécifiques à chaque type.
+L'objet _units_ implémente les opérations de bases génériques, une spécialisation est faite via la structure ```UnitVtable``` qui va référencer les méthodes spécifiques à chaque type.
 
-Voici un example non exhaustif des méthodes de ```UnitVtable``` :
+Voici un exemple non exhaustif des méthodes de ```UnitVtable``` :
 ```c
 typedef struct UnitVTable {
         /* How much memory does an object of this unit type need */
@@ -303,17 +303,17 @@ Wants=multi-users.target
 
 La propriété ```Wants=``` a pour effet de créer une dépendance entre cette _unit_ et la target _unit_ "multi-user.target".
 
-NB : La plupart des relations peuvent être notée dans un sens ou dans l'autre (```Before=```/ ```After=```, ```Require=```/```RequiredBy=```...) 
-On pourrait donc réaliser cette même dépendance a l'aide de la propriété ```WantedBy=``` dans la target et cela aurait le même effet.
+NB : La plupart des relations peuvent être notées dans un sens ou dans l'autre (```Before=```/ ```After=```, ```Require=```/```RequiredBy=```...) 
+On pourrait donc réaliser cette même dépendance à l'aide de la propriété ```WantedBy=``` dans la target et cela aurait le même effet.
 
 Cette dépendance va avoir pour effet de propager l'activation de la target "multi-user.target" aux _unit_ ayant une relation de type ```Wants=``` avec elle.
 
-Lors de cette activation une transaction qui va contenir le job d'activation de la target en elle meme plus autant de job que de dépendances.
+Lors de cette activation une transaction qui va contenir le job d'activation de la target en elle-même plus autant de job que de dépendances.
 
-Ainsi dans le cas d'une relation avec une _unit_ de type ```Wants=``` la transaction pourra est mise ne succès même si ce job est en échec. 
+Ainsi dans le cas d'une relation avec une _unit_ de type ```Wants=``` la transaction pourra être mise en succès même si ce job est en échec. 
 Ce qui n'aurait pas été le cas avec une relation plus "forte" (par exemple ```Require=```/```RequiredBy=```).
 
-En pratique ces relations sont spécifiées par une enumeration de propriétés beaucoup plus fines les ```UnitDependencyAtom``` ou "atoms" (qui ne sont rien d'autre qu'un bitmask).
+En pratique ces relations sont spécifiées par une énumération de propriétés beaucoup plus fines les ```UnitDependencyAtom``` ou "atoms" (qui ne sont rien d'autre qu'un bitmask).
 
 Ainsi la propriété ```Wants=``` est composée de la sorte :
 ```c
@@ -323,15 +323,15 @@ Ainsi la propriété ```Wants=``` est composée de la sorte :
                UNIT_ATOM_ADD_DEFAULT_TARGET_DEPENDENCY_QUEUE,
 ```
 
-Cela lui permet de réagir aux propriétés suivantes qui peuvent être utilisées par different objects (transaction, units...). 
-Sans rentrer dans les details on retrouve l'attribut "UNIT_ATOM_PULL_IN_START_IGNORED" le comportement décrit plus haut.
+Cela lui permet de réagir aux propriétés suivantes qui peuvent être utilisées par différents objets (transaction, units...). 
+Sans rentrer dans les détails on retrouve l'attribut "UNIT_ATOM_PULL_IN_START_IGNORED" le comportement décrit plus haut.
 
 Il implémente un mécanisme de transaction connu sous le nom de Job qui s'assure de la transition d'une _unit_ d'un état A vers un état B (par exemple start / stop / restart...).
 
 ## Conclusion
 
-Vous l'avez peut-être remarqué, mais systemd est concu comme un système orienté objet. 
-On retrouve d'ailleurs beaucoup de principes de la POO (polymorphisme, sous-typage, redefinition...) dans les différents points que j'ai abordés
+Vous l'avez peut-être remarqué, mais systemd est conçu comme un système orienté objet. 
+On retrouve d'ailleurs beaucoup de principes de la POO (polymorphisme, sous-typage, redéfinition...) dans les différents points que j'ai abordés
 
 Voilà ainsi va se conclure cet article.
 Dans le prochain, nous aborderons l'architecture de systemd.
